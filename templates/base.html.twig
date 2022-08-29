@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Bienvenue sur PlanetBody!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>📝</text></svg>">
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="PlanetBody est un site développé par Cyril Gourdon pour l'ECF Studi">
+		<link
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+		<!-- Feuilles de styles -->
+		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+		{% block stylesheets %}
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300&display=swap" rel="stylesheet">
+
+
+		{% endblock %}
+		<link
+		rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+
+		<!-- Fichiers JS -->
+		<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
+		{% block javascripts %}{% endblock %}
+		<script src="{{ asset('assets/js/script.js') }}" defer></script>
+
+
+	</head>
+	<body>
+		{% block header %}
+			{% include "partials/_header.html.twig" %}
+		{% endblock %}
+		{% block body %}{% endblock %}
+		{% include "partials/_footer.html.twig" %}
+
+
+	</body>
+</html>
