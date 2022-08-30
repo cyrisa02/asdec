@@ -4,11 +4,22 @@
 {% endblock %}
 
 {% block body %}
-	<div class="jumbotron">
-		<h1 class="display-4">Hello, world!</h1>
-		<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-		<hr class="my-4">
-		<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-		<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+	<div class="container mt-4">
+		<div class="jumbotron">
+			<h1 class="display-4">Bienvenue sur le site de
+				<strong>l'ASDEC</strong>
+			</h1>
+			<img src="{{ asset('assets/images/logo.png')}}" alt="logo asdec" style="max-width: 12rem;" class="mx-auto d-block" data-aos="fade-right" data-aos-duration="50000">
+
+			<p class="lead">Ce site permet la gestion des membres de l'association de l'ASDEC.</p>
+			<hr class="my-4">
+			<img src="{{ asset('assets/images/yoga.jpg')}}" alt="activité sportive" style="max-width: 30rem;" class="mx-auto d-block" data-aos="fade-left" data-aos-duration="50000">
+			<hr class="my-4">
+
+			<p>Si vous souhaitez de plus amples informations sur les activités de l'<strong>ASDEC</strong>.</p>
+			<a class="btn btn-primary btn-lg" href="http://asdec.e-monsite.com/" role="button">En savoir plus</a>
+
+		</div>
 	</div>
+
 {% endblock %}

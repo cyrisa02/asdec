@@ -30,6 +30,7 @@
 		<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
 		{% block javascripts %}{% endblock %}
 		<script src="{{ asset('assets/js/script.js') }}" defer></script>
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 
 
 	</head>
@@ -40,6 +41,10 @@
 		{% block body %}{% endblock %}
 		{% include "partials/_footer.html.twig" %}
 
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script>
+			AOS.init();
+		</script>
 
 	</body>
 </html>
