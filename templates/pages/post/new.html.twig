@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ecrire un article
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Nouvel article</h1>
+
+		{{ include('pages/post/_form.html.twig') }}
+
+		<a href="{{ path('app_post_index') }}">Retour à la liste</a>
+	</div>
+
+{% endblock %}

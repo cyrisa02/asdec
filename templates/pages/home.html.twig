@@ -21,5 +21,62 @@
 
 		</div>
 	</div>
+	<hr
+	class="my-4">
+	{# timeless post 	 #}
+
+
+	<div class="container my-5">
+		<a href="{{ path('app_post_new')}}" class="btn btn-primary">Ecrire un article</a>
+
+
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<h4 style="margin-left: 1.2rem;">Fil d'actualités</h4>
+
+
+				<ul class="timeline-3">
+					{% for post in posts|reverse %}
+						<li>
+							<a href="/posts/{{post.id}}">{{post.title}}</a>
+							<a href="/posts/{{post.id}}" class="float-end">{{post.author}}
+								-{{post.createdAt |date("d/m/Y")}}</a>
+							<p class="mt-2">{{post.content}}</p>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	{# end #}
+	<hr class="my-4">
+	<h2>Autre présentation</h2>
+
+
+	<div class="container">
+		<a class="btn btn-primary btn-lg" href="http://asdec.e-monsite.com/" role="button">Ecrire un article</a>
+
+
+		<div class="row mt-4">
+			{% for post in posts|reverse %}
+				<div class="col-md-4">
+					<div class="card">
+						<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">{{post.title}}</h5>
+							<p class="card-text">{{post.content}}</p>
+							<p>{{post.author}}
+								-
+								{{post.createdAt |date("d/m/Y")}}</p>
+							<a href="/posts/{{post.id}}" class="btn btn-primary">Voir l'article</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<hr class="my-4">
+
 
 {% endblock %}

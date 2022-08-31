@@ -10,7 +10,7 @@
 
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="PlanetBody est un site développé par Cyril Gourdon pour l'ECF Studi">
+		<meta name="description" content="ASDEC est un site développé par Cyril Gourdon pour le compte de l'ASDEC, une association de sport à Soissons. Elle permet la gestion de ses membres.">
 		<link
 		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
@@ -38,13 +38,26 @@
 		{% block header %}
 			{% include "partials/_header.html.twig" %}
 		{% endblock %}
-		{% block body %}{% endblock %}
-		{% include "partials/_footer.html.twig" %}
+		<div class="container">
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
 
-		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-		<script>
-			AOS.init();
-		</script>
+			{% for message in app.flashes('danger') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
 
+			{% block body %}{% endblock %}
+			{% include "partials/_footer.html.twig" %}
+
+			<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+			<script>
+				AOS.init();
+			</script>
+		</body>
 	</body>
 </html>

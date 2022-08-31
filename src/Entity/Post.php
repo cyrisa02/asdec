@@ -23,8 +23,18 @@ class Post
     #[ORM\Column(length: 190)]
     private ?string $author = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt ;
+
+    
+
+    public function __construct()
+    {
+       
+        $this->createdAt = new \DateTimeImmutable;
+        
+    }
+
 
     public function getId(): ?int
     {
@@ -78,4 +88,6 @@ class Post
 
         return $this;
     }
+
+    
 }
