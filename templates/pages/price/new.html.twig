@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau tarif
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Créer un nouveau tarif</h1>
+
+		{{ include('pages/price/_form.html.twig') }}
+		<div class="mt-4">
+			<a href="{{ path('app_price_index') }}">Retour à la liste</a>
+		</div>
+
+
+	</div>
+
+{% endblock %}

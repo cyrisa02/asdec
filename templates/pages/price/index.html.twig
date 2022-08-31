@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+	<div class="mt-4 container">
+		<h1>Liste des tarifs</h1>
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>N°</th>
+					<th>Adulte</th>
+					<th>Enfant</th>
+					<th>Saison</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for price in prices|reverse %}
+					<tr>
+						<td>{{ price.id }}</td>
+						<td>{{ price.adult }}</td>
+						<td>{{ price.child }}</td>
+						<td>{{ price.year }}</td>
+						<td>
+							{# <a href="{{ path('app_price_show', {'id': price.id}) }}">show</a> #}
+							<a href="{{ path('app_price_edit', {'id': price.id}) }}">Modifier</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">Pas de tarifs</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_price_new') }}">Créer un nouveau tarif</a>
+	</div>
+
+{% endblock %}

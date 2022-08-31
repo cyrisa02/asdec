@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block body %}
+	<h2>Regarder les conditions de ventes et les RGPD</h2>
+
 	<div class="container mt-4 d-flex align-items-start">
 
 		<div class="jumbotron">
@@ -13,12 +15,27 @@
 			<img src="{{ asset('assets/images/logo.png')}}" alt="logo asdec" style="max-width: 12rem;" class="mx-auto d-block" data-aos="fade-right" data-aos-duration="50000">
 
 			<p class="lead">Ce site permet la gestion des membres de l'association de l'ASDEC.</p>
+			<a class="btn btn-primary btn-lg" href="{{ path('app_login')}}" role="button">Se connecter à son espace</a>
+
+
 			<hr class="my-4">
 			<img src="{{ asset('assets/images/yoga.jpg')}}" alt="activité sportive" style="max-width: 30rem;" class="mx-auto d-block" data-aos="fade-left" data-aos-duration="50000">
 			<hr class="my-4">
 
 			<p>Si vous souhaitez de plus amples informations sur les activités de l'<strong>ASDEC</strong>.</p>
 			<a class="btn btn-primary btn-lg" href="http://asdec.e-monsite.com/" role="button">En savoir plus</a>
+			<hr class="my-4">
+			<p>Vous souhaitez vous inscrire pour la première fois.</p>
+			<a class="btn btn-primary btn-lg" href="{{ path('app_register_member')}}" role="button">Cliquez-ici!</a>
+			<p class="mt-4">Si vous êtes déjà membre et que vous souhaitez renouveller votre abonnement, alors connectez-vous à votre
+				<a href=" {{ path('app_login')}} ">espace.</a>
+
+			</p>
+
+			<hr class="my-4">
+			<p>Vous avez déjà un compte et vous souhaitez renouveller votre adhésion.</p>
+			<a class="btn btn-primary btn-lg" href="{{ path('home.index')}}" role="button">Cliquez-ici! TODO Visible que si on est connecté</a>
+
 
 		</div>
 		{# timeless post 	 #}

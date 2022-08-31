@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Price
+{% endblock %}
+
+{% block body %}
+	<h1>Edit Price</h1>
+
+	{{ include('pages/price/_form.html.twig', {'button_label': 'Modifier'}) }}
+	<div class="mt-4">
+		<a href="{{ path('app_price_index') }}">Retour à la liste</a>
+	</div>
+
+
+	{{ include('pages/price/_delete_form.html.twig') }}
+{% endblock %}
