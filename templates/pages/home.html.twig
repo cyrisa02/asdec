@@ -4,7 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-4">
+	<div class="container mt-4 d-flex align-items-start">
+
 		<div class="jumbotron">
 			<h1 class="display-4">Bienvenue sur le site de
 				<strong>l'ASDEC</strong>
@@ -20,37 +21,33 @@
 			<a class="btn btn-primary btn-lg" href="http://asdec.e-monsite.com/" role="button">En savoir plus</a>
 
 		</div>
-	</div>
-	<hr
-	class="my-4">
-	{# timeless post 	 #}
+		{# timeless post 	 #}
+		<div class="container my-5 d-flex align-items-end" data-aos="fade-left" data-aos-duration="50000">
+			<div class="row">
+				<a href="{{ path('app_post_new')}}" class="btn btn-primary mb-3" style="font-size: 30px;">Ecrire un article</a>
 
-
-	<div class="container my-5">
-		<a href="{{ path('app_post_new')}}" class="btn btn-primary">Ecrire un article</a>
-
-
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<h4 style="margin-left: 1.2rem;">Fil d'actualités</h4>
-
-
-				<ul class="timeline-3">
-					{% for post in posts|reverse %}
-						<li>
-							<a href="/posts/{{post.id}}">{{post.title}}</a>
-							<a href="/posts/{{post.id}}" class="float-end">{{post.author}}
-								-{{post.createdAt |date("d/m/Y")}}</a>
-							<p class="mt-2">{{post.content}}</p>
-						</li>
-					{% endfor %}
-				</ul>
+				<div class="col-md-6 offset-md-3">
+					<h4 style="margin-left: 1.2rem;">Fil d'actualités</h4>
+					<ul class="timeline-3">
+						{% for post in posts|reverse %}
+							<li>
+								<a href="/posts/{{post.id}}">{{post.title}}</a>
+								<a href="/posts/{{post.id}}" class="float-end">{{post.author}}
+									-{{post.createdAt |date("d/m/Y")}}</a>
+								<p class="mt-2">{{post.content}}</p>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
 			</div>
 		</div>
+		{# end #}
+
 	</div>
-	{# end #}
 	<hr class="my-4">
-	<h2>Autre présentation</h2>
+
+	<hr class="my-4">
+	<h2>Autre présentation du mur d'actualité</h2>
 
 
 	<div class="container">

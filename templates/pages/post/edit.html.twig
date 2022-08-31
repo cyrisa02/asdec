@@ -1,14 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Post
+{% block title %}Modération
 {% endblock %}
 
 {% block body %}
-	<h1>Edit Post</h1>
+	<div class="mt-4 container">
+		<h1>Modification / Suppression de l'article</h1>
 
-	{{ include('pages/post/_form.html.twig', {'button_label': 'Valider'}) }}
+		{{ include('pages/post/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-	<a href="{{ path('app_post_index') }}">Retour à la liste</a>
+		<div class="mt-4">
+			<a href="{{ path('app_post_index') }}">Retour à la liste</a>
+		</div>
 
-	{{ include('pages/post/_delete_form.html.twig') }}
+
+		{{ include('pages/post/_delete_form.html.twig') }}</div>
+
 {% endblock %}

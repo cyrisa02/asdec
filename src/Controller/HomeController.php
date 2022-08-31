@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * This controller displays the HomepPage and the post
+ * This controller displays the HomePage and the posts
  */
 class HomeController extends AbstractController
 {

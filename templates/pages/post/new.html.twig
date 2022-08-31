@@ -8,8 +8,11 @@
 		<h1>Nouvel article</h1>
 
 		{{ include('pages/post/_form.html.twig') }}
+		<div class="mt-4">
+			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+		</div>
 
-		<a href="{{ path('app_post_index') }}">Retour à la liste</a>
+
 	</div>
 
 {% endblock %}

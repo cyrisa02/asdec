@@ -31,8 +31,15 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $postRepository->add($post, true);
 
-            return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash(
+                'success',
+                'Votre article  a été envoyé avec succès'
+            );
+
+            return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }
+
+        
 
         return $this->renderForm('pages/post/new.html.twig', [
             'post' => $post,
@@ -57,10 +64,17 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $postRepository->add($post, true);
 
+            $this->addFlash(
+                'success',
+                'Votre demande a été enregistrée avec succès'
+            );
+
             return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/edit.html.twig', [
+        
+
+        return $this->renderForm('pages/post/edit.html.twig', [
             'post' => $post,
             'form' => $form,
         ]);
@@ -72,7 +86,10 @@ class PostController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
         }
-
+$this->addFlash(
+                'success',
+                'Votre article  a été supprimé avec succès.'
+            );
         return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
     }
 }

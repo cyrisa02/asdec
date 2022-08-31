@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sport
+{% endblock %}
+
+{% block body %}
+	<h1>Sport</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ sport.id }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ sport.title }}</td>
+			</tr>
+			<tr>
+				<th>Place</th>
+				<td>{{ sport.place }}</td>
+			</tr>
+			<tr>
+				<th>Day</th>
+				<td>{{ sport.day }}</td>
+			</tr>
+			<tr>
+				<th>Start</th>
+				<td>{{ sport.start }}</td>
+			</tr>
+			<tr>
+				<th>End</th>
+				<td>{{ sport.end }}</td>
+			</tr>
+			<tr>
+				<th>PeopleNbr</th>
+				<td>{{ sport.peopleNbr }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_sport_index') }}">back to list</a>
+
+	<a href="{{ path('app_sport_edit', {'id': sport.id}) }}">edit</a>
+
+	{{ include('pages/sport/_delete_form.html.twig') }}
+{% endblock %}
