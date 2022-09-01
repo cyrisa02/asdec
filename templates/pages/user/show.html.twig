@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Mon Compte</h1>
+		<h1>Manque les activités validées</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>N° de carte</th>
+					<td>{{ user.id }}</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{{ user.email }}</td>
+				</tr>
+
+				<tr>
+					<th>Nom</th>
+					<td>{{ user.name }}</td>
+				</tr>
+				<tr>
+					<th>Prénom</th>
+					<td>{{ user.firstname }}</td>
+				</tr>
+				<tr>
+					<th>Adresse</th>
+					<td>{{ user.address }}</td>
+				</tr>
+				<tr>
+					<th>Code Postale</th>
+					<td>{{ user.zipcode }}</td>
+				</tr>
+				<tr>
+					<th>Ville</th>
+					<td>{{ user.city }}</td>
+				</tr>
+				<tr>
+					<th>Téléphone</th>
+					<td>{{ user.phone }}</td>
+				</tr>
+				<tr>
+					<th>Date de naissance</th>
+					<td>{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Statut du réglement</th>
+					<td>{{ user.IsValid ? 'Payé' : 'Reste à payer' }}</td>
+				</tr>
+				<tr>
+					<th>Date d'entrée</th>
+					<td>{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Job</th>
+					<td>{{ user.job }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+
+		<a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifer</a>
+
+		{{ include('pages/user/_delete_form.html.twig') }}</div>
+
+{% endblock %}

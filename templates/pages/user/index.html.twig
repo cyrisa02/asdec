@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Liste des utilisateurs</h1>
+
+		<h1>Manque les activités validées</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>N° de carte</th>
+					<th>Prénom</th>
+					<th>Nom</th>
+					<th>Email</th>
+					{# <th>Roles</th> #}
+					<th>Adresse</th>
+					<th>Code</th>
+					<th>Ville</th>
+					<th>Téléphone</th>
+					<th>Date de naissance</th>
+					<th>Statut</th>
+					<th>Date d'entrée</th>
+					<th>Profession</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.firstname }}</td>
+						<td>{{ user.name }}</td>
+
+						<td>{{ user.email }}</td>
+						{# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
+
+
+						<td>{{ user.address }}</td>
+						<td>{{ user.zipcode }}</td>
+						<td>{{ user.city }}</td>
+						<td>{{ user.phone }}</td>
+						<td>{{ user.Birthdate ? user.Birthdate|date('Y-m-d') : '' }}</td>
+						<td>{{ user.IsValid ? 'a réglé' : 'Pas encore payé' }}</td>
+						<td>{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}</td>
+						<td>{{ user.job }}</td>
+						<td>
+							<a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
+							<a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="15">Pas d'utilistateur</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{# <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a> #}
+	</div>
+
+{% endblock %}
