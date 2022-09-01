@@ -31,6 +31,8 @@ class UserFixtures extends Fixture
 
         $admin->setBirthdate(\DateTime::createFromFormat('d-m-Y','05-02-1973')); 
         $admin->setJob('Développeur'); 
+        $admin->setIsMedical(true);
+        $admin->setCertificatyear('2020');
         $admin->setIsValid(true); 
 
         $manager->persist($admin);  
@@ -51,6 +53,8 @@ class UserFixtures extends Fixture
            // $user->setPhone($faker->phoneNumber);
             $user->setJob('Profession');  
             $user->setBirthdate($faker->dateTime);
+            $user->setIsMedical(true);
+            $user->setCertificatyear('2020');
             $user->setIsValid(mt_rand(0,1) == 1 ? true :false);
 
         $manager->persist($user);  

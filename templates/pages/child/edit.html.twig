@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification profil enfant
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Modification profil enfant</h1>
+
+		<h1>Manque les activités</h1>
+		{{ include('pages/child/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+		<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+
+		{{ include('pages/child/_delete_form.html.twig') }}</div>
+
+{% endblock %}

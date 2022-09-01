@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil Enfant
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Compte Enfant</h1>
+		<h1>Manque les activités</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>N° de carte</th>
+					<td>{{ child.id }}</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{{ child.email }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ child.name }}</td>
+				</tr>
+				<tr>
+					<th>Prénom</th>
+					<td>{{ child.firstname }}</td>
+				</tr>
+				<tr>
+					<th>Adresse</th>
+					<td>{{ child.address }}</td>
+				</tr>
+				<tr>
+					<th>Code Postale</th>
+					<td>{{ child.zipcode }}</td>
+				</tr>
+				<tr>
+					<th>Ville</th>
+					<td>{{ child.city }}</td>
+				</tr>
+				<tr>
+					<th>Téléphone</th>
+					<td>{{ child.phone }}</td>
+				</tr>
+				<tr>
+					<th>Date de naissance</th>
+					<td>{{ child.birthdate ? child.birthdate|date('d-m-Y') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Satut du réglement</th>
+					<td>{{ child.isValid ? 'Payé' : 'Reste à payer' }}</td>
+				</tr>
+				<tr>
+					<th>Date d'entrée</th>
+					<td>{{ child.createdAt ? child.createdAt|date('d-m-Y') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Certificat Médical</th>
+					<td>{{ child.isMedical ? 'Oui' : 'Non' }}</td>
+				</tr>
+				<tr>
+					<th>Année</th>
+					<td>{{ child.certificatyear }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('home.index') }}">Retour Accueil</a>
+
+		<a href="{{ path('app_child_edit', {'id': child.id}) }}">Modifier</a>
+
+		{{ include('pages/child/_delete_form.html.twig') }}</div>
+
+{% endblock %}

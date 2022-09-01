@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création profil enfant
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Création d'un profil enfant</h1>
+		<h1>Manque les activités</h1>
+
+		{{ include('pages/child/_form.html.twig') }}
+		<div class="mt-4">
+			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+		</div>
+
+
+	</div>
+
+{% endblock %}

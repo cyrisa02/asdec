@@ -127,6 +127,29 @@ class RegistrationMemberFormType extends AbstractType
                     'class' => 'form-check-label'
                 ]
             ])
+            ->add('certificatyear', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlenght' => '2',
+                    'maxlenght' => '190',
+                ],
+                'label' => 'Année du certificat médical',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                
+            ])
+
+            ->add('isMedical', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4',
+                ],
+                'required' => false,
+                'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical de non-contre-indication de l\'activité ou des activités de moins de 3 ans lors de l\'inscription.',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control'

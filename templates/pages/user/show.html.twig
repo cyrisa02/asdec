@@ -56,9 +56,18 @@
 					<td>{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}</td>
 				</tr>
 				<tr>
-					<th>Job</th>
+					<th>Profession</th>
 					<td>{{ user.job }}</td>
 				</tr>
+				<tr>
+					<th>Certificat Médical</th>
+					<td>{{ user.isMedical ? 'Oui' : 'Non' }}</td>
+				</tr>
+				<tr>
+					<th>Année</th>
+					<td>{{ user.certificatyear }}</td>
+				</tr>
+
 			</tbody>
 		</table>
 

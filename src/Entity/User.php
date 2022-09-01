@@ -60,6 +60,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 190, nullable: true)]
     private ?string $job = null;
 
+    #[ORM\Column]
+    private ?bool $IsMedical = null;
+
+    #[ORM\Column(length: 190)]
+    private ?string $certificatyear = null;
+
     /**
  	*This constructor is for the date
  	*/
@@ -257,6 +263,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setJob(?string $job): self
     {
         $this->job = $job;
+
+        return $this;
+    }
+
+    public function isIsMedical(): ?bool
+    {
+        return $this->IsMedical;
+    }
+
+    public function setIsMedical(bool $IsMedical): self
+    {
+        $this->IsMedical = $IsMedical;
+
+        return $this;
+    }
+
+    public function getCertificatyear(): ?string
+    {
+        return $this->certificatyear;
+    }
+
+    public function setCertificatyear(string $certificatyear): self
+    {
+        $this->certificatyear = $certificatyear;
 
         return $this;
     }

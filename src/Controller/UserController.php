@@ -32,7 +32,7 @@ class UserController extends AbstractController
             $userRepository->add($user, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pages/user/new.html.twig', [
@@ -59,7 +59,7 @@ class UserController extends AbstractController
             $userRepository->add($user, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('pages/user/edit.html.twig', [

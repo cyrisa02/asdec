@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Child;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class UserType extends AbstractType
+class ChildType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -22,7 +22,6 @@ class UserType extends AbstractType
                 ],
                 'label' => 'E-mail'
             ])            
-            //->add('password')
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -95,7 +94,7 @@ class UserType extends AbstractType
                 ],
                 
             ])
-            ->add('Birthdate', BirthdayType::class, [
+            ->add('birthdate', BirthdayType::class, [
                 'placeholder' => [
         'year' => 'Année',  'day' => 'Jour','month' => 'Mois'
     ],
@@ -107,44 +106,31 @@ class UserType extends AbstractType
                 'format' => 'dd-MM-yyyy',
                 
             ])
-            ->add('job', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '190',
-                ],
-                'label' => 'Profession',
-                'label_attr' => [
-                    'class' => 'form-label  mt-4'
-                ],
-                
-            ])
+           
             
-
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
                     'class' => 'form-check-input',
                 ],
                 'required' => false,
-                'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical récent.',
+                'label' => 'En tant qu\'adulte, je déclare être responsable de cet(te) enfant et certifie sur l\'honneur avoir en ma possession son certificat médical récent.',
                 'label_attr' => [
                     'class' => 'form-check-label'
                 ]
             ])
-
             ->add('certificatyear', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '190',
                 ],
-                'label' => 'Année du certificat médical',
+                'label' => 'Année de son certificat médical',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],
                 
             ])
-            ->add('isValid', CheckboxType::class, [
+             ->add('isValid', CheckboxType::class, [
                 'attr' => [
                     'class' => 'd-none',
                 ],
@@ -154,15 +140,13 @@ class UserType extends AbstractType
                     'class' => 'form-check-label'
                 ]
             ])
-            
-            
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Child::class,
         ]);
     }
 }
