@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Childsport
+{% endblock %}
+
+{% block body %}
+	<h1>Childsport</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ childsport.id }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ childsport.title }}</td>
+			</tr>
+			<tr>
+				<th>Place</th>
+				<td>{{ childsport.place }}</td>
+			</tr>
+			<tr>
+				<th>Day</th>
+				<td>{{ childsport.day }}</td>
+			</tr>
+			<tr>
+				<th>Start</th>
+				<td>{{ childsport.start }}</td>
+			</tr>
+			<tr>
+				<th>End</th>
+				<td>{{ childsport.end }}</td>
+			</tr>
+			<tr>
+				<th>PeopleNbr</th>
+				<td>{{ childsport.peopleNbr }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_childsport_index') }}">back to list</a>
+
+	<a href="{{ path('app_childsport_edit', {'id': childsport.id}) }}">edit</a>
+
+	{{ include('pages/childsport/_delete_form.html.twig') }}
+{% endblock %}

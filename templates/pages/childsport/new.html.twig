@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création activité enfant
+
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Création activité enfant</h1>
+
+
+		{{ include('pages/childsport/_form.html.twig') }}
+
+		<div class="mt-4">
+			<a href="{{ path('app_childsport_index') }}">Retour à la liste</a>
+		</div>
+
+	</div>
+
+{% endblock %}

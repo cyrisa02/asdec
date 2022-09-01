@@ -39,14 +39,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
 
-        $sport = new Sport();
-        $sport->setTitle('Badminton -de 16 ans')
-            ->setPlace('Gymnase Gérard Philipe')            
-            ->setDay('Mardi')
-            ->setStart('18h15')
-            ->setEnd('19h45')
-            ->setPeopleNbr('non renseigné');
-        $manager->persist($sport);
+        
 
 
         $sport = new Sport();

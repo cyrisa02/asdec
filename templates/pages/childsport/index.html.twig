@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des activités enfants
+{% endblock %}
+
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Liste des activités enfants</h1>
+
+
+		<table class="table">
+			<thead>
+				<tr>
+
+					<th>Dénomination</th>
+					<th>Lieu</th>
+					<th>Jour</th>
+					<th>Début</th>
+					<th>Fin</th>
+					<th>Remarque</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for childsport in childsports %}
+					<tr>
+
+						<td>{{ childsport.title }}</td>
+						<td>{{ childsport.place }}</td>
+						<td>{{ childsport.day }}</td>
+						<td>{{ childsport.start }}</td>
+						<td>{{ childsport.end }}</td>
+						<td>{{ childsport.peopleNbr }}</td>
+						<td>
+							{# <a href="{{ path('app_childsport_show', {'id': childsport.id}) }}">show</a> #}
+							<a href="{{ path('app_childsport_edit', {'id': childsport.id}) }}">modifier</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Pas d'activité</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_childsport_new') }}">Créer une activité enfant</a>
+	</div>
+
+{% endblock %}

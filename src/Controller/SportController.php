@@ -36,7 +36,7 @@ class SportController extends AbstractController
             return $this->redirectToRoute('app_sport_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('sport/new.html.twig', [
+        return $this->renderForm('pages/sport/new.html.twig', [
             'sport' => $sport,
             'form' => $form,
         ]);

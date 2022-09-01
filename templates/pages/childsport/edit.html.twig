@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une activité adulte
+
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Modification d'une activité enfant</h1>
+
+
+		{{ include('pages/childsport/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+		<div class="mt-4">
+			<a href="{{ path('app_childsport_index') }}">Retour à la liste</a>
+		</div>
+
+
+		{{ include('pages/childsport/_delete_form.html.twig') }}</div>
+
+{% endblock %}
