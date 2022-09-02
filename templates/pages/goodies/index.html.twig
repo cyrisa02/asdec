@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles publicitaires
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Liste des articles publicitaires</h1>
+		<h2>
+			Si vous voulez un champ stock , merci de me le signaler</h2>
+
+		<table class="table">
+			<thead>
+				<tr>
+
+					<th>Dénomination</th>
+					<th>Prix</th>
+					<th>Couleur</th>
+					<th>Taille</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for goody in goodies %}
+					<tr>
+
+						<td>{{ goody.Title }}</td>
+						<td>{{ goody.Price }}</td>
+						<td>{{ goody.Color }}</td>
+						<td>{{ goody.Size }}</td>
+						<td>
+							<a href="{{ path('app_goodies_show', {'id': goody.id}) }}">Voir</a>
+							<a href="{{ path('app_goodies_edit', {'id': goody.id}) }}">Modifier</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">Pas d'objet</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_goodies_new') }}">Créer un nouvel article</a>
+	</div>
+
+{% endblock %}

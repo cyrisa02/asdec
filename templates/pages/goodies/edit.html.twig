@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un article
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Modifier un article</h1>
+
+		{{ include('pages/goodies/_form.html.twig', {'button_label': 'Modifier'}) }}
+		<div class="mt-4">
+			<a href="{{ path('app_goodies_index') }}">Retour à liste</a>
+
+		</div>
+
+		{{ include('pages/goodies/_delete_form.html.twig') }}</div>
+
+{% endblock %}

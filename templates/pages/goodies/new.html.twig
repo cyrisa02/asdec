@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un article
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Création d'un article</h1>
+
+		{{ include('pages/goodies/_form.html.twig') }}
+
+		<a href="{{ path('app_goodies_index') }}">Retour à la liste</a>
+	</div>
+
+{% endblock %}
