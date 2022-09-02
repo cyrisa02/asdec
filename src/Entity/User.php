@@ -69,6 +69,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isRegistered = null;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Condition $present = null;
+
     /**
  	*This constructor is for the date
  	*/
@@ -302,6 +305,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsRegistered(?bool $isRegistered): self
     {
         $this->isRegistered = $isRegistered;
+
+        return $this;
+    }
+
+    public function getPresent(): ?Condition
+    {
+        return $this->present;
+    }
+
+    public function setPresent(?Condition $present): self
+    {
+        $this->present = $present;
 
         return $this;
     }

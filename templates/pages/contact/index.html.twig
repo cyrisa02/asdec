@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des messages reçus
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des messages reçus</h1>
+	<h2>Mettre en place un mailer pour prévenir d'un nouveau message</h2>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>N°</th>
+				<th>Nom</th>
+				<th>Email</th>
+				<th>Message</th>
+				<th>Date</th>
+				{# <th>actions</th> #}
+			</tr>
+		</thead>
+		<tbody>
+			{% for contact in contacts|reverse %}
+				<tr>
+					<td>{{ contact.id }}</td>
+					<td>{{ contact.fullname }}</td>
+					<td>{{ contact.email }}</td>
+					<td>{{ contact.content }}</td>
+					<td>{{ contact.createdAt ? contact.createdAt|date('d-m-Y') : '' }}</td>
+					{# <td>
+											<a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
+											<a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
+										</td> #}
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">Pas de message</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{# <a href="{{ path('app_contact_new') }}">Create new</a> #}
+{% endblock %}

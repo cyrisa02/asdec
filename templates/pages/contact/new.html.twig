@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer un message
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Nous envoyer un message.</h1>
+		<h3>Nous vous répondrons rapidement.</h3>
+
+		{{ include('pages/contact/_form.html.twig') }}
+
+		<div class="mt-4">
+			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+		</div>
+
+	</div>
+{% endblock %}

@@ -50,6 +50,9 @@ class Child
     #[ORM\Column(length: 190)]
     private ?string $certificatyear = null;
 
+    #[ORM\OneToOne(inversedBy: 'child', cascade: ['persist', 'remove'])]
+    private ?Condition $present = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -202,6 +205,18 @@ class Child
     public function setCertificatyear(string $certificatyear): self
     {
         $this->certificatyear = $certificatyear;
+
+        return $this;
+    }
+
+    public function getPresent(): ?Condition
+    {
+        return $this->present;
+    }
+
+    public function setPresent(?Condition $present): self
+    {
+        $this->present = $present;
 
         return $this;
     }
