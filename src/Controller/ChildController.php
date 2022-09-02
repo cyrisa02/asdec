@@ -5,19 +5,28 @@ namespace App\Controller;
 use App\Entity\Child;
 use App\Form\ChildType;
 use App\Repository\ChildRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/enfant')]
 class ChildController extends AbstractController
 {
     #[Route('/', name: 'app_child_index', methods: ['GET'])]
-    public function index(ChildRepository $childRepository): Response
+    public function index(ChildRepository $childRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $childs = $childRepository->findAll();
+
+        $childs =$paginator->paginate(
+            $childs,
+            
+            $request->query->getInt('page', 1),
+            3
+        );
         return $this->render('pages/child/index.html.twig', [
-            'children' => $childRepository->findAll(),
+            'children' => $childs,
         ]);
     }
 

@@ -11,7 +11,12 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class UserType extends AbstractType
+
+/**
+ * This Type is for the second time to register
+ */
+
+class ReregistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -123,12 +128,12 @@ class UserType extends AbstractType
 
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input mt-4',
+                    'class' => 'form-check-input',
                 ],
                 'required' => false,
                 'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical récent.',
                 'label_attr' => [
-                    'class' => 'form-check-label mt-4'
+                    'class' => 'form-check-label'
                 ]
             ])
 
@@ -143,16 +148,6 @@ class UserType extends AbstractType
                     'class' => 'form-label  mt-4'
                 ],
                 
-            ])
-            ->add('isRegistered', CheckboxType::class, [
-                'attr' => [
-                    'class' => 'form-check-input mt-4',
-                ],
-                'required' => false,
-                'label' => 'Ne cliquer sur cette case que pour une ré-inscription, DECLENCHE UN MAIL POUR L\'ASDEC???',
-                'label_attr' => [
-                    'class' => 'form-check-label mt-4'
-                ]
             ])
             ->add('isValid', CheckboxType::class, [
                 'attr' => [

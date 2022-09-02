@@ -26,12 +26,12 @@
 					<th>Profession</th>
 					<th>Certificat Médical</th>
 					<th>Date</th>
-
+					<th>Déjà ré-inscrit</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for user in users %}
+				{% for user in users|reverse %}
 					<tr>
 						<td>{{ user.id }}</td>
 						<td>{{ user.firstname }}</td>
@@ -52,6 +52,8 @@
 
 						<td>{{ user.isMedical ? 'Oui' : 'Non' }}</td>
 						<td>{{ user.certificatyear }}</td>
+						<td>{{ user.IsRegistered ? 'Oui' : 'Non' }}</td>
+
 						<td>
 							<a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
 							<a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
@@ -65,4 +67,5 @@
 			<td colspan="15">Pas d'utilistateur</td>
 		</tr>
 	{% endfor %}
-</tbody></table>{# <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a> #}</div>{% endblock %}
+</tbody></table>{# <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a> #}<div class="navigation d-flex justify-content-center mt-4">
+{{ knp_pagination_render(users) }}</div></div>{% endblock %}

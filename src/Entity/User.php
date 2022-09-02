@@ -66,6 +66,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 190)]
     private ?string $certificatyear = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isRegistered = null;
+
     /**
  	*This constructor is for the date
  	*/
@@ -287,6 +290,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCertificatyear(string $certificatyear): self
     {
         $this->certificatyear = $certificatyear;
+
+        return $this;
+    }
+
+    public function isIsRegistered(): ?bool
+    {
+        return $this->isRegistered;
+    }
+
+    public function setIsRegistered(?bool $isRegistered): self
+    {
+        $this->isRegistered = $isRegistered;
 
         return $this;
     }

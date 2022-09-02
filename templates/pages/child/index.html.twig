@@ -59,6 +59,9 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<div class="navigation d-flex justify-content-center mt-4">
+		{{ knp_pagination_render(children) }}
+	</div>
 
 	<a href="{{ path('app_child_new') }}">Créer un profil enfant</a>
 {% endblock %}
