@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\GoodiesRepository;
 use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +16,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home.index')]
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository, GoodiesRepository $goodiesRepository): Response
     {
         $posts = $postRepository->findAll();
+        $goodiess = $goodiesRepository->findAll();
       
 
         return $this->render('pages/home.html.twig', [
             'posts' => $posts,
+            'goodiess' => $goodiess, 
         ]);
     }
 

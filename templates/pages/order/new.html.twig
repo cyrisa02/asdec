@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de commande
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Création de commande</h1>
+
+		{{ include('pages/order/_form.html.twig') }}
+
+
+		<div class="mt-4">
+			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+		</div>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Commande</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>N°</th>
+					<td>{{ order.id }}</td>
+				</tr>
+				<tr>
+					<th>Réf. Article</th>
+					<td>{{ order.articleNr }}</td>
+				</tr>
+				<tr>
+					<th>Dénomination</th>
+					<td>{{ order.title }}</td>
+				</tr>
+				<tr>
+					<th>Observation</th>
+					<td>{{ order.comment }}</td>
+				</tr>
+				<tr>
+					<th>Client</th>
+					<td>{{ order.customer }}</td>
+				</tr>
+				<tr>
+					<th>Date de création</th>
+					<td>{{ order.createdAt ? order.createdAt|date('d-m-Y') : '' }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_order_index') }}">Retour à la liste</a>
+
+		<a href="{{ path('app_order_edit', {'id': order.id}) }}">Modifier</a>
+
+		{{ include('pages/order/_delete_form.html.twig') }}</div>
+
+{% endblock %}

@@ -62,14 +62,45 @@
 		{# end #}
 
 	</div>
-	<hr class="my-4">
+	<hr
+	class="my-4">
+	{# Presentation des goodies #}
 
+	<div class="container">
+		<a class="btn btn-primary btn-lg" href="{{ path('app_order_new')}}" role="button">Commander un objet publicitaire</a>
+
+		<div class="row mt-4">
+			{% for goodies in goodiess|reverse %}
+				<div class="col-md-4">
+					<div class="card">
+						<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">{{goodies.title}}</h5>
+							<p class="card-text">Référence:
+								{{goodies.id}}</p>
+
+							<p class="card-text">Prix TTC:
+								{{goodies.price}}</p>
+							<p class="card-text">Taille:
+								{{goodies.size}}</p>
+							<p class="card-text">Couleur:
+								{{goodies.color}}</p>
+							<a href="{{ path('app_order_new')}}" class="btn btn-primary">Commander l'article</a>
+
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	{# fin des goodies #}
 	<hr class="my-4">
 	<h2>Autre présentation du mur d'actualité</h2>
 
 
 	<div class="container">
-		<a class="btn btn-primary btn-lg" href="http://asdec.e-monsite.com/" role="button">Ecrire un article</a>
+		<a class="btn btn-primary btn-lg" href="{{ path('app_post_new')}}" role="button">Ecrire un article</a>
 
 
 		<div class="row mt-4">

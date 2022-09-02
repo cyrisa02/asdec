@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des commandes
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des commandes</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Commande</th>
+				<th>Client</th>
+
+				<th>Réf de l'article</th>
+				<th>Dénomination</th>
+				<th>Observation</th>
+
+				<th>Date de création</th>
+				<th>Statut</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for order in orders|reverse %}
+				<tr>
+					<td>{{ order.id }}</td>
+					<td>{{ order.customer }}</td>
+
+					<td>{{ order.articleNr }}</td>
+					<td>{{ order.title }}</td>
+					<td>{{ order.comment }}</td>
+
+					<td>{{ order.createdAt ? order.createdAt|date('d-m-Y') : '' }}</td>
+					<td>{{ order.IsSended ? 'Réglé' : 'A préparer' }}</td>
+
+					<td>
+						<a href="{{ path('app_order_show', {'id': order.id}) }}">Voir</a>
+						<a href="{{ path('app_order_edit', {'id': order.id}) }}">Changer le statut</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">Pas de commande</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_order_new') }}">Créer une commande</a>
+{% endblock %}
