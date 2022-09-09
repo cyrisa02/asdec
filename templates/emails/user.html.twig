@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<p>Bonjour, au niveau présentation, c'est le mieux que je puisse faire, je ne peux pas amener de pièces jointes, de style désolé.</p>
+		{% if user.isValid == true %}
+			<h1>
+				Adhésion Saison 2022 / 2023
+			</h1>
+			<h2>
+				Association Sport Détente et Culture</h2>
+			<h3>
+				Nom:{{ user.name }}
+			</h3>
+			<h3>
+				Prénom:
+				{{ user.firstname }}</h3>
+			<p>
+				Votre Email de connexion :
+				{{ user.email }}</p>
+			<p>
+				N° d'adhérent :
+				{{ user.id }}</p>
+			<p>
+				Fait le :
+				{{ "now"|date("d/m/Y") }}
+			</p>
+			<p>-----------------------------------------------------------</p>
+			<p>Adresse:
+				{{ user.address }}</p>
+			<p>{{ user.zipcode }}
+				{{ user.city }}
+			</p>
+			<p></p>
+
+			<p>Né(e) le:
+				{{ user.birthdate|date('d-m-Y') }}
+
+			</p>
+			<p>Age:
+				{{ user.getAge() }}
+				ans</p>
+			<p>Cotisation annuelle: réglée</p>
+			<p>Le Président: Pascal Petit</p>
+			<p>Siège social: 18 rue des Pensées | 02880 Crouy
+			</p>
+
+		{% else %}
+			<p>Votre profil a changé.</p>
+		{% endif %}
+
+	</body>
+</html>

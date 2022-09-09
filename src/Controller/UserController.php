@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\MailService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,7 +62,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edition', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, MailService $mailService): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -69,6 +70,13 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->add($user, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+
+            // Email J'ai injecté le MailService $mailService
+            $mailService->sendEmail(
+                $user->getEmail(),                
+                'emails/user.html.twig',
+                ['user'=>$user]
+            );
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }

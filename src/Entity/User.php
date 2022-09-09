@@ -83,6 +83,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         
     }
 
+    public function getAge()
+     {
+        $dateInterval = $this->Birthdate->diff(new \DateTime());
+ 
+         return $dateInterval->y;
+     }
+
     public function getId(): ?int
     {
         return $this->id;
