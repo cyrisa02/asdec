@@ -156,7 +156,7 @@ class UserType extends AbstractType
             ])
             ->add('isValid', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input mt-4',
+                    'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
                 'label' => 'L\'adhérent(e) est à jour de sa cotisation d\'adhésion ASDEC',

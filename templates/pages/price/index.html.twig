@@ -14,6 +14,8 @@
 					<th>N°</th>
 					<th>Adulte</th>
 					<th>Enfant</th>
+					<th>Au ticket</th>
+
 					<th>Saison</th>
 					<th>actions</th>
 				</tr>
@@ -24,6 +26,8 @@
 						<td>{{ price.id }}</td>
 						<td>{{ price.adult }}</td>
 						<td>{{ price.child }}</td>
+						<td>{{ price.IsTicket ? 'oui' : 'non' }}</td>
+
 						<td>{{ price.year }}</td>
 						<td>
 							{# <a href="{{ path('app_price_show', {'id': price.id}) }}">show</a> #}

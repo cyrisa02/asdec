@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class PriceType extends AbstractType
 {
@@ -44,6 +45,16 @@ class PriceType extends AbstractType
                 'label' => 'Saison',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
+                ]
+            ])
+            ->add('isTicket', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'Ce tarif fait-il l\'objet d\'un paiement au ticket?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
                 ]
             ])
         ;
