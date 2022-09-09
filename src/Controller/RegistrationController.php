@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\MailService;
 use App\Security\UserAuthenticator;
 use App\Form\RegistrationBoardFormType;
 use App\Form\RegistrationMemberFormType;
@@ -23,7 +24,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription_adherent', name: 'app_register_member')]
-    public function registermember(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function registermember(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager,MailService $mailService): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationMemberFormType::class, $user);
@@ -43,6 +44,14 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+            
+            // Email J'ai injecté le MailService $mailService
+            $mailService->sendEmail(
+                $user->getEmail(),                
+                'emails/member.html.twig',
+                ['user'=>$user]
+            );
+
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,

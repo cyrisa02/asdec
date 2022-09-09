@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+
+
+		<h1>
+			Adhésion Saison
+			{{ "now"|date("Y") }}
+		</h1>
+		<h2>
+			Association Sport Détente et Culture</h2>
+		<h3>
+			{{ user.firstname }}
+			{{ user.name }},
+
+		</h3>
+		<p>Nous vous remercions de votre confiance.</p>
+		<p>Votre inscription est en cours de traitement. Nous attendons le paiment de votre cotisation.</p>
+		{% if user.isChild == true %}
+			<p>Vous nous avez informés que vous souhaitiez inscrire un ou plusieurs enfants. Nous vous tiendrons informé de la marche à suivre une fois le paiment de vos cotisations réglées.</p>
+		{% endif %}
+		<p>Cordialement</p>
+		<p>L'ASDEC</p>
+	</body>
+</html>

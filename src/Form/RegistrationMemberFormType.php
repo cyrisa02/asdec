@@ -142,7 +142,7 @@ class RegistrationMemberFormType extends AbstractType
 
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input mt-4',
+                    'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
                 'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical de non-contre-indication de l\'activité ou des activités de moins de 3 ans lors de l\'inscription.',
@@ -157,6 +157,9 @@ class RegistrationMemberFormType extends AbstractType
                 'label' => 'E-mail'
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input  ms-4',
+                ],
                 'mapped' => false,
                 'label' => 'Etes-vous d\'accord avec notre RGPD ?',
                 'constraints' => [
@@ -185,6 +188,17 @@ class RegistrationMemberFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('isChild', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'Voulez-vous inscrire un ou des enfants à nos activités?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
+
         ;
     }
 

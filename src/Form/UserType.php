@@ -123,7 +123,7 @@ class UserType extends AbstractType
 
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input mt-4',
+                    'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
                 'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical récent.',
@@ -146,7 +146,7 @@ class UserType extends AbstractType
             ])
             ->add('isRegistered', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input mt-4',
+                    'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
                 'label' => 'Ne cliquer sur cette case que pour une ré-inscription, DECLENCHE UN MAIL POUR L\'ASDEC???',
@@ -165,7 +165,26 @@ class UserType extends AbstractType
                 ]
             ])
             
-            
+            ->add('isYoga', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'L\'adhérent(e) pratique le Yoga?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
+            ->add('isPilate', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'L\'adhérent(e) pratique le Pilates?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
         ;
     }
 

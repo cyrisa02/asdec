@@ -128,12 +128,12 @@ class ReregistrationType extends AbstractType
 
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input',
+                    'class' => 'form-check-input ms-4 mt-4',
                 ],
                 'required' => false,
                 'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical récent.',
                 'label_attr' => [
-                    'class' => 'form-check-label'
+                    'class' => 'form-check-label mt-4'
                 ]
             ])
 

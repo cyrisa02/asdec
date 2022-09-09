@@ -21,13 +21,16 @@ class MailService
         string $from,        
         string $htmlTemplate,
         array $context,
-        string $to = 'ivha@cegetel.net',
+        //string $to = 'ivha@cegetel.net',
+        string $to = 'atelier.cabriolet@gmail.com',
+        string $cc = 'cyrisa02.test@gmail.com',
         string $subject = 'Votre adhésion à l\'ASDEC //  Test Cyril',
 
     ): void {
         $email = (new TemplatedEmail())
             ->from($from)
             ->to($to)
+            ->cc($cc)
             ->subject($subject)
             ->htmlTemplate($htmlTemplate)
             ->context($context);

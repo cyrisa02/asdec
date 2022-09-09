@@ -72,6 +72,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Condition $present = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isYoga = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPilate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isChild = null;
+
     /**
  	*This constructor is for the date
  	*/
@@ -324,6 +333,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPresent(?Condition $present): self
     {
         $this->present = $present;
+
+        return $this;
+    }
+
+    public function isIsYoga(): ?bool
+    {
+        return $this->isYoga;
+    }
+
+    public function setIsYoga(?bool $isYoga): self
+    {
+        $this->isYoga = $isYoga;
+
+        return $this;
+    }
+
+    public function isIsPilate(): ?bool
+    {
+        return $this->isPilate;
+    }
+
+    public function setIsPilate(?bool $isPilate): self
+    {
+        $this->isPilate = $isPilate;
+
+        return $this;
+    }
+
+    public function isIsChild(): ?bool
+    {
+        return $this->isChild;
+    }
+
+    public function setIsChild(?bool $isChild): self
+    {
+        $this->isChild = $isChild;
 
         return $this;
     }
