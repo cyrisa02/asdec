@@ -74,7 +74,7 @@ class UserController extends AbstractController
             // Email J'ai injecté le MailService $mailService
             $mailService->sendEmail(
                 $user->getEmail(),                
-                'emails/user.html.twig',
+                'emails/userafterpayment.html.twig',
                 ['user'=>$user]
             );
 

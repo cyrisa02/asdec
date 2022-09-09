@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
             // Email J'ai injecté le MailService $mailService
             $mailService->sendEmail(
                 $user->getEmail(),                
-                'emails/member.html.twig',
+                'emails/memberregistration.html.twig',
                 ['user'=>$user]
             );
 
