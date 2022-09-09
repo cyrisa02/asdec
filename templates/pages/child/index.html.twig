@@ -11,8 +11,11 @@
 		<thead>
 			<tr>
 				<th>N° de carte</th>
-				<th>Prénom</th>
-				<th>Nom</th>
+				<th>Prénom du responsable</th>
+				<th>Nom du responsable</th>
+
+				<th>Prénom de l'enfant</th>
+				<th>Nom de l'enfant</th>
 				<th>Email</th>
 				{# <th>Roles</th> #}
 				<th>Adresse</th>
@@ -32,6 +35,10 @@
 			{% for child in children %}
 				<tr>
 					<td>{{ child.id }}</td>
+					<td>{{ child.parentfirstname }}</td>
+
+					<td>{{ child.parentname }}</td>
+
 
 					<td>{{ child.firstname }}</td>
 

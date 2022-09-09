@@ -20,15 +20,40 @@ class ChildType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'E-mail'
-            ])            
+                'label' => 'E-mail du responsable de l\'enfant'
+            ])   
+            ->add('parentname', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlenght' => '2',
+                    'maxlenght' => '190',
+                ],
+                'label' => 'Nom du réprésentant légal de l\'enfant',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                
+            ])  
+            ->add('parentfirstname', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlenght' => '2',
+                    'maxlenght' => '190',
+                ],
+                'label' => 'Prénom du réprésentant légal de l\'enfant',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                
+            ])       
+
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '190',
                 ],
-                'label' => 'Nom',
+                'label' => 'Nom de l\'enfant',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],
@@ -40,7 +65,7 @@ class ChildType extends AbstractType
                     'minlenght' => '2',
                     'maxlenght' => '190',
                 ],
-                'label' => 'Prénom',
+                'label' => 'Prénom de l\'enfant',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],
@@ -110,12 +135,12 @@ class ChildType extends AbstractType
             
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input',
+                    'class' => 'form-check-input ms-4 mt-4',
                 ],
                 'required' => false,
                 'label' => 'En tant qu\'adulte, je déclare être responsable de cet(te) enfant et certifie sur l\'honneur avoir en ma possession son certificat médical récent.',
                 'label_attr' => [
-                    'class' => 'form-check-label'
+                    'class' => 'form-check-label mt-4'
                 ]
             ])
             ->add('certificatyear', TextType::class, [

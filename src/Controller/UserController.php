@@ -43,6 +43,18 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->add($user, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+            // Ajout de la photo
+            $file = $request->files->get('user')['my_file'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();  
+            $file->move(
+                $uploads_directory,
+                $filename);
+                // Comment sauveagrder en BD, champ picture
+            $user->setPicture($filename);
+            $userRepository->add($user, true);
+
+
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }

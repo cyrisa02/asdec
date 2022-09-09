@@ -7,6 +7,7 @@ use App\Service\MailService;
 use App\Security\UserAuthenticator;
 use App\Form\RegistrationBoardFormType;
 use App\Form\RegistrationMemberFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,9 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
+
             $user->setRoles(["ROLE_MEMBER"])
             // encode the plain password
                   ->setPassword(

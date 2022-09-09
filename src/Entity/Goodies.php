@@ -25,6 +25,9 @@ class Goodies
     #[ORM\Column(length: 190, nullable: true)]
     private ?string $Size = null;
 
+    #[ORM\Column(length: 190, nullable: true)]
+    private ?string $picture = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Goodies
     public function setSize(?string $Size): self
     {
         $this->Size = $Size;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

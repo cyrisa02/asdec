@@ -76,7 +76,9 @@
 			{% for goodies in goodiess|reverse %}
 				<div class="col-md-4">
 					<div class="card">
-						<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+						<img src="{{ asset('uploads/') }}{{ goodies.picture }}" alt="{{ goodies.title }} ">
+
+
 						<div class="card-body">
 							<h5 class="card-title">{{goodies.title}}</h5>
 							<p class="card-text">Référence:

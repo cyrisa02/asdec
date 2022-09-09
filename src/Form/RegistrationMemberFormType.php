@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -156,6 +157,7 @@ class RegistrationMemberFormType extends AbstractType
                 ],
                 'label' => 'E-mail'
             ])
+            
             ->add('agreeTerms', CheckboxType::class, [
                 'attr' => [
                     'class' => 'form-check-input  ms-4',

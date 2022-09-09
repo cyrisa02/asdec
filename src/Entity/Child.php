@@ -53,6 +53,12 @@ class Child
     #[ORM\OneToOne(inversedBy: 'child', cascade: ['persist', 'remove'])]
     private ?Condition $present = null;
 
+    #[ORM\Column(length: 190)]
+    private ?string $parentname = null;
+
+    #[ORM\Column(length: 190)]
+    private ?string $parentfirstname = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -217,6 +223,30 @@ class Child
     public function setPresent(?Condition $present): self
     {
         $this->present = $present;
+
+        return $this;
+    }
+
+    public function getParentname(): ?string
+    {
+        return $this->parentname;
+    }
+
+    public function setParentname(string $parentname): self
+    {
+        $this->parentname = $parentname;
+
+        return $this;
+    }
+
+    public function getParentfirstname(): ?string
+    {
+        return $this->parentfirstname;
+    }
+
+    public function setParentfirstname(string $parentfirstname): self
+    {
+        $this->parentfirstname = $parentfirstname;
 
         return $this;
     }

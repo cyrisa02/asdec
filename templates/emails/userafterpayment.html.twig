@@ -51,8 +51,11 @@
 				<p>Vous avez choisi de pratiquer du Pilate</p>
 			{% endif %}
 
-			{% if isChild == true %}
-				<p>Vos cotisations sont en règles concernant votre adhésion et celle de vos enfants. Vous devez maintenant inscrire vos enfants en cliquant sur ce lien ???????????????????????</p>
+			{% if user.isChild == true %}
+				<p>Vos cotisations sont en règles concernant votre adhésion et celle de vos enfants. Vous devez maintenant inscrire vos enfants en cliquant sur ce
+					<a href="{{ absolute_url(path('app_child_new')) }}">lien
+					</a>.</p>
+
 			{% endif %}
 
 

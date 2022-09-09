@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -22,7 +23,7 @@ class UserType extends AbstractType
                 ],
                 'label' => 'E-mail'
             ])            
-            //->add('password')
+            ->add('password')
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -163,6 +164,12 @@ class UserType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-check-label mt-4'
                 ]
+            ])
+            ->add('my_file', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Télécharger votre photo.'
+
             ])
             
             ->add('isYoga', CheckboxType::class, [

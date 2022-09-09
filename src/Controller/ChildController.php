@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Child;
 use App\Form\ChildType;
+use App\Service\MailService;
 use App\Repository\ChildRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class ChildController extends AbstractController
     }
 
     #[Route('/creation', name: 'app_child_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ChildRepository $childRepository): Response
+    public function new(Request $request, ChildRepository $childRepository, MailService $mailService): Response
     {
         $child = new Child();
         $form = $this->createForm(ChildType::class, $child);
@@ -40,6 +41,14 @@ class ChildController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $childRepository->add($child, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+
+            // Email J'ai injecté le MailService $mailService
+            $mailService->sendEmail(
+                $child->getEmail(),                
+                'emails/childregistration.html.twig',
+                ['child'=>$child]
+            );
+
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }
