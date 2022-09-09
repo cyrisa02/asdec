@@ -25,7 +25,7 @@ class ChilsportFixtures extends Fixture
             ->setDay('Vendredi')
             ->setStart('19h45')
             ->setEnd('21h')
-            ->setPeopleNbr('non renseigné');
+            ->setPeopleNbr('Doit être accompagné(e) d\'un adhérent adulte (pas forcément un parent)');
         $manager->persist($sport);
 
         $sport = new Childsport();

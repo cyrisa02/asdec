@@ -20,7 +20,7 @@ class PagesController extends AbstractController
     #[Route('/rgpd', name: 'rgpd', methods: ['GET'])]
     public function indexrgpd(): Response
     {
-        return $this->render('pages/rgpd.html.twig');
+        return $this->render('pages/rgpd1.html.twig');
     }
 
     #[Route('/readme', name: 'readme', methods: ['GET'])]
