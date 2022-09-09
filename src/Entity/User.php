@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -72,6 +73,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Condition $present = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isYoga = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPilate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isChild = null;
+
+    #[ORM\Column(length: 190, nullable: true)]
+    private ?string $picture = null;
+
+   
+
     /**
  	*This constructor is for the date
  	*/
@@ -82,6 +97,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
            
         
     }
+
+    public function getAge()
+     {
+        $dateInterval = $this->Birthdate->diff(new \DateTime());
+ 
+         return $dateInterval->y;
+     }
 
     public function getId(): ?int
     {
@@ -320,4 +342,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isIsYoga(): ?bool
+    {
+        return $this->isYoga;
+    }
+
+    public function setIsYoga(?bool $isYoga): self
+    {
+        $this->isYoga = $isYoga;
+
+        return $this;
+    }
+
+    public function isIsPilate(): ?bool
+    {
+        return $this->isPilate;
+    }
+
+    public function setIsPilate(?bool $isPilate): self
+    {
+        $this->isPilate = $isPilate;
+
+        return $this;
+    }
+
+    public function isIsChild(): ?bool
+    {
+        return $this->isChild;
+    }
+
+    public function setIsChild(?bool $isChild): self
+    {
+        $this->isChild = $isChild;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    
 }

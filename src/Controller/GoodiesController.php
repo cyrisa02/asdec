@@ -29,6 +29,18 @@ class GoodiesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Ajout de la photo
+            $file = $request->files->get('goodies')['my_file'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();  
+            $file->move(
+                $uploads_directory,
+                $filename);
+                // Comment sauveagrder en BD, champ picture
+            $goody->setPicture($filename);
+            //$goodiesRepository->add($goody, true);
+
             $goodiesRepository->add($goody, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+
+
+		<h1>
+			Adhésion Saison
+			{{ "now"|date("Y") }}
+		</h1>
+		<h2>
+			Association Sport Détente et Culture</h2>
+		<h3>
+			{{ child.parentfirstname }}
+			{{ child.parentname }},
+
+		</h3>
+		<p>Nous vous informons que l'enfant
+			{{ child.firstname }}
+			{{ child.name }}
+			est bien membre de notre association.
+		</p>
+
+		<p>Nous vous remercions de votre confiance.</p>
+
+
+		<p>Cordialement</p>
+		<p>L'ASDEC</p>
+	</body>
+</html>

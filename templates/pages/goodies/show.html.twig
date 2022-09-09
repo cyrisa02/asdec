@@ -28,10 +28,23 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="mt-4 container">
+			{% if goody.Picture is defined %}
+				<img src="{{ asset('uploads/') }}{{ goody.Picture }}" alt="{{ goody.Title }} ">
 
-		<a href="{{ path('app_goodies_index') }}">Retour à la liste</a>
 
-		<a href="{{ path('app_goodies_edit', {'id': goody.id}) }}">Modifier</a>
+			{% else %}
+				<p>Pas de Photo</p>
+			{% endif %}
+		</div>
+
+
+		<div class="mt-4 container">
+			<a href="{{ path('app_goodies_index') }}">Retour à la liste</a>
+
+			<a href="{{ path('app_goodies_edit', {'id': goody.id}) }}">Modifier</a>
+		</div>
+
 
 		{{ include('pages/goodies/_delete_form.html.twig') }}</div>
 

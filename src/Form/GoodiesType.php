@@ -6,6 +6,7 @@ use App\Entity\Goodies;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class GoodiesType extends AbstractType
@@ -56,6 +57,12 @@ class GoodiesType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ]
+            ])
+            ->add('my_file', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Télécharger votre photo.'
+
             ])
         ;
     }

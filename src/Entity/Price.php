@@ -22,6 +22,9 @@ class Price
     #[ORM\Column(length: 190)]
     private ?string $year = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isTicket = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Price
     public function setYear(string $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function isIsTicket(): ?bool
+    {
+        return $this->isTicket;
+    }
+
+    public function setIsTicket(?bool $isTicket): self
+    {
+        $this->isTicket = $isTicket;
 
         return $this;
     }

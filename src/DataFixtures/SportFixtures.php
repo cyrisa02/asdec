@@ -12,7 +12,7 @@ class SportFixtures extends Fixture
     {
          $sport = new Sport();
 
-         $sport->setTitle('Gymnastique')
+         $sport->setTitle('Gymnastique - Lundi')
             ->setPlace('Gymnase Lamartine')
             ->setDay('Lundi')
             ->setStart('19h')
@@ -21,7 +21,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Badminton')
+        $sport->setTitle('Badminton - Lundi')
             ->setPlace('Gymnase Gérard Philipe')
             ->setDay('Lundi')
             ->setStart('20h30')
@@ -30,7 +30,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Pilates')
+        $sport->setTitle('Pilates - Lundi')
             ->setPlace('Gymnase Jean Davesne salle à l\'étage')
             ->setDay('Lundi')
             ->setStart('20h30')
@@ -43,7 +43,7 @@ class SportFixtures extends Fixture
 
 
         $sport = new Sport();
-        $sport->setTitle('Yoga')
+        $sport->setTitle('Yoga - Mardi')
             ->setPlace('Gymnase Jean Davesne Salle à l\'étage')            
             ->setDay('Mardi')
             ->setStart('18h15')
@@ -52,7 +52,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Gymnastique')
+        $sport->setTitle('Gymnastique - Mardi')
             ->setPlace('Gymnase Gérard Philipe')            
             ->setDay('Mardi')
             ->setStart('20h')
@@ -61,7 +61,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Badminton')
+        $sport->setTitle('Badminton - Mardi')
             ->setPlace('Gymnase Gérard Philipe')            
             ->setDay('Mardi')
             ->setStart('21h')
@@ -70,7 +70,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Gymnastique')
+        $sport->setTitle('Gymnastique - Mercredi')
             ->setPlace('Gymnase Gérard Philipe')            
             ->setDay('Mercredi')
             ->setStart('20h')
@@ -79,7 +79,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Sport de raquettes')
+        $sport->setTitle('Sport de raquettes - Mercredi')
             ->setPlace('Gymnase Jean Davesne Salle à l\'étage')            
             ->setDay('Mercredi')
             ->setStart('20h')
@@ -88,7 +88,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Badminton')
+        $sport->setTitle('Badminton - Jeudi')
             ->setPlace('Gymnase Gérard Philipe')            
             ->setDay('Jeudi')
             ->setStart('20h30')
@@ -97,7 +97,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Yoga')
+        $sport->setTitle('Yoga - Jeudi')
             ->setPlace('Salle polyvalente de Crouy derrière la Mairie')            
             ->setDay('Jeudi')
             ->setStart('17h00')
@@ -106,7 +106,7 @@ class SportFixtures extends Fixture
         $manager->persist($sport);
 
         $sport = new Sport();
-        $sport->setTitle('Yoga')
+        $sport->setTitle('Yoga - Jeudi')
             ->setPlace('Salle polyvalente de Crouy derrière la Mairie')            
             ->setDay('Jeudi')
             ->setStart('18h15')

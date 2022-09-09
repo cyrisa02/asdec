@@ -19,7 +19,7 @@ class SportType extends AbstractType
                     'minlenght' => '2',
                     'maxlenght' => '190',
                 ],
-                'label' => 'Nom de l\'activité',
+                'label' => 'Nom de l\'activité suivi du jour    --  comme l\'exemple: Yoga - Lundi',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ]

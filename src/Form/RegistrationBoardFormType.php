@@ -141,7 +141,7 @@ class RegistrationBoardFormType extends AbstractType
 
             ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'form-check-input mt-4',
+                    'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
                 'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical de non-contre-indication de l\'activité ou des activités de moins de 3 ans lors de l\'inscription.',
