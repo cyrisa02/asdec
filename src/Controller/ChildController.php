@@ -42,6 +42,17 @@ class ChildController extends AbstractController
             $childRepository->add($child, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 
+            // Ajout de la photo
+            $file = $request->files->get('child')['my_file'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();  
+            $file->move(
+                $uploads_directory,
+                $filename);
+                // Comment sauveagrder en BD, champ picture
+            $child->setPicture($filename);
+            $childRepository->add($child, true);
+
             // Email J'ai injecté le MailService $mailService
             $mailService->sendEmail(
                 $child->getEmail(),                

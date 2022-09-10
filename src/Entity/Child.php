@@ -59,6 +59,9 @@ class Child
     #[ORM\Column(length: 190)]
     private ?string $parentfirstname = null;
 
+    #[ORM\Column(length: 190, nullable: true)]
+    private ?string $picture = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -247,6 +250,18 @@ class Child
     public function setParentfirstname(string $parentfirstname): self
     {
         $this->parentfirstname = $parentfirstname;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
