@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Goodies;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -61,7 +62,19 @@ class GoodiesType extends AbstractType
             ->add('my_file', FileType::class, [
                 'mapped' => false,
                 'required' => false,
-                'label' => 'Télécharger votre photo.'
+                'label' => 'Télécharger votre photo.',
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/*',
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Télécharger une image au bon format',
+                    ])
+                ],
+
 
             ])
         ;

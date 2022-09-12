@@ -16,46 +16,74 @@
 
 				<th>Prénom de l'enfant</th>
 				<th>Nom de l'enfant</th>
-				<th>Email</th>
+				<th>Activité(s)</th>
+
+				{# <th>Email</th> #}
 				{# <th>Roles</th> #}
-				<th>Adresse</th>
-				<th>Code</th>
-				<th>Ville</th>
-				<th>Téléphone</th>
-				<th>Date de naissance</th>
-				<th>Statut</th>
-				<th>Date d'entrée</th>
-				<th>Certificat Médical</th>
-				<th>Date</th>
-
-				<th>Actions</th>
-			</tr>
+				{# <th>Adresse</th>
+																																				<th>Code</th>
+																																				<th>Ville</th> #}
+					<th>
+				Téléphone
+				</th>
+				{# <th>
+																												Date de naissance
+																												</th><th>
+																												Statut
+																												</th><th>
+																												Date d'entrée
+																												</th><th>
+																												Certificat Médical
+																												</th><th>
+																												Date
+																												</th> #}
+					<th>
+				Actions
+			</th>
+		</tr>
 		</thead>
-		<tbody>
-			{% for child in children %}
-				<tr>
-					<td>{{ child.id }}</td>
-					<td>{{ child.parentfirstname }}</td>
+			<tbody>
+				{% for child in children %}
+					<tr>
+						<td>
+					{{ child.id }}
+					</td>
+						<td>
+					{{ child.parentfirstname }}
+					</td>
+						<td>
+					{{ child.parentname }}
+					</td>
+						<td>
+					{{ child.firstname }}
+					</td>
+						<td>
+					{{ child.name }}
+					</td>
+						<td>
+							{% for sport in child.sports %}
+							{{ sport.title }}
+						/
+					{% endfor %}
 
-					<td>{{ child.parentname }}</td>
+					</td>
+					{# <td>{{ child.email }}</td> #}
 
-
-					<td>{{ child.firstname }}</td>
-
-					<td>{{ child.name }}</td>
-					<td>{{ child.email }}</td>
-
-					<td>{{ child.address }}</td>
-					<td>{{ child.zipcode }}</td>
-					<td>{{ child.city }}</td>
-					<td>{{ child.phone }}</td>
-					<td>{{ child.birthdate ? child.birthdate|date('d-m-Y') : '' }}</td>
-					<td>{{ child.isValid ? 'a réglé' : 'Pas encore payé' }}</td>
-					<td>{{ child.createdAt ? child.createdAt|date('d-m-Y') : '' }}</td>
-					<td>{{ child.isMedical ? 'Oui' : 'Non' }}</td>
-					<td>{{ child.certificatyear }}</td>
+					{# <td>{{ child.address }}</td>
+																																													<td>{{ child.zipcode }}</td>
+																																													<td>{{ child.city }}</td> #}
+						<td>
+					{{ child.phone }}
+						{# </td><td>{{ child.birthdate ? child.birthdate|date('d-m-Y') : '' }} #}
+					</td>
+					<td>{{ child.isValid ? 'a réglé' : 'Pas encore payé' }}
+						{# </td><td>{{ child.createdAt ? child.createdAt|date('d-m-Y') : '' }}
+																																															</td><td>{{ child.isMedical ? 'Oui' : 'Non' }}
+																																															</td><td>{{ child.certificatyear }} #}
+					</td>
 					<td>
-						<a href="{{ path('app_child_show', {'id': child.id}) }}">voir</a>
+						<a href="{{ path('app_child_show', {'id': child.id}) }}">
+							voir</a>
 						<a href="{{ path('app_child_edit', {'id': child.id}) }}">modifier</a>
 					</td>
 				</tr>

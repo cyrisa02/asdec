@@ -6,6 +6,7 @@ use App\Entity\Child;
 use App\Form\ChildType;
 use App\Service\MailService;
 use App\Repository\ChildRepository;
+use App\Repository\ChildsportRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ChildController extends AbstractController
 {
     #[Route('/', name: 'app_child_index', methods: ['GET'])]
-    public function index(ChildRepository $childRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(ChildRepository $childRepository, PaginatorInterface $paginator, Request $request, ChildsportRepository $childsportRepository): Response
     {
         $childs = $childRepository->findAll();
 
@@ -28,6 +29,7 @@ class ChildController extends AbstractController
         );
         return $this->render('pages/child/index.html.twig', [
             'children' => $childs,
+            'sports' => $childsportRepository->findAll(),
         ]);
     }
 

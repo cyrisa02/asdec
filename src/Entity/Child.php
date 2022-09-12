@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ChildRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ChildRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ChildRepository::class)]
 class Child
@@ -62,10 +64,17 @@ class Child
     #[ORM\Column(length: 190, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\ManyToMany(targetEntity: Childsport::class, inversedBy: 'children')]
+    private Collection $sports;
+
+    
+
+    
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-           
+        $this->sports = new ArrayCollection();
+             
         
     }
 
@@ -265,4 +274,32 @@ class Child
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Childsport>
+     */
+    public function getSports(): Collection
+    {
+        return $this->sports;
+    }
+
+    public function addSport(Childsport $sport): self
+    {
+        if (!$this->sports->contains($sport)) {
+            $this->sports->add($sport);
+        }
+
+        return $this;
+    }
+
+    public function removeSport(Childsport $sport): self
+    {
+        $this->sports->removeElement($sport);
+
+        return $this;
+    }
+
+   
+
+    
 }

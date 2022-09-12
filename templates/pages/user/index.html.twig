@@ -7,55 +7,90 @@
 	<div class="mt-4 container">
 		<h1>Liste des utilisateurs adultes</h1>
 
-		<h1>Manque les activités validées</h1>
+
 		<table class="table">
 			<thead>
 				<tr>
 					<th>N° de carte</th>
 					<th>Prénom</th>
 					<th>Nom</th>
-					<th>Email</th>
+					{# <th>Email</th> #}
 					{# <th>Roles</th> #}
-					<th>Adresse</th>
-					<th>Code</th>
-					<th>Ville</th>
-					<th>Téléphone</th>
-					<th>Date de naissance</th>
-					<th>Statut</th>
-					<th>Date d'entrée</th>
-					<th>Profession</th>
-					<th>Certificat Médical</th>
-					<th>Date</th>
-					<th>Déjà ré-inscrit</th>
-					<th>Actions</th>
+					{# <th>Adresse</th>
+																														<th>Code</th>
+																														<th>Ville</th> #}<th>Activité(s)
+					</th>
+
+						<th>
+					Téléphone
+						{# </th><th>Date de naissance
+																													</th> #}
+					</th>
+					<th>Statut
+					</th>
+					{# <th>Date d'entrée
+																									</th><th>Profession
+																									</th><th>Certificat Médical
+																									</th><th>Date
+																									</th> #}
+					<th>Déjà ré-inscrit
+					</th>
+					<th>Actions
+					</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for user in users|reverse %}
 					<tr>
-						<td>{{ user.id }}</td>
-						<td>{{ user.firstname }}</td>
-						<td>{{ user.name }}</td>
+						<td>{{ user.id }}
+						</td>
+						<td>{{ user.firstname }}
+						</td>
+						<td>{{ user.name }}
+						</td>
 
-						<td>{{ user.email }}</td>
+						{# <td>{{ user.email }}</td> #}
 						{# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
 
 
-						<td>{{ user.address }}</td>
-						<td>{{ user.zipcode }}</td>
-						<td>{{ user.city }}</td>
-						<td>{{ user.phone }}</td>
-						<td>{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}</td>
-						<td>{{ user.IsValid ? 'a réglé' : 'Pas encore payé' }}</td>
-						<td>{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}</td>
-						<td>{{ user.job }}</td>
+						{# <td>{{ user.address }}</td>
+																																				<td>{{ user.zipcode }}</td>
+																																				<td>{{ user.city }}</td> #}
+							<td>
+								{% for sport in user.sports %}
+								{{ sport.title }}
+							/
+						{% endfor %}
 
-						<td>{{ user.isMedical ? 'Oui' : 'Non' }}</td>
-						<td>{{ user.certificatyear }}</td>
-						<td>{{ user.IsRegistered ? 'Oui' : 'Non' }}</td>
+						</td>
 
-						<td>
-							<a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
+							<td>
+						{{ user.phone }}
+						</td>
+						{# <td>
+																								{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
+																								</td> #}
+							<td>
+						{{ user.IsValid ? 'a réglé' : 'Pas encore payé' }}
+						</td>
+						{# <td>
+																		{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
+																		</td>
+																			<td>
+																		{{ user.job }}
+																		</td>
+																			<td>
+																		{{ user.isMedical ? 'Oui' : 'Non' }}
+																		</td>
+																			<td>
+																		{{ user.certificatyear }}
+																		</td> #}
+							<td>
+						{{ user.IsRegistered ? 'Oui' : 'Non' }}
+						</td>
+
+							<td>
+								<a href="{{ path('app_user_show', {'id': user.id}) }}"> Voir</a>
 							<a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
 						</td>
 					</tr>
