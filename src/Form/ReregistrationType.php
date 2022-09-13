@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Sport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,12 +23,12 @@ class ReregistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'label' => 'E-mail'
-            ])            
+            // ->add('email', EmailType::class, [
+            //     'attr' => [
+            //         'class' => 'form-control'
+            //     ],
+            //     'label' => 'E-mail'
+            // ])            
             //->add('password')
             ->add('name', TextType::class, [
                 'attr' => [
@@ -149,6 +151,53 @@ class ReregistrationType extends AbstractType
                 ],
                 
             ])
+            
+            ->add('isRegistered', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'Souhaitez vous vous réinscrire?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
+
+            ->add('sports', EntityType::class, [
+                'class' => Sport::class,                
+                'label' => 'Merci de sélectionner vos activités',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 '
+                ],
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+                'attr' => [
+                    'class' => 'form-check-label mt-4 pe-4',
+                ],
+            ])
+            
+            ->add('isYoga', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'Souhaitez-vous pratiquer le Yoga?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
+            ->add('isPilate', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'Souhaitez-vous pratiquer le Pilates?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
+
             ->add('isValid', CheckboxType::class, [
                 'attr' => [
                     'class' => 'd-none',
@@ -159,7 +208,8 @@ class ReregistrationType extends AbstractType
                     'class' => 'form-check-label'
                 ]
             ])
-            
+
+
             
         ;
     }

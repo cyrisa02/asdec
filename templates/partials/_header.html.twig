@@ -9,93 +9,125 @@
 			<ul
 				class="navbar-nav me-auto">
 				{# <li class="nav-item">
-																																																																																																																																													<a class="nav-link active" href="#">Home
-																																																																																																																																														<span class="visually-hidden">(current)</span>
-																																																																																																																																													</a>
-																																																																																																																																												</li> #}
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrateur</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="{{ path('app_sport_index')}}">Activités sportives Adultes</a>
-						<a class="dropdown-item" href="{{ path('app_childsport_index')}}">Activités sportives Enfants</a>
-
-
-						<a class="dropdown-item" href="{{ path('app_price_index')}}">Tarifs et au ticket</a>
-
-						<a class="dropdown-item" href="{{ path('app_register_board')}}">Créer des statuts Représentant du Bureau</a>
-
-						<a class="dropdown-item" href="{{ path('app_user_index')}} ">Gestion des utilisateurs adultes et réinscriptions</a>
-
-						<a class="dropdown-item" href="{{ path('app_child_index')}} ">Gestion des utilisateurs enfants</a>
-
-
-						<a class="dropdown-item" href="#">Coachs TODO</a>
-
-						<a class="dropdown-item" href="#">Adhérents TODO</a>
-						<a class="dropdown-item" href="{{ path('app_timecard_index')}} ">Fiches de présence</a>
-
-
-						<a class="dropdown-item" href="#">Envoyer des Mails à l'ensemble des membres / Newsletter TODO</a>
-						<a class="dropdown-item" href="{{ path('app_contact_index')}} ">Gérer les mails formulaire de contact</a>
-
-
-						<a class="dropdown-item" href="{{ path('app_post_index')}}">Modération - Mur de communication</a>
-
-
-						<a class="dropdown-item" href="{{ path('app_goodies_index')}}">Objets publicitaires</a>
-						<a class="dropdown-item" href="{{ path('app_order_index')}}">Gestion des commandes des Objets publicitaires</a>
-
-
-						{# <a class="dropdown-item" href="#">Something else here</a>
-																																																																																																																																																																																																																																																																																										<div class="dropdown-divider"></div>
-																																																																																																																																																																																																																																																																																										<a class="dropdown-item" href="#">Separated link</a> #}
-					</div>
-				</li>
-
-				{# <li class="nav-item">
-																																																																																																																																																																																																																									<a class="nav-link" href="#">Features</a>
-																																																																																																																																																																																																																								</li>
-																																																																																																																																																																																																																								<li class="nav-item">
-																																																																																																																																																																																																																									<a class="nav-link" href="#">Pricing</a>
-																																																																																																																																																																																																																								</li>
-																																																																																																																																																																																																																								<li class="nav-item">
-																																																																																																																																																																																																																									<a class="nav-link" href="#">About</a>
+																																																																																																																																																																																																																									<a class="nav-link active" href="#">Home
+																																																																																																																																																																																																																										<span class="visually-hidden">(current)</span>
+																																																																																																																																																																																																																									</a>
 																																																																																																																																																																																																																								</li> #}
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Représentant</a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="{{ path('app_timecard_new')}}">Créer une feuille de présence</a>
+				{% if app.user %}
+					{% if is_granted('ROLE_ADMIN') %}
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrateur</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('app_sport_index')}}">Activités sportives Adultes</a>
+								<a class="dropdown-item" href="{{ path('app_childsport_index')}}">Activités sportives Enfants</a>
 
 
-						<a class="dropdown-item" href="#">Imprimer une feuille de présence TODO</a>
-						<a class="dropdown-item" href="#">Imprimer une feuille de présence TODO pour le Yoga et le Pilates en mettant les tarifs au ticket</a>
+								<a class="dropdown-item" href="{{ path('app_price_index')}}">Tarifs et au ticket</a>
 
-						<a class="dropdown-item" href="#">Supprimer un adhérent de la feuille de présence TODO</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Separated link</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Adhérent et coach</a>
-					<div
-						class="dropdown-menu">
-						{# <a class="dropdown-item" href="{{ path('app_user_show',{'id':app.user.id})}}">Ma carte d'adhérent</a> #}
-						<a class="dropdown-item" href="#">Ma carte d'adhérent TODO</a>
+								<a class="dropdown-item" href="{{ path('app_register_board')}}">Créer des statuts Représentant du Bureau</a>
+
+								<a class="dropdown-item" href="{{ path('app_user_index')}} ">Gestion des utilisateurs adultes</a>
+
+								<a class="dropdown-item" href="{{ path('app_reregistration_index')}} ">Réinscriptions</a>
 
 
-						<a class="dropdown-item" href="{{ path('app_child_new')}}">Inscrire un enfant</a>
+								<a class="dropdown-item" href="{{ path('app_child_index')}} ">Gestion des utilisateurs enfants</a>
 
-						<a class="dropdown-item" href="#">Réinscription TODO dépend de l'id du connecté + envoyer un email à Nicolas et au user</a>
 
-						<a class="dropdown-item" href="#">Mur de communication</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Objets publicitaires TODO</a>
-						<a class="dropdown-item" href="#">Commander des Objets publicitaires avec filtre JS TODO</a>
+								{# <a class="dropdown-item" href="#">Coachs TODO</a>
+																																																																																														
+																																																																																																				<a class="dropdown-item" href="#">Adhérents TODO</a> #}
+								<a class="dropdown-item" href="{{ path('app_timecard_index')}} ">Fiches de présence</a>
 
-					</div>
-				</li>
+
+								<a class="dropdown-item" href="#">Envoyer des Mails à l'ensemble des membres / Newsletter TODO</a>
+								<a class="dropdown-item" href="{{ path('app_contact_index')}} ">Gérer les mails formulaire de contact</a>
+
+
+								<a class="dropdown-item" href="{{ path('app_post_index')}}">Modération - Mur de communication</a>
+
+
+								<a class="dropdown-item" href="{{ path('app_goodies_index')}}">Objets publicitaires</a>
+								<a class="dropdown-item" href="{{ path('app_order_index')}}">Gestion des commandes des Objets publicitaires</a>
+
+
+								{# <a class="dropdown-item" href="#">Something else here</a>
+																																																																																																																																																																																																																																																																																																																																																																																																																<div class="dropdown-divider"></div>
+																																																																																																																																																																																																																																																																																																																																																																																																																<a class="dropdown-item" href="#">Separated link</a> #}
+							</div>
+						</li>
+
+						{# <li class="nav-item">
+																																																																																																																																																																																																																																																																																																									<a class="nav-link" href="#">Features</a>
+																																																																																																																																																																																																																																																																																																								</li>
+																																																																																																																																																																																																																																																																																																								<li class="nav-item">
+																																																																																																																																																																																																																																																																																																									<a class="nav-link" href="#">Pricing</a>
+																																																																																																																																																																																																																																																																																																								</li>
+																																																																																																																																																																																																																																																																																																								<li class="nav-item">
+																																																																																																																																																																																																																																																																																																									<a class="nav-link" href="#">About</a>
+																																																																																																																																																																																																																																																																																																								</li> #}
+					{% endif %}
+				{% endif %}
+				{% if app.user %}
+					{% if is_granted('ROLE_BOARD') %}
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Représentant</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('app_timecard_new')}}">Créer une feuille de présence</a>
+
+
+								<a class="dropdown-item" href="#">Imprimer une feuille de présence TODO</a>
+								<a class="dropdown-item" href="#">Imprimer une feuille de présence TODO pour le Yoga et le Pilates en mettant les tarifs au ticket</a>
+
+								<a class="dropdown-item" href="#">Supprimer un adhérent de la feuille de présence TODO</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Separated link</a>
+							</div>
+						</li>
+					{% endif %}
+				{% endif %}
+				{% if app.user %}
+					{% if is_granted('ROLE_MEMBER') %}
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Adhérent et coach</a>
+							<div
+								class="dropdown-menu">
+								{# <a class="dropdown-item" href="{{ path('app_user_show',{'id':app.user.id})}}">Ma carte d'adhérent</a> #}
+								<a class="dropdown-item" href="{{ path('app_user_show',{'id':app.user.id})}}">Mon profil</a>
+								<a class="dropdown-item" href="{{ path('app_user_show_card',{'id':app.user.id})}}">Ma carte d'adhérent TODO</a>
+
+
+								<a class="dropdown-item" href="{{ path('app_child_new')}}">Inscrire un enfant</a>
+
+								<a class="dropdown-item" href="{{ path('app_reregistration_edit',{'id':app.user.id})}}">Réinscription Saison
+									{{ "now"|date("Y") +1  }}
+									/
+									{{ "now"|date("Y") +2 }}
+								</a>
+							</div>
+						</li>
+					{% endif %}
+				{% endif %}
 
 			</ul>
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				{% if app.user %}
+
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_logout') }}">Me déconnecter</a>
+					</li>
+				{% else %}
+
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_login') }}">Mon Espace</a>
+					</li>
+
+				{% endif %}
+			</ul>
+
 			<form class="d-flex">
 				<input class="form-control me-sm-2" type="text" placeholder="Search">
 				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>

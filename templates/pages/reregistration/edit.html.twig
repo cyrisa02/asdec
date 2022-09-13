@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation réinscription d'un utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Valider la réinscription Saison
+			{{ "now"|date("Y") +1  }}
+			/
+			{{ "now"|date("Y") +2 }}</h1>
+
+		<div class="container mt-4">
+			<h2>Vous devrez régler votre adhésion auprès d'un responsable.</h2>
+			<h3>Merci de mettre à jour vos informations personnelles.</h3>
+		</div>
+
+		{{ include('pages/user/_form.html.twig', {'button_label': 'Valider votre ré-inscription'}) }}
+		<div class="mt-4">
+			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+
+		</div>
+
+		{{ include('pages/user/_delete_form.html.twig') }}</div>
+
+{% endblock %}

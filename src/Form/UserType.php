@@ -26,7 +26,7 @@ class UserType extends AbstractType
                 ],
                 'label' => 'E-mail'
             ])            
-            ->add('password')
+            //->add('password')
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',

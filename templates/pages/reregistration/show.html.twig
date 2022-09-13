@@ -101,4 +101,7 @@
 
 	</tr>
 
-</tbody></table><a href="{{ path('home.index') }}">Retour à l'accueil</a><a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifer</a>{{ include('pages/user/_delete_form.html.twig') }}</div>{% endblock %}
+</tbody></table><div class="mt-4 container">
+<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+<a href="{{ path('app_reregistration_edit', {'id': user.id}) }}">Modifer</a>
+{{ include('pages/user/_delete_form.html.twig') }}</div></div>{% endblock %}

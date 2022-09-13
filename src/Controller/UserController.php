@@ -109,4 +109,12 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/carte/{id}', name: 'app_user_show_card', methods: ['GET'])]
+    public function showcard(User $user): Response
+    {
+        return $this->render('pages/user/showcard.html.twig', [
+            'user' => $user,
+        ]);
+    }
 }

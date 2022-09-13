@@ -7,7 +7,12 @@
 		<p>Bonjour, au niveau présentation, c'est le mieux que je puisse faire, je ne peux pas amener de pièces jointes, de style désolé.</p>
 		{% if user.isValid == true %}
 			<h1>
-				Adhésion Saison 2022 / 2023
+				Adhésion Saison
+				{{ "now"|date("Y") }}
+				/
+				{{ "now"|date("Y") +1  }}
+
+
 			</h1>
 			<h2>
 				Association Sport Détente et Culture</h2>
