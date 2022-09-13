@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\MailService;
 use App\Repository\ContactRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/message')]
 class ContactController extends AbstractController
@@ -22,7 +23,7 @@ class ContactController extends AbstractController
     }
 
     #[Route('/creation', name: 'app_contact_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ContactRepository $contactRepository): Response
+    public function new(Request $request, ContactRepository $contactRepository, MailService $mailService): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -31,6 +32,13 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contactRepository->add($contact, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+
+            // Email J'ai injecté le MailService $mailService
+            $mailService->sendEmail(
+                $contact->getEmail(),                
+                'emails/contact.html.twig',
+                ['contact'=>$contact]
+            );
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }
