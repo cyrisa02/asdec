@@ -8,10 +8,7 @@
 		<p>Codes et adresses mail</p>
 		<p>Pour un adhérent: activite@gmail.com  code: azertyui</p>
 		<p>Pour un membre du CA: board@gmail.com  code: azertyui</p>
-
 		<p>Pour l'admin: cyrisa02.test@gmail.com  code: admin</p>
-
-
 	</div>
 
 
@@ -50,89 +47,93 @@
 
 
 		</div>
-		{# timeless post 	 #}
-		<div class="container my-5 d-flex align-items-end" data-aos="fade-left" data-aos-duration="50000">
-			<div class="row">
-				<a href="{{ path('app_post_new')}}" class="btn btn-primary mb-3" style="font-size: 30px;">Ecrire un article</a>
+		{% if app.user %}
+
+			{# timeless post 	 #}
+			<div class="container my-5 d-flex align-items-end" data-aos="fade-left" data-aos-duration="50000">
+				<div class="row">
+					<a href="{{ path('app_post_new')}}" class="btn btn-primary mb-3" style="font-size: 30px;">Ecrire un article</a>
 
 
-				<div class="col-md-6 offset-md-3">
-					<h4 style="margin-left: 1.2rem;">Fil d'actualités</h4>
-					<ul class="timeline-3">
-						{% for post in posts|reverse %}
-							<li>
-								<a href="/posts/{{post.id}}">{{post.title}}</a>
-								<a href="/posts/{{post.id}}" class="float-end">{{post.author}}
-									-{{post.createdAt |date("d/m/Y")}}</a>
-								<p class="mt-2">{{post.content}}</p>
-							</li>
-						{% endfor %}
-					</ul>
+					<div class="col-md-6 offset-md-3">
+						<h4 style="margin-left: 1.2rem;">Fil d'actualités</h4>
+						<ul class="timeline-3">
+							{% for post in posts|reverse %}
+								<li>
+									<a href="/posts/{{post.id}}">{{post.title}}</a>
+									<a href="/posts/{{post.id}}" class="float-end">{{post.author}}
+										-{{post.createdAt |date("d/m/Y")}}</a>
+									<p class="mt-2">{{post.content}}</p>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
 				</div>
 			</div>
+			{# end #}
+
 		</div>
-		{# end #}
+		<hr
+		class="my-4">
+		{# Presentation des goodies #}
 
-	</div>
-	<hr
-	class="my-4">
-	{# Presentation des goodies #}
+		<div class="container">
+			<a class="btn btn-primary btn-lg" href="{{ path('app_order_new')}}" role="button">Commander un objet publicitaire</a>
 
-	<div class="container">
-		<a class="btn btn-primary btn-lg" href="{{ path('app_order_new')}}" role="button">Commander un objet publicitaire</a>
-
-		<div class="row mt-4">
-			{% for goodies in goodiess|reverse %}
-				<div class="col-md-4">
-					<div class="card">
-						<img src="{{ asset('uploads/') }}{{ goodies.picture }}" alt="{{ goodies.title }} ">
+			<div class="row mt-4">
+				{% for goodies in goodiess|reverse %}
+					<div class="col-md-4">
+						<div class="card">
+							<img src="{{ asset('uploads/') }}{{ goodies.picture }}" alt="{{ goodies.title }} ">
 
 
-						<div class="card-body">
-							<h5 class="card-title">{{goodies.title}}</h5>
-							<p class="card-text">Référence:
-								{{goodies.id}}</p>
+							<div class="card-body">
+								<h5 class="card-title">{{goodies.title}}</h5>
+								<p class="card-text">Référence:
+									{{goodies.id}}</p>
 
-							<p class="card-text">Prix TTC:
-								{{goodies.price}}</p>
-							<p class="card-text">Taille:
-								{{goodies.size}}</p>
-							<p class="card-text">Couleur:
-								{{goodies.color}}</p>
-							<a href="{{ path('app_order_new')}}" class="btn btn-primary">Commander l'article</a>
+								<p class="card-text">Prix TTC:
+									{{goodies.price}}</p>
+								<p class="card-text">Taille:
+									{{goodies.size}}</p>
+								<p class="card-text">Couleur:
+									{{goodies.color}}</p>
+								<a href="{{ path('app_order_new')}}" class="btn btn-primary">Commander l'article</a>
 
+							</div>
 						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
-	</div>
 
-	{# fin des goodies #}
-	<hr class="my-4">
-	<h2>Autre présentation du mur d'actualité</h2>
-
-
-	<div class="container">
-		<a class="btn btn-primary btn-lg" href="{{ path('app_post_new')}}" role="button">Ecrire un article</a>
+		{# fin des goodies #}
+		<hr class="my-4">
+		<h2>Autre présentation du mur d'actualité</h2>
 
 
-		<div class="row mt-4">
-			{% for post in posts|reverse %}
-				<div class="col-md-4">
-					<div class="card">
-						<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">{{post.title}}</h5>
-							<p class="card-text">{{post.content}}</p>
-							<p>{{post.author}}
-								-
-								{{post.createdAt |date("d/m/Y")}}</p>
-							<a href="/posts/{{post.id}}" class="btn btn-primary">Voir l'article</a>
+		<div class="container">
+			<a class="btn btn-primary btn-lg" href="{{ path('app_post_new')}}" role="button">Ecrire un article</a>
+
+
+			<div class="row mt-4">
+				{% for post in posts|reverse %}
+					<div class="col-md-4">
+						<div class="card">
+							<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h5 class="card-title">{{post.title}}</h5>
+								<p class="card-text">{{post.content}}</p>
+								<p>{{post.author}}
+									-
+									{{post.createdAt |date("d/m/Y")}}</p>
+								<a href="/posts/{{post.id}}" class="btn btn-primary">Voir l'article</a>
+							</div>
 						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			{% endif %}
+
 		</div>
 	</div>
 

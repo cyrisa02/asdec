@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+
+		<h1>
+			Saison
+			{{ "now"|date("Y") }}
+			/
+			{{ "now"|date("Y") +1  }}
+
+
+		</h1>
+		<h2>
+			Association Sport Détente et Culture</h2>
+		<h3>
+			{{ contact.fullname }}
+			nous a écrit un message.
+		</h3>
+		<h3>
+			Son adresse mail:
+			{{ contact.email }}</h3>
+		<p>
+			Son message :
+			{{ contact.content }}</p>
+
+		Rédigé le :
+		{{ "now"|date("d/m/Y") }}</body>
+</html></p></body></html>
