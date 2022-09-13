@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Sport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -103,6 +105,16 @@ class RegistrationBoardFormType extends AbstractType
                     'class' => 'form-label  mt-4'
                 ],
                 
+            ])
+            ->add('sports', EntityType::class, [
+                'class' => Sport::class,                
+                'label' => 'Merci de sélectionner vos activités',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 '
+                ],
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('birthdate', BirthdayType::class, [
                 'placeholder' => [

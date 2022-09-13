@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Sport;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -189,6 +191,16 @@ class RegistrationMemberFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('sports', EntityType::class, [
+                'class' => Sport::class,                
+                'label' => 'Merci de sélectionner vos activités',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 '
+                ],
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('isChild', CheckboxType::class, [
                 'attr' => [

@@ -3,11 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Child;
+use App\Entity\Childsport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -155,6 +160,36 @@ class ChildType extends AbstractType
                 ],
                 
             ])
+            ->add('my_file', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Télécharger une photo de l\'enfant.',
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/*',
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Télécharger une image au bon format',
+                    ])
+                ],
+
+            ])
+
+            ->add('sports', EntityType::class, [
+                'class' => Childsport::class,                
+                'label' => 'Les activités',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 '
+                ],
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+            ])
+
+
              ->add('isValid', CheckboxType::class, [
                 'attr' => [
                     'class' => 'd-none',

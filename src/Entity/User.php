@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -85,6 +87,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 190, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\ManyToMany(targetEntity: Sport::class, inversedBy: 'users')]
+    private Collection $sports;
+
    
 
     /**
@@ -94,6 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
  	public function __construct()
     {
         $this->CreatedAt = new \DateTimeImmutable();
+        $this->sports = new ArrayCollection();
            
         
     }
@@ -387,6 +393,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sport>
+     */
+    public function getSports(): Collection
+    {
+        return $this->sports;
+    }
+
+    public function addSport(Sport $sport): self
+    {
+        if (!$this->sports->contains($sport)) {
+            $this->sports->add($sport);
+        }
+
+        return $this;
+    }
+
+    public function removeSport(Sport $sport): self
+    {
+        $this->sports->removeElement($sport);
 
         return $this;
     }
