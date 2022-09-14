@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presence index{% endblock %}
+
+{% block body %}
+    <h1>Presence index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IsPresent</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for presence in presences %}
+            <tr>
+                <td>{{ presence.id }}</td>
+                <td>{{ presence.isPresent ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_presence_show', {'id': presence.id}) }}">show</a>
+                    <a href="{{ path('app_presence_edit', {'id': presence.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_presence_new') }}">Create new</a>
+{% endblock %}

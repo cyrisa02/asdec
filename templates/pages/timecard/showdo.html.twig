@@ -22,8 +22,8 @@
 					<th>N°</th>
 					<th>Nom</th>
 					<th>Présent</th>
-					<th>Présent nouvelle
-					</th>
+					<th>Photo</th>
+
 
 				</tr>
 			</thead>
@@ -35,15 +35,27 @@
 							<td>{{ user.id }}</td>
 
 							<td>{{ user.name }}</td>
-							<td>{{ user.IsPresent ? 'Payé' : 'Reste à payer' }}</td>
+
 
 							<td>
 								{% for presence in user.presences %}
-									{{ presence.IsPresent ? 'Présent' : 'Absent' }}
+									{# {{ presence.IsPresent ? 'Présent' : 'Absent' }} #}
 
-									<a class="btn btn-secondary btn-lg mb-4" href="{{ path('app_lessons_end', {'id': lesson.id}) }}">{{ isEnded ? 'La leçon est terminée' : 'La leçon est en cours'}}</a>
 
+									{% set deactiver = 'background-color: #CB3D3F' %}
+									{% set activer = 'background-color: #2F7A4D' %}
+
+									<a class="btn text-light me-3 ms-3" style="{{ presence.isIsPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+										{{ presence.isIsPresent ? 'Présent' : 'Absent' }}</a>
 								{% endfor %}
+							</td>
+
+							<td>
+								{% if user.picture is defined %}
+									<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 5rem; height: auto; border-radius: 50%;">
+								{% else %}
+									<p>Pas de photo</p>
+								{% endif %}
 							</td>
 
 

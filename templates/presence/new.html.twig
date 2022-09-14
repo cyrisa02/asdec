@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Presence{% endblock %}
+
+{% block body %}
+    <h1>Create new Presence</h1>
+
+    {{ include('presence/_form.html.twig') }}
+
+    <a href="{{ path('app_presence_index') }}">back to list</a>
+{% endblock %}
