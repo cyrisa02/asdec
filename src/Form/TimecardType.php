@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Sport;
 use App\Entity\Timecard;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -24,6 +27,17 @@ class TimecardType extends AbstractType
                     'class' => 'form-label  mt-4'
                 ]
             ])
+            ->add('sports', EntityType::class, [
+                'class' => Sport::class,                
+                'label' => 'Merci de sélectionner vos activités',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 '
+                ],
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+            ])
+            
             
         ;
     }

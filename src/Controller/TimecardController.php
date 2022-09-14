@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Sport;
 use App\Entity\Timecard;
 use App\Form\TimecardType;
+use App\Repository\PresenceRepository;
+use App\Repository\SportRepository;
 use App\Repository\TimecardRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +18,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class TimecardController extends AbstractController
 {
     #[Route('/', name: 'app_timecard_index', methods: ['GET'])]
-    public function index(TimecardRepository $timecardRepository): Response
+    public function index(TimecardRepository $timecardRepository, SportRepository $sportRepository): Response
     {
         return $this->render('pages/timecard/index.html.twig', [
             'timecards' => $timecardRepository->findAll(),
+            'sports' => $sportRepository->findAll(),
         ]);
     }
 
@@ -41,13 +46,13 @@ class TimecardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_timecard_show', methods: ['GET'])]
-    public function show(Timecard $timecard): Response
-    {
-        return $this->render('pages/timecard/show.html.twig', [
-            'timecard' => $timecard,
-        ]);
-    }
+    // #[Route('/{id}', name: 'app_timecard_show', methods: ['GET'])]
+    // public function show(Timecard $timecard): Response
+    // {
+    //     return $this->render('pages/timecard/show.html.twig', [
+    //         'timecard' => $timecard,
+    //     ]);
+    // }
 
     #[Route('/{id}/edition', name: 'app_timecard_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Timecard $timecard, TimecardRepository $timecardRepository): Response
@@ -78,4 +83,31 @@ class TimecardController extends AbstractController
 
         return $this->redirectToRoute('app_timecard_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/fiche/{id}', name: 'app_timecarddo_index', methods: ['GET'])]
+    public function indexdo(TimecardRepository $timecardRepository, SportRepository $sportRepository, UserRepository $userRepository,Timecard $timecard, Sport $sport): Response
+    {
+        return $this->render('pages/timecard/indexdo.html.twig', [
+            'timecards' => $timecardRepository->findAll(),
+            'sports' => $sportRepository->findAll(),
+            'users' => $userRepository->findAll(),
+            'timecard' => $timecard,
+            'sport' => $sport,
+        ]);
+    }
+
+
+    #[Route('/{id}', name: 'app_timecard_showdo', methods: ['GET'])]
+    public function showdo(Timecard $timecard, SportRepository $sportRepository, UserRepository $userRepository, PresenceRepository $presenceRepository): Response
+    {
+        return $this->render('pages/timecard/showdo.html.twig', [
+            'timecard' => $timecard,
+            'sports' => $sportRepository->findAll(),
+            'users' => $userRepository->findAll(),
+            'presences' => $presenceRepository->findAll(),
+            
+        ]);
+    }
+
+   
 }
