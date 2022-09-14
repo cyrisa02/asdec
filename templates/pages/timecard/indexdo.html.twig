@@ -8,6 +8,8 @@
 		<h1>Liste des fiches d'appel</h1>
 		<h2>TODO relier les activités et les adhérents</h2>
 
+		{# <td>{{ timecard.responsable.sport }}</td> #}
+
 
 		<table class="table">
 			<thead>
@@ -33,10 +35,9 @@
 
 						<td>{{ timecard.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</td>
 						<td>
-							{# <a href="{{ path('app_timecard_show', {'id': timecard.id}) }}">Voir</a> #}
+							<a href="{{ path('app_timecard_show', {'id': timecard.id}) }}">Voir</a>
 							<a href="{{ path('app_timecard_edit', {'id': timecard.id}) }}">Modifier</a>
-							<a href="{{ path('app_timecard_showdo', {'id': timecard.id}) }}">Faire l'appel</a>
-
+							<a href="{{ path('app_timecarddo_index', {'id': timecard.id}) }}">Faire l'appel</a>
 						</td>
 					</tr>
 				{% else %}

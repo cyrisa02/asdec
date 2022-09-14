@@ -72,8 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isRegistered = null;
 
-    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Condition $present = null;
+    
 
     #[ORM\Column(nullable: true)]
     private ?bool $isYoga = null;
@@ -90,6 +89,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Sport::class, inversedBy: 'users')]
     private Collection $sports;
 
+    
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPresent = null;
+
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Presence::class)]
+    private Collection $presences;
+
    
 
     /**
@@ -100,6 +107,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->CreatedAt = new \DateTimeImmutable();
         $this->sports = new ArrayCollection();
+        $this->presences = new ArrayCollection();
+       
            
         
     }
@@ -337,17 +346,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPresent(): ?Condition
-    {
-        return $this->present;
-    }
-
-    public function setPresent(?Condition $present): self
-    {
-        $this->present = $present;
-
-        return $this;
-    }
+    
 
     public function isIsYoga(): ?bool
     {
@@ -417,6 +416,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSport(Sport $sport): self
     {
         $this->sports->removeElement($sport);
+
+        return $this;
+    }
+
+    
+
+    public function isIsPresent(): ?bool
+    {
+        return $this->isPresent;
+    }
+
+    public function setIsPresent(?bool $isPresent): self
+    {
+        $this->isPresent = $isPresent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Presence>
+     */
+    public function getPresences(): Collection
+    {
+        return $this->presences;
+    }
+
+    public function addPresence(Presence $presence): self
+    {
+        if (!$this->presences->contains($presence)) {
+            $this->presences->add($presence);
+            $presence->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresence(Presence $presence): self
+    {
+        if ($this->presences->removeElement($presence)) {
+            // set the owning side to null (unless already changed)
+            if ($presence->getUsers() === $this) {
+                $presence->setUsers(null);
+            }
+        }
 
         return $this;
     }

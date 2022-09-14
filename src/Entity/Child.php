@@ -52,8 +52,7 @@ class Child
     #[ORM\Column(length: 190)]
     private ?string $certificatyear = null;
 
-    #[ORM\OneToOne(inversedBy: 'child', cascade: ['persist', 'remove'])]
-    private ?Condition $present = null;
+    
 
     #[ORM\Column(length: 190)]
     private ?string $parentname = null;
@@ -66,6 +65,9 @@ class Child
 
     #[ORM\ManyToMany(targetEntity: Childsport::class, inversedBy: 'children')]
     private Collection $sports;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPresent = null;
 
     
 
@@ -227,17 +229,7 @@ class Child
         return $this;
     }
 
-    public function getPresent(): ?Condition
-    {
-        return $this->present;
-    }
-
-    public function setPresent(?Condition $present): self
-    {
-        $this->present = $present;
-
-        return $this;
-    }
+    
 
     public function getParentname(): ?string
     {
@@ -295,6 +287,18 @@ class Child
     public function removeSport(Childsport $sport): self
     {
         $this->sports->removeElement($sport);
+
+        return $this;
+    }
+
+    public function isIsPresent(): ?bool
+    {
+        return $this->isPresent;
+    }
+
+    public function setIsPresent(?bool $isPresent): self
+    {
+        $this->isPresent = $isPresent;
 
         return $this;
     }
