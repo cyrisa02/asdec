@@ -10,7 +10,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>N°</th>
+
 				<th>Nom</th>
 				<th>Email</th>
 				<th>Message</th>
@@ -21,15 +21,15 @@
 		<tbody>
 			{% for contact in contacts|reverse %}
 				<tr>
-					<td>{{ contact.id }}</td>
+
 					<td>{{ contact.fullname }}</td>
 					<td>{{ contact.email }}</td>
 					<td>{{ contact.content }}</td>
 					<td>{{ contact.createdAt ? contact.createdAt|date('d-m-Y') : '' }}</td>
 					{# <td>
-											<a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
-											<a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
-										</td> #}
+																<a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
+																<a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
+															</td> #}
 				</tr>
 			{% else %}
 				<tr>

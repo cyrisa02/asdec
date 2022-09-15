@@ -6,13 +6,12 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Liste des fiches d'appel</h1>
-		<h2>TODO relier les activités et les adhérents</h2>
 
 
 		<table class="table">
 			<thead>
 				<tr>
-					<th>N°</th>
+
 					<th>Responsable</th>
 					<th>Activité</th>
 					<th>Date</th>
@@ -22,7 +21,7 @@
 			<tbody>
 				{% for timecard in timecards|reverse %}
 					<tr>
-						<td>{{ timecard.id }}</td>
+						{# <td>{{ timecard.id }}</td> #}
 						<td>{{ timecard.responsable }}</td>
 						<td>
 							{% for sport in timecard.sports %}
@@ -36,7 +35,7 @@
 							{# <a href="{{ path('app_timecard_show', {'id': timecard.id}) }}">Voir</a> #}
 							<a href="{{ path('app_timecard_edit', {'id': timecard.id}) }}">Modifier</a>
 							<a href="{{ path('app_timecard_showdo', {'id': timecard.id}) }}">Faire l'appel</a>
-
+							<a href="{{ path('app_timecard_printdo', {'id': timecard.id}) }}">Imprimer</a>
 						</td>
 					</tr>
 				{% else %}

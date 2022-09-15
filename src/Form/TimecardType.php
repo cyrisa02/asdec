@@ -29,7 +29,7 @@ class TimecardType extends AbstractType
             ])
             ->add('sports', EntityType::class, [
                 'class' => Sport::class,                
-                'label' => 'Merci de sélectionner vos activités',
+                'label' => 'Merci de sélectionner une activité',
                 'label_attr' => [
                     'class' => 'form-label mt-4 '
                 ],

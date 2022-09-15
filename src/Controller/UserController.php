@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
 use App\Service\MailService;
+use App\Form\UserEditSportType;
+use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,6 +99,31 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/{id}/edition_sport', name: 'app_user_editsport', methods: ['GET', 'POST'])]
+    public function editsport(Request $request, User $user, UserRepository $userRepository, MailService $mailService): Response
+    {
+        $form = $this->createForm(UserEditSportType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->add($user, true);
+            $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+
+            // Email J'ai injecté le MailService $mailService
+            $mailService->sendEmail(
+                $user->getEmail(),                
+                'emails/userchangesport.html.twig',
+                ['user'=>$user]
+            );
+
+            return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('pages/user/editsport.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
@@ -118,5 +144,17 @@ class UserController extends AbstractController
         ]);
     }
 
+    // #[Route('/mise_a_zero', name: 'app_isvalid_delete', methods: ['POST'])]
+    // public function deleteisvalid(Request $request, User $user, UserRepository $userRepository): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+    //         $userRepository->remove($user, true);
+    //         $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+    //     }
+
+    //     return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    // }
+
+    
     
 }

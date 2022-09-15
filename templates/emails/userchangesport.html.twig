@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
-		<p>Bonjour, au niveau présentation, c'est le mieux que je puisse faire, je ne peux pas amener de pièces jointes, de style désolé.</p>
+
 		{% if user.isValid == true %}
 			<h1>
 				Adhésion Saison
@@ -16,18 +16,23 @@
 			</h1>
 			<h2>
 				Association Sport Détente et Culture</h2>
-			<h3>
-				Nom:{{ user.name }}
-			</h3>
-			<h3>
-				Prénom:
-				{{ user.firstname }}</h3>
+
 			<p>
 				Votre Email de connexion :
 				{{ user.email }}</p>
 			<p>
 				N° d'adhérent :
-				{{ user.cardnr }}</p>
+				{{ user.cardnr}}</p>
+
+
+			<h3>
+				{{ user.firstname }}
+				{{ user.name }},
+
+			</h3>
+			<p>Nous vous informons que votre statut a été modifié, veuillez prendre contact avec l'ASEDEC. Merci.</p>
+
+
 			<p>
 				Fait le :
 				{{ "now"|date("d/m/Y") }}

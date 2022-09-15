@@ -19,10 +19,11 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>N°</th>
+					<th>N° de carte</th>
 					<th>Nom</th>
 					<th>Présent</th>
 					<th>Photo</th>
+					<th>Action</th>
 
 
 				</tr>
@@ -32,7 +33,7 @@
 					{% for user in sport.users %}
 
 						<tr>
-							<td>{{ user.id }}</td>
+							<td>{{ user.cardnr }}</td>
 
 							<td>{{ user.name }}</td>
 
@@ -57,7 +58,11 @@
 									<p>Pas de photo</p>
 								{% endif %}
 							</td>
+							<td>
+								{# <a href="{{ path('app_timecard_show', {'id': timecard.id}) }}">Voir</a> #}
+								<a href="{{ path('app_user_editsport', {'id': user.id}) }}">Modifier</a>
 
+							</td>
 
 						</tr>
 					{% endfor %}
@@ -70,29 +75,11 @@
 
 			</tbody>
 
+		</table>
+		<a href="{{ path('app_timecard_index') }}">Retour à la liste</a>
 
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>N°</th>
-						<td>{{ timecard.id }}</td>
-					</tr>
-					<tr>
-						<th>Responsable</th>
-						<td>{{ timecard.responsable }}</td>
-					</tr>
-					<tr>
-						<th>Date</th>
-						<td>{{ timecard.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</td>
-					</tr>
-				</tbody>
-			</table>
+		<a href="{{ path('app_timecard_edit', {'id': timecard.id}) }}">Modifier</a>
 
+		{{ include('pages/timecard/_delete_form.html.twig') }}</div>
 
-			<a href="{{ path('app_timecard_index') }}">Retour à la liste</a>
-
-			<a href="{{ path('app_timecard_edit', {'id': timecard.id}) }}">Modifier</a>
-
-			{{ include('pages/timecard/_delete_form.html.twig') }}</div>
-
-	{% endblock %}
+{% endblock %}

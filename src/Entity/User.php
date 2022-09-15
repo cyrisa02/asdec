@@ -97,6 +97,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Presence::class)]
     private Collection $presences;
 
+    #[ORM\Column(nullable: true, unique: true)]
+    private ?int $cardnr = null;
+
    
 
     /**
@@ -286,6 +289,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->CreatedAt;
@@ -460,6 +464,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $presence->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCardnr(): ?int
+    {
+        return $this->cardnr;
+    }
+
+    public function setCardnr(?int $cardnr): self
+    {
+        $this->cardnr = $cardnr;
 
         return $this;
     }

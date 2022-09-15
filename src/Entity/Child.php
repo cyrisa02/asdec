@@ -69,6 +69,9 @@ class Child
     #[ORM\Column(nullable: true)]
     private ?bool $isPresent = null;
 
+    #[ORM\Column(nullable: true, unique: true)]
+    private ?int $cardnr = null;
+
     
 
     
@@ -299,6 +302,18 @@ class Child
     public function setIsPresent(?bool $isPresent): self
     {
         $this->isPresent = $isPresent;
+
+        return $this;
+    }
+
+    public function getCardnr(): ?int
+    {
+        return $this->cardnr;
+    }
+
+    public function setCardnr(?int $cardnr): self
+    {
+        $this->cardnr = $cardnr;
 
         return $this;
     }
