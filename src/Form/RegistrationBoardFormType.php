@@ -115,6 +115,9 @@ class RegistrationBoardFormType extends AbstractType
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
+                'attr' => [
+                    'class' => 'd-flex justify-content-between',
+                ],
             ])
             ->add('birthdate', BirthdayType::class, [
                 'placeholder' => [

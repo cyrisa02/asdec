@@ -80,7 +80,7 @@ class PresenceController extends AbstractController
 
 
     #[Route('/makeItValide/{page}/{id}', name: 'app_salle_valide', methods: ['GET', 'POST'])]
-    public function makeItValide($page, $id, PresenceRepository $presenceRepository): Response
+    public function makeItValide($page, int $id, PresenceRepository $presenceRepository, Request $request): Response
     {
 
 
@@ -109,6 +109,8 @@ class PresenceController extends AbstractController
          // generate a URL for route "app_timecard_showdo".         
 
         return $this->redirect($_SERVER['HTTP_REFERER']);
+
+       // return $this->redirect($request->server['HTTP_REFERER']);
 
     }
 

@@ -173,7 +173,7 @@ class ReregistrationType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'attr' => [
-                    'class' => 'form-check-label mt-4 pe-4',
+                    'class' => 'd-flex justify-content-between',
                 ],
             ])
             
