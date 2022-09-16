@@ -18,12 +18,12 @@ class PresenceController extends AbstractController
     #[Route('/', name: 'app_presence_index', methods: ['GET'])]
     public function index(PresenceRepository $presenceRepository): Response
     {
-        return $this->render('presence/index.html.twig', [
+        return $this->render('pages/presence/index.html.twig', [
             'presences' => $presenceRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_presence_new', methods: ['GET', 'POST'])]
+    #[Route('/creation', name: 'app_presence_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PresenceRepository $presenceRepository): Response
     {
         $presence = new Presence();
@@ -36,7 +36,7 @@ class PresenceController extends AbstractController
             return $this->redirectToRoute('app_presence_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('presence/new.html.twig', [
+        return $this->renderForm('pages/presence/new.html.twig', [
             'presence' => $presence,
             'form' => $form,
         ]);
@@ -45,12 +45,12 @@ class PresenceController extends AbstractController
     #[Route('/{id}', name: 'app_presence_show', methods: ['GET'])]
     public function show(Presence $presence): Response
     {
-        return $this->render('presence/show.html.twig', [
+        return $this->render('pages/presence/show.html.twig', [
             'presence' => $presence,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_presence_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edition', name: 'app_presence_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Presence $presence, PresenceRepository $presenceRepository): Response
     {
         $form = $this->createForm(PresenceType::class, $presence);
@@ -62,7 +62,7 @@ class PresenceController extends AbstractController
             return $this->redirectToRoute('app_presence_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('presence/edit.html.twig', [
+        return $this->renderForm('pages/presence/edit.html.twig', [
             'presence' => $presence,
             'form' => $form,
         ]);

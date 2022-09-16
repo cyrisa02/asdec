@@ -42,6 +42,10 @@ class Timecard
            
         
     }
+    public function __toString()
+     {
+       return $this->responsable;
+     }
 
     public function getId(): ?int
     {
