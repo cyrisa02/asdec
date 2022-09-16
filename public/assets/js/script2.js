@@ -52,3 +52,44 @@ let buttonAll= document.getElementById("all");
 buttonAll.addEventListener("click", showAll);
 
 }
+
+
+// API - SearchBar with the Post
+
+const postCardTemplate = document.querySelector("[data-post-template]")
+const postCardContainer = document.querySelector("[data-post-cards-container]")
+const searchInput = document.querySelector("[data-search]")
+
+
+
+let posts = []
+
+searchInput.addEventListener("input", e => {
+   
+    const value = e.target.value.toLowerCase()
+    posts.forEach(post => {
+         
+        const isVisible = post.content.toLowerCase().includes(value) || post.author.toLowerCase().includes(value)
+        //console.log(post.element.classList)
+        post.element.classList.toggle("d-none", !isVisible )
+    })
+    
+})
+
+
+ fetch('http://127.0.0.1:8000/api/posts?page=1')
+.then(res => res.json())
+.then(data => { return data['hydra:member']})
+.then(data1=> {
+   posts = data1.map(post => {     
+        const card = postCardTemplate.content.cloneNode(true).children[0]
+         const header = card.querySelector("[data-header]")
+         const body = card.querySelector("[data-body]")
+         
+         header.textContent= post.content 
+         body.textContent= post.author 
+         
+         postCardContainer.append(card)
+         return { content: post.content, author: post.author, element: card}
+         })
+ })

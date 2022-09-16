@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Presence;
 use App\Entity\Sport;
 use App\Entity\Timecard;
 use App\Form\TimecardType;
@@ -9,6 +10,8 @@ use App\Repository\PresenceRepository;
 use App\Repository\SportRepository;
 use App\Repository\TimecardRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,14 +30,31 @@ class TimecardController extends AbstractController
     }
 
     #[Route('/création', name: 'app_timecard_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TimecardRepository $timecardRepository): Response
+    public function new(Request $request, TimecardRepository $timecardRepository, EntityManagerInterface $entityManager ): Response
     {
         $timecard = new Timecard();
         $form = $this->createForm(TimecardType::class, $timecard);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $presence = new Presence();
+
+            /**
+             * @var User $user
+             */
+            $user=$this->getUser();
+            $sport = $user->getSports();
+            
+            $presence->setIsPresent(0);
+            $presence->setUsers($this->getUser())
+           
+            ->setTimecards($timecard);
+           
+            $entityManager->persist($presence);
+            $entityManager->persist($user);
+            $entityManager->flush();
             $timecardRepository->add($timecard, true);
+            
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
