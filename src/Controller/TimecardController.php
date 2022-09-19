@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Presence;
 use App\Entity\Sport;
 use App\Entity\Timecard;
 use App\Form\TimecardType;
@@ -9,6 +10,8 @@ use App\Repository\PresenceRepository;
 use App\Repository\SportRepository;
 use App\Repository\TimecardRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,14 +30,22 @@ class TimecardController extends AbstractController
     }
 
     #[Route('/creation', name: 'app_timecard_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TimecardRepository $timecardRepository): Response
+    public function new(Request $request, TimecardRepository $timecardRepository, EntityManagerInterface $entityManager, PresenceRepository $presenceRepository, UserRepository $userRepository ): Response
     {
         $timecard = new Timecard();
         $form = $this->createForm(TimecardType::class, $timecard);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sport=$form->getData()->getSports();
+            
+            $usersofActivite = $sport[0]->getUsers() ;
+
+            dd($usersofActivite[0]);          
+           
+            
             $timecardRepository->add($timecard, true);
+            
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
@@ -101,6 +112,18 @@ class TimecardController extends AbstractController
     public function showdo(Timecard $timecard, SportRepository $sportRepository, UserRepository $userRepository, PresenceRepository $presenceRepository): Response
     {
         return $this->render('pages/timecard/showdo.html.twig', [
+            'timecard' => $timecard,
+            'sports' => $sportRepository->findAll(),
+            'users' => $userRepository->findAll(),
+            'presences' => $presenceRepository->findAll(),
+            
+        ]);
+    }
+
+    #[Route('/impression/{id}', name: 'app_timecard_printdo', methods: ['GET'])]
+    public function printdo(Timecard $timecard, SportRepository $sportRepository, UserRepository $userRepository, PresenceRepository $presenceRepository): Response
+    {
+        return $this->render('pages/timecard/printdo.html.twig', [
             'timecard' => $timecard,
             'sports' => $sportRepository->findAll(),
             'users' => $userRepository->findAll(),
