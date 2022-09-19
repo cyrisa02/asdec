@@ -20,23 +20,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for timecard in timecards|reverse %}
+				{% for timecard1 in timecard1s|reverse %}
 					<tr>
-						<td>{{ timecard.id }}</td>
-						<td>{{ timecard.responsable }}</td>
+						<td>{{ timecard1.id }}</td>
+						<td>{{ timecard1.responsable }}</td>
 						<td>
-							{% for sport in timecard.sports %}
+							{% for sport in timecard1.sports %}
 								{{ sport.title }}
 							{% endfor %}
 						</td>
 
 
-						<td>{{ timecard.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</td>
+						<td>{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</td>
 						<td>
 							{# <a href="{{ path('app_timecard_show', {'id': timecard.id}) }}">Voir</a> #}
-							<a href="{{ path('app_timecard_edit', {'id': timecard.id}) }}">Modifier</a>
-							<a href="{{ path('app_timecard_showdo', {'id': timecard.id}) }}">Faire l'appel</a>
-							<a href="{{ path('app_timecard_printdo', {'id': timecard.id}) }}">Imprimer</a>
+							<a href="{{ path('app_timecard_edit', {'id': timecard1.id}) }}">Modifier</a>
+							<a href="{{ path('app_timecard_showdo', {'id': timecard1.id}) }}">Faire l'appel</a>
+							<a href="{{ path('app_timecard_printdo', {'id': timecard1.id}) }}">Imprimer</a>
 
 						</td>
 					</tr>
@@ -48,7 +48,7 @@
 			</tbody>
 		</table>
 
-		<a href="{{ path('app_timecard_new') }}">Créer une nouvelle fiche</a>
+		<a href="{{ path('app_timecard1_new') }}">Créer une nouvelle fiche</a>
 	</div>
 
 {% endblock %}

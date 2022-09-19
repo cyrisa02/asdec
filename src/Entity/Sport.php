@@ -42,6 +42,12 @@ class Sport
     #[ORM\OneToMany(mappedBy: 'sports', targetEntity: Timecard1::class)]
     private Collection $timecard1s;
 
+    public function __toString()
+     {
+       return $this->title;
+     }
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();

@@ -111,9 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->CreatedAt = new \DateTimeImmutable();
         $this->sports = new ArrayCollection();
         $this->presences = new ArrayCollection();
-        $this->presence1s = new ArrayCollection();
-       
-           
+        $this->presence1s = new ArrayCollection();          
         
     }
 

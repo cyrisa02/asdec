@@ -9,10 +9,10 @@
 			<ul
 				class="navbar-nav me-auto">
 				{# <li class="nav-item">
-																																																																																																																																																																																																																																																																																																																																																									<a class="nav-link active" href="#">Home
-																																																																																																																																																																																																																																																																																																																																																										<span class="visually-hidden">(current)</span>
-																																																																																																																																																																																																																																																																																																																																																									</a>
-																																																																																																																																																																																																																																																																																																																																																								</li> #}
+																																																																																																																																																																																																																																																																																																																																																													<a class="nav-link active" href="#">Home
+																																																																																																																																																																																																																																																																																																																																																														<span class="visually-hidden">(current)</span>
+																																																																																																																																																																																																																																																																																																																																																													</a>
+																																																																																																																																																																																																																																																																																																																																																												</li> #}
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}
 
@@ -57,7 +57,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_timecard_index')}}">
+							<a class="nav-link" href="{{ path('app_timecard1_index')}}">
 
 								Fiche de présence</a>
 							<span class="visually-hidden">(current)</span>

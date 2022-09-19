@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de la fiche d'appel
+{% endblock %}
+
+{% block body %}
+	<h1>Modification de la fiche d'appel</h1>
+
+	{{ include('pages/timecard1/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+	<div class="mt-4">
+		<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
+	</div>
+
+
+	{{ include('pages/timecard1/_delete_form.html.twig') }}
+{% endblock %}

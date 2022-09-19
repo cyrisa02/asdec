@@ -6,15 +6,15 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Fiche d'appel:
-			{% for sport in timecard.sports %}
+			{% for sport in timecard1.sports %}
 				{{ sport.title}}
 			{% endfor %}
 			-
-			{{ timecard.responsable }}
+			{{ timecard1.responsable }}
 
 		</h1>
 		<p>Date:
-			{{ timecard.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</p>
+			{{ timecard1.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</p>
 
 		<table class="table">
 			<thead>
@@ -28,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for sport in timecard.sports %}
+				{% for sport in timecard1.sports %}
 					{% for user in sport.users %}
 
 						<tr>
@@ -75,24 +75,24 @@
 				<tbody>
 					<tr>
 						<th>N°</th>
-						<td>{{ timecard.id }}</td>
+						<td>{{ timecard1.id }}</td>
 					</tr>
 					<tr>
 						<th>Responsable</th>
-						<td>{{ timecard.responsable }}</td>
+						<td>{{ timecard1.responsable }}</td>
 					</tr>
 					<tr>
 						<th>Date</th>
-						<td>{{ timecard.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</td>
+						<td>{{ timecard1.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</td>
 					</tr>
 				</tbody>
 			</table>
 
 
-			<a href="{{ path('app_timecard_index') }}">Retour à la liste</a>
+			<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
 
-			<a href="{{ path('app_timecard_edit', {'id': timecard.id}) }}">Modifier</a>
+			<a href="{{ path('app_timecard1_edit', {'id': timecard.id}) }}">Modifier</a>
 
-			{{ include('pages/timecard/_delete_form.html.twig') }}</div>
+			{{ include('pages/timecard1/_delete_form.html.twig') }}</div>
 
 	{% endblock %}
