@@ -108,29 +108,9 @@ class TimecardController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_timecard_showdo', methods: ['GET'])]
-    public function showdo(Timecard $timecard, SportRepository $sportRepository, UserRepository $userRepository, PresenceRepository $presenceRepository): Response
-    {
-        return $this->render('pages/timecard/showdo.html.twig', [
-            'timecard' => $timecard,
-            'sports' => $sportRepository->findAll(),
-            'users' => $userRepository->findAll(),
-            'presences' => $presenceRepository->findAll(),
-            
-        ]);
-    }
+   
 
-    #[Route('/impression/{id}', name: 'app_timecard_printdo', methods: ['GET'])]
-    public function printdo(Timecard $timecard, SportRepository $sportRepository, UserRepository $userRepository, PresenceRepository $presenceRepository): Response
-    {
-        return $this->render('pages/timecard/printdo.html.twig', [
-            'timecard' => $timecard,
-            'sports' => $sportRepository->findAll(),
-            'users' => $userRepository->findAll(),
-            'presences' => $presenceRepository->findAll(),
-            
-        ]);
-    }
+    
 
    
 }

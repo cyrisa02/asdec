@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Timecard1;
 use App\Form\Timecard1Type;
+use App\Repository\UserRepository;
+use App\Repository\SportRepository;
+use App\Repository\Presence1Repository;
 use App\Repository\Timecard1Repository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/timecard1')]
+#[Route('/fichedappel')]
 class Timecard1Controller extends AbstractController
 {
     #[Route('/', name: 'app_timecard1_index', methods: ['GET'])]
@@ -18,6 +21,7 @@ class Timecard1Controller extends AbstractController
     {
         return $this->render('pages/timecard1/index.html.twig', [
             'timecard1s' => $timecard1Repository->findAll(),
+            
         ]);
     }
 
@@ -40,10 +44,22 @@ class Timecard1Controller extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_timecard1_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_timecard_showdo', methods: ['GET'])]
+    public function showdo(Timecard1 $timecard1, SportRepository $sportRepository, UserRepository $userRepository, Presence1Repository $presence1Repository): Response
+    {
+        return $this->render('pages/timecard1/showdo.html.twig', [
+            'timecard1' => $timecard1,
+            'sports' => $sportRepository->findAll(),
+            'users' => $userRepository->findAll(),
+            'presence1s' => $presence1Repository->findAll(),
+            
+        ]);
+    }
+
+    #[Route('/voir/{id}', name: 'app_timecard1_show', methods: ['GET'])]
     public function show(Timecard1 $timecard1): Response
     {
-        return $this->render('timecard1/show.html.twig', [
+        return $this->render('pages/timecard1/show.html.twig', [
             'timecard1' => $timecard1,
         ]);
     }
@@ -74,5 +90,19 @@ class Timecard1Controller extends AbstractController
         }
 
         return $this->redirectToRoute('app_timecard1_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+     
+
+    #[Route('/impression/{id}', name: 'app_timecard_printdo', methods: ['GET'])]
+    public function printdo(Timecard1 $timecard1, SportRepository $sportRepository, UserRepository $userRepository, Presence1Repository $presence1Repository): Response
+    {
+        return $this->render('pages/timecard1/printdo.html.twig', [
+            'timecard1' => $timecard1,
+            'sports' => $sportRepository->findAll(),
+            'users' => $userRepository->findAll(),
+            'presence1s' => $presence1Repository->findAll(),
+            
+        ]);
     }
 }

@@ -35,7 +35,7 @@ class Timecard1
  	
  	public function __construct()
     {
-        $this->CreatedAt = new \DateTimeImmutable();
+        $this->created_At = new \DateTimeImmutable();
         $this->presence1s = new ArrayCollection();          
         
     }

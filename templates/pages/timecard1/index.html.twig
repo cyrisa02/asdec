@@ -6,7 +6,7 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Liste des fiches d'appel</h1>
-		<h2>TODO relier les activités et les adhérents</h2>
+		<h2>TODO relier les activités et les adhérents...</h2>
 
 
 		<table class="table">
@@ -25,16 +25,18 @@
 						<td>{{ timecard1.id }}</td>
 						<td>{{ timecard1.responsable }}</td>
 						<td>
-							{% for sport in timecard1.sports %}
-								{{ sport.title }}
-							{% endfor %}
+
+							{{ timecard1.sports.title }}
+
 						</td>
 
 
 						<td>{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</td>
+
+
 						<td>
 							{# <a href="{{ path('app_timecard_show', {'id': timecard.id}) }}">Voir</a> #}
-							<a href="{{ path('app_timecard_edit', {'id': timecard1.id}) }}">Modifier</a>
+							<a href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">Modifier</a>
 							<a href="{{ path('app_timecard_showdo', {'id': timecard1.id}) }}">Faire l'appel</a>
 							<a href="{{ path('app_timecard_printdo', {'id': timecard1.id}) }}">Imprimer</a>
 

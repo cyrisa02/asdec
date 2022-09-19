@@ -6,15 +6,15 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Fiche d'appel:
-			{% for sport in timecard1.sports %}
-				{{ sport.title}}
-			{% endfor %}
+			{{ timecard1.sports.title }}
+			{{ timecard1.sports.id }}
+
 			-
 			{{ timecard1.responsable }}
 
 		</h1>
 		<p>Date:
-			{{ timecard1.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</p>
+			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</p>
 
 		<table class="table">
 			<thead>
@@ -23,44 +23,32 @@
 					<th>Nom</th>
 					<th>Présent</th>
 					<th>Photo</th>
-
-
 				</tr>
 			</thead>
 			<tbody>
-				{% for sport in timecard1.sports %}
-					{% for user in sport.users %}
-
-						<tr>
-							<td>{{ user.id }}</td>
-
-							<td>{{ user.name }}</td>
-
-
-							<td>
-								{% for presence in user.presences %}
-									{# {{ presence.IsPresent ? 'Présent' : 'Absent' }} #}
-
-
-									{% set deactiver = 'background-color: #CB3D3F' %}
-									{% set activer = 'background-color: #2F7A4D' %}
-
-									<a class="btn text-light me-3 ms-3" style="{{ presence.isIsPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
-										{{ presence.isIsPresent ? 'Présent' : 'Absent' }}</a>
-								{% endfor %}
-							</td>
-
-							<td>
-								{% if user.picture is defined %}
-									<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 5rem; height: auto; border-radius: 50%;">
-								{% else %}
-									<p>Pas de photo</p>
-								{% endif %}
-							</td>
-
-
-						</tr>
-					{% endfor %}
+				{# {% for sport in sports %} #}
+				{% for user in timecard1.sports.users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.name }}</td>
+						<td>
+							{% for presence1 in user.presence1s %}
+								{# {{ presence.IsPresent ? 'Présent' : 'Absent' }} #}
+								{% set deactiver = 'background-color: #CB3D3F' %}
+								{% set activer = 'background-color: #2F7A4D' %}
+								<a class="btn text-light me-3 ms-3" style="{{ presence1.isIsPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence1.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+									{{ presence1.isIsPresent ? 'Présent' : 'Absent' }}</a>
+							{% endfor %}
+						</td>
+						<td>
+							{% if user.picture is defined %}
+								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 5rem; height: auto; border-radius: 50%;">
+							{% else %}
+								<p>Pas de photo</p>
+							{% endif %}
+						</td>
+					</tr>
+					{# {% endfor %} #}
 				{% else %}
 					<tr>
 						<td colspan="15">Pas d'utilistateur</td>
@@ -78,12 +66,12 @@
 						<td>{{ timecard1.id }}</td>
 					</tr>
 					<tr>
-						<th>Responsable</th>
+						<th>Responsable.</th>
 						<td>{{ timecard1.responsable }}</td>
 					</tr>
 					<tr>
 						<th>Date</th>
-						<td>{{ timecard1.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</td>
+						<td>{{ timecard1.CreatedAt ? timecard1.CreatedAt | date('d-m-Y') : '' }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -91,7 +79,7 @@
 
 			<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
 
-			<a href="{{ path('app_timecard1_edit', {'id': timecard.id}) }}">Modifier</a>
+			<a href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">Modifier</a>
 
 			{{ include('pages/timecard1/_delete_form.html.twig') }}</div>
 
