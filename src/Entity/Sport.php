@@ -39,10 +39,14 @@ class Sport
     #[ORM\ManyToMany(targetEntity: Timecard::class, mappedBy: 'sports')]
     private Collection $timecards;
 
+    #[ORM\OneToMany(mappedBy: 'sports', targetEntity: Timecard1::class)]
+    private Collection $timecard1s;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->timecards = new ArrayCollection();
+        $this->timecard1s = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +177,36 @@ class Sport
     {
         if ($this->timecards->removeElement($timecard)) {
             $timecard->removeSport($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Timecard1>
+     */
+    public function getTimecard1s(): Collection
+    {
+        return $this->timecard1s;
+    }
+
+    public function addTimecard1(Timecard1 $timecard1): self
+    {
+        if (!$this->timecard1s->contains($timecard1)) {
+            $this->timecard1s->add($timecard1);
+            $timecard1->setSports($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTimecard1(Timecard1 $timecard1): self
+    {
+        if ($this->timecard1s->removeElement($timecard1)) {
+            // set the owning side to null (unless already changed)
+            if ($timecard1->getSports() === $this) {
+                $timecard1->setSports(null);
+            }
         }
 
         return $this;
