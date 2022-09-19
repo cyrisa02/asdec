@@ -26,7 +26,7 @@ class TimecardController extends AbstractController
         ]);
     }
 
-    #[Route('/création', name: 'app_timecard_new', methods: ['GET', 'POST'])]
+    #[Route('/creation', name: 'app_timecard_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TimecardRepository $timecardRepository): Response
     {
         $timecard = new Timecard();
