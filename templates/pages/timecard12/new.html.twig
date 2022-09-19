@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Timecard1{% endblock %}
+
+{% block body %}
+    <h1>Create new Timecard1</h1>
+
+    {{ include('timecard1/_form.html.twig') }}
+
+    <a href="{{ path('app_timecard1_index') }}">back to list</a>
+{% endblock %}

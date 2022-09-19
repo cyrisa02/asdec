@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presence1{% endblock %}
+
+{% block body %}
+    <h1>Presence1</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ presence1.id }}</td>
+            </tr>
+            <tr>
+                <th>IsPresent</th>
+                <td>{{ presence1.isPresent ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_presence1_index') }}">back to list</a>
+
+    <a href="{{ path('app_presence1_edit', {'id': presence1.id}) }}">edit</a>
+
+    {{ include('presence1/_delete_form.html.twig') }}
+{% endblock %}

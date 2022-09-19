@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Timecard1 index{% endblock %}
+
+{% block body %}
+    <h1>Timecard1 index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Responsable</th>
+                <th>Created_At</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for timecard1 in timecard1s %}
+            <tr>
+                <td>{{ timecard1.id }}</td>
+                <td>{{ timecard1.responsable }}</td>
+                <td>{{ timecard1.createdAt ? timecard1.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_timecard1_show', {'id': timecard1.id}) }}">show</a>
+                    <a href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_timecard1_new') }}">Create new</a>
+{% endblock %}

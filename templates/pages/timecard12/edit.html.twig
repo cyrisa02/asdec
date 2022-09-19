@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Timecard1
+{% endblock %}
+
+{% block body %}
+	<h1>Edit Timecard1</h1>
+
+	{{ include('pages/timecard1/_form.html.twig', {'button_label': 'Update'}) }}
+
+	<a href="{{ path('app_timecard1_index') }}">back to list</a>
+
+	{{ include('timecard1/_delete_form.html.twig') }}
+{% endblock %}

@@ -6,14 +6,14 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Fiche d'appel:
-			{% for sport in timecard.sports %}
+			{% for sport in timecard1.sports %}
 				{{ sport.title}}
 			{% endfor %}
 			-
-			{{ timecard.responsable }}
+			{{ timecard1.responsable }}
 		</h1>
 		<p>Date:
-			{{ timecard.CreatedAt ? timecard.CreatedAt|date('d-m-Y') : '' }}</p>
+			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</p>
 		<table class="table">
 			<thead>
 				<tr>
@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for sport in timecard.sports %}
+				{% for sport in timecard1.sports %}
 					{% for user in sport.users %}
 						<tr>
 							<td>{{ user.cardnr}}</td>
@@ -40,7 +40,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<a href="{{ path('app_timecard_index') }}">Retour à la liste</a>
+		<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
 	</div>
 	<form>
 		<input id="impression" name="impression" type="button" onclick="imprimer_page()" value="Imprimer cette page"/>

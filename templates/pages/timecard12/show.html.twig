@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Timecard1{% endblock %}
+
+{% block body %}
+    <h1>Timecard1</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ timecard1.id }}</td>
+            </tr>
+            <tr>
+                <th>Responsable</th>
+                <td>{{ timecard1.responsable }}</td>
+            </tr>
+            <tr>
+                <th>Created_At</th>
+                <td>{{ timecard1.createdAt ? timecard1.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_timecard1_index') }}">back to list</a>
+
+    <a href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">edit</a>
+
+    {{ include('timecard1/_delete_form.html.twig') }}
+{% endblock %}

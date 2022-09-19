@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche d'appel
+{% endblock %}
+
+{% block body %}
+	<div class="mt-4 container">
+		<h1>Fiche d'appel</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>N°</th>
+					<td>{{ timecard1.id }}</td>
+				</tr>
+				<tr>
+					<th>Responsable</th>
+					<td>{{ timecard1.responsable }}</td>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<td>{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
+
+		<a href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">Modifier</a>
+
+		{{ include('pages/timecard1/_delete_form.html.twig') }}</div>
+
+{% endblock %}

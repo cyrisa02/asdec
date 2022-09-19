@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_timecard_delete', {'id': timecard1.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette fiche d'appel?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ timecard1.id) }}">
+	<button class="btn btn-danger btn-lg mt-4">Supprimer</button>
+
+</form>

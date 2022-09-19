@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Presence1{% endblock %}
+
+{% block body %}
+    <h1>Edit Presence1</h1>
+
+    {{ include('presence1/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_presence1_index') }}">back to list</a>
+
+    {{ include('presence1/_delete_form.html.twig') }}
+{% endblock %}

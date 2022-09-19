@@ -97,6 +97,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Presence::class)]
     private Collection $presences;
 
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Presence1::class)]
+    private Collection $presence1s;
+
    
 
     /**
@@ -108,8 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->CreatedAt = new \DateTimeImmutable();
         $this->sports = new ArrayCollection();
         $this->presences = new ArrayCollection();
-       
-           
+        $this->presence1s = new ArrayCollection();          
         
     }
 
@@ -458,6 +460,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($presence->getUsers() === $this) {
                 $presence->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Presence1>
+     */
+    public function getPresence1s(): Collection
+    {
+        return $this->presence1s;
+    }
+
+    public function addPresence1(Presence1 $presence1): self
+    {
+        if (!$this->presence1s->contains($presence1)) {
+            $this->presence1s->add($presence1);
+            $presence1->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresence1(Presence1 $presence1): self
+    {
+        if ($this->presence1s->removeElement($presence1)) {
+            // set the owning side to null (unless already changed)
+            if ($presence1->getUsers() === $this) {
+                $presence1->setUsers(null);
             }
         }
 
