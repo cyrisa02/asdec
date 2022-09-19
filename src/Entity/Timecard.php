@@ -23,11 +23,16 @@ class Timecard
 
    
 
-    #[ORM\ManyToMany(targetEntity: Sport::class, inversedBy: 'timecards')]
-    private Collection $sports;
+    
 
     #[ORM\OneToMany(mappedBy: 'timecards', targetEntity: Presence::class)]
     private Collection $presences;
+
+   
+
+    #[ORM\ManyToOne(inversedBy: 'timecards')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Sport $sport = null;
 
     /**
  	*This constructor is for the date
@@ -37,7 +42,7 @@ class Timecard
     {
         $this->CreatedAt = new \DateTimeImmutable();
        
-        $this->sports = new ArrayCollection();
+       
         $this->presences = new ArrayCollection();
            
         
@@ -74,29 +79,7 @@ class Timecard
 
     
 
-    /**
-     * @return Collection<int, Sport>
-     */
-    public function getSports(): Collection
-    {
-        return $this->sports;
-    }
-
-    public function addSport(Sport $sport): self
-    {
-        if (!$this->sports->contains($sport)) {
-            $this->sports->add($sport);
-        }
-
-        return $this;
-    }
-
-    public function removeSport(Sport $sport): self
-    {
-        $this->sports->removeElement($sport);
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Presence>
@@ -124,6 +107,20 @@ class Timecard
                 $presence->setTimecards(null);
             }
         }
+
+        return $this;
+    }
+
+    
+
+    public function getSport(): ?Sport
+    {
+        return $this->sport;
+    }
+
+    public function setSport(?Sport $sport): self
+    {
+        $this->sport = $sport;
 
         return $this;
     }
