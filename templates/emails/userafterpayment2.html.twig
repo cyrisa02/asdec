@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+
+		<img src="/public/assets/images/logo.png" alt="Logo" style="max-width: 2rem; ">
+
+		<p>Bonjour, au niveau présentation, c'est le mieux que je puisse faire, je ne peux pas amener de pièces jointes, de style désolé.</p>
+		{% if user.isValid == true %}
+			<h1>
+				Adhésion Saison
+				{{ "now"|date("Y") }}
+				/
+				{{ "now"|date("Y") +1  }}
+
+
+			</h1>
+			<h2>
+				Association Sport Détente et Culture</h2>
+			<h3>
+				Nom:{{ user.name }}
+			</h3>
+			<h3>
+				Prénom:
+				{{ user.firstname }}</h3>
+			<p>
+				Votre Email de connexion :
+				{{ user.email }}</p>
+			<p>
+				N° d'adhérent :
+				{{ user.cardnr }}</p>
+			<p>
+				Fait le :
+				{{ "now"|date("d/m/Y") }}
+			</p>
+			<p>-----------------------------------------------------------</p>
+			<p>Adresse:
+				{{ user.address }}</p>
+			<p>{{ user.zipcode }}
+				{{ user.city }}
+			</p>
+			<p></p>
+
+			<p>Né(e) le:
+				{{ user.birthdate|date('d-m-Y') }}
+
+			</p>
+			<p>Age:
+				{{ user.getAge() }}
+				ans</p>
+			<p>Cotisation annuelle: réglée</p>
+			{% if user.isYoga == true %}
+				<p>Vous avez choisi de pratiquer du Yoga</p>
+			{% endif %}
+
+			{% if user.isPilate == true %}
+				<p>Vous avez choisi de pratiquer du Pilate</p>
+			{% endif %}
+
+			{% if user.isChild == true %}
+				<p>Vos cotisations sont en règles concernant votre adhésion et celle de vos enfants. Vous devez maintenant inscrire vos enfants en cliquant sur ce
+					<a href="{{ absolute_url(path('app_child_new')) }}">lien
+					</a>.</p>
+
+			{% endif %}
+
+
+			<p>Le Président: Pascal Petit</p>
+			<p>Siège social: 18 rue des Pensées | 02880 Crouy
+			</p>
+
+		{% else %}
+			<p>Votre profil a changé.</p>
+		{% endif %}
+
+
+	</body>
+</html>

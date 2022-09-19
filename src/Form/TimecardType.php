@@ -34,7 +34,7 @@ class TimecardType extends AbstractType
                     'class' => 'form-label mt-4 '
                 ],
                 'choice_label' => 'title',
-                'multiple' => true,
+                'multiple' => false,
                 'expanded' => true,
                 'attr' => [
                     'class' => 'd-flex justify-content-between',

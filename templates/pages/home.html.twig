@@ -52,15 +52,8 @@
 
 			{# searchbar for the posts #}
 			<div class="container mt-4">
-				<div class="search-wrapper">
-					<label for="search">Recherchez votre article par auteur ou par mot</label>
-					<input type="search" id="search" data-search>
-				</div>
-				<div class="post-cards mt-4" data-post-cards-container style="display: flex;flex-direction: row;
-																																																													flex-wrap: wrap;
-																																												justify-content: space-between;
-																																												align-items: stretch;
-																																																									align-content: space-around;"></div>
+				<h3>Articles</h3>
+				<div class="post-cards mt-4" data-post-cards-container style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-between;align-items: stretch;align-content: space-around;"></div>
 
 				<template data-post-template>
 					<div class="card border-primary mb-3" style="width:300px;">
@@ -69,7 +62,7 @@
 						<div class="card-header bg-secondary" data-header></div>
 
 						<div class="card-body bg-light" data-body></div>
-						{# <a class="btn btn-primary btn-sm row my-2 ms-2  " href="{{path('app_register2')}}" role="button" style="width:100px;">Sélectionner</a> #}
+
 					</div>
 				</template>
 
@@ -82,6 +75,11 @@
 			<div class="container my-5 d-flex align-items-end" data-aos="fade-left" data-aos-duration="50000">
 				<div class="row">
 					<a href="{{ path('app_post_new')}}" class="btn btn-primary mb-3" style="font-size: 30px;">Ecrire un article</a>
+
+					<div class="search-wrapper">
+						<label for="search">Recherchez votre article par auteur ou par mot</label>
+						<input type="search" id="search" data-search>
+					</div>
 
 
 					<div class="col-md-6 offset-md-3">

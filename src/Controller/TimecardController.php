@@ -29,30 +29,28 @@ class TimecardController extends AbstractController
         ]);
     }
 
-    #[Route('/création', name: 'app_timecard_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TimecardRepository $timecardRepository, EntityManagerInterface $entityManager ): Response
+    #[Route('/creation', name: 'app_timecard_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, TimecardRepository $timecardRepository, EntityManagerInterface $entityManager, PresenceRepository $presenceRepository, UserRepository $userRepository ): Response
     {
         $timecard = new Timecard();
         $form = $this->createForm(TimecardType::class, $timecard);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $presence = new Presence();
-
-            /**
-             * @var User $user
-             */
-            $user=$this->getUser();
-            $sport = $user->getSports();
+            $sport=$form->getData()->getSports();
             
-            $presence->setIsPresent(0);
-            $presence->setUsers($this->getUser())
+            $usersofActivite = $sport[0]->getUsers() ;
+
+            dd($usersofActivite[0]);
+
+        
+
+             
+             
+             
            
-            ->setTimecards($timecard);
            
-            $entityManager->persist($presence);
-            $entityManager->persist($user);
-            $entityManager->flush();
+            
             $timecardRepository->add($timecard, true);
             
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');

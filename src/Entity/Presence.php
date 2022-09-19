@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PresenceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PresenceRepository::class)]
@@ -19,8 +21,7 @@ class Presence
     #[ORM\ManyToOne(inversedBy: 'presences')]
     private ?User $users = null;
 
-    #[ORM\ManyToOne(inversedBy: 'presences')]
-    private ?Timecard $timecards = null;
+       
 
     public function getId(): ?int
     {
@@ -51,15 +52,6 @@ class Presence
         return $this;
     }
 
-    public function getTimecards(): ?Timecard
-    {
-        return $this->timecards;
-    }
-
-    public function setTimecards(?Timecard $timecards): self
-    {
-        $this->timecards = $timecards;
-
-        return $this;
-    }
+   
+    
 }
