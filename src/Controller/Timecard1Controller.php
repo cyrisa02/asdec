@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Repository\SportRepository;
 use App\Repository\Presence1Repository;
 use App\Repository\Timecard1Repository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +28,33 @@ class Timecard1Controller extends AbstractController
     }
 
     #[Route('/creation', name: 'app_timecard1_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, Timecard1Repository $timecard1Repository): Response
+    public function new(Request $request, Timecard1Repository $timecard1Repository, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
+
+        // Je crée une nouvelle entité fiche d'appel
         $timecard1 = new Timecard1();
+        // Je crée le formulaire grâce au modèle Timecard1Type
         $form = $this->createForm(Timecard1Type::class, $timecard1);
         $form->handleRequest($request);
-
+        //Si le formulaire est soumis et valide, je continue
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Je crée l'entité Presence1 avec les champs users, timecards1 et IsPresent
+            $presence1 = new Presence1();
+            // J'ai besoin de la liste des users Faut il créer une fonction dans le repository de user findSport? Voir Repository de User
+            $users= [];
+            foreach ($users as $user) {
+                $presence1->setIsPresent(0)
+                      ->setUsers($user) //il faudrait boucler sur tous les users
+                      ->setTimecards1($timecard1);
+                      $entityManager->persist($presence1);
+            }
+            // Je flush quand tous les presence1 ont été persistés
+            $entityManager->flush();
+
             $timecard1Repository->add($timecard1, true);
+                      $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+                    
 
             return $this->redirectToRoute('app_timecard1_index', [], Response::HTTP_SEE_OTHER);
         }
