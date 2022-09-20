@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Sport;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -220,6 +221,20 @@ class UserType extends AbstractType
                     'class' => 'form-check-label mt-4'
                 ]
             ])
+            ->add('categories', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'Voulez-vous vous inscrire aux informations de vos activités préférées? (recommandé pour recevoir les dernières informations)',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                'attr' => [
+                    'class' => 'd-flex justify-content-around',
+                ],
+            ])
+
         ;
     }
 

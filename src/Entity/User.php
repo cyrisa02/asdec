@@ -100,6 +100,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Presence1::class)]
     private Collection $presence1s;
 
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'users')]
+    private Collection $categories;
+
    
 
     /**
@@ -111,7 +114,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->CreatedAt = new \DateTimeImmutable();
         $this->sports = new ArrayCollection();
         $this->presences = new ArrayCollection();
-        $this->presence1s = new ArrayCollection();          
+        $this->presence1s = new ArrayCollection();
+        $this->categories = new ArrayCollection();          
         
     }
 
@@ -491,6 +495,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($presence1->getUsers() === $this) {
                 $presence1->setUsers(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeUser($this);
         }
 
         return $this;
