@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Presence1;
 use App\Entity\Timecard1;
 use App\Form\Timecard1Type;
 use App\Repository\UserRepository;
@@ -45,7 +46,7 @@ class Timecard1Controller extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_timecard_showdo', methods: ['GET'])]
-    public function showdo(Timecard1 $timecard1, SportRepository $sportRepository, UserRepository $userRepository, Presence1Repository $presence1Repository): Response
+    public function showdo(Timecard1 $timecard1, SportRepository $sportRepository, UserRepository $userRepository, Presence1Repository $presence1Repository, Presence1 $presence1): Response
     {
         return $this->render('pages/timecard1/showdo.html.twig', [
             'timecard1' => $timecard1,

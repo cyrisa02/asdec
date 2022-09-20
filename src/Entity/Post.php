@@ -5,8 +5,15 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ApiResource( 
+    collectionOperations: ['get'],
+    itemOperations: ['get'],    
+    normalizationContext: ['groups' => ['read'], "enable_max_depth"=>true],
+)]
 class Post
 {
     #[ORM\Id]
@@ -18,9 +25,11 @@ class Post
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['read'])]
     private ?string $content = null;
 
     #[ORM\Column(length: 190)]
+    #[Groups(['read'])]
     private ?string $author = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
