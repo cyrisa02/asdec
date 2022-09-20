@@ -32,7 +32,7 @@
 						<td>{{ user.id }}</td>
 						<td>{{ user.name }}</td>
 						<td>
-							{% for presence1 in user.presence1s %}
+							{% for presence1 in timecard1.presence1s %}
 								{# {{ presence.IsPresent ? 'Présent' : 'Absent' }} #}
 								{% set deactiver = 'background-color: #CB3D3F' %}
 								{% set activer = 'background-color: #2F7A4D' %}
