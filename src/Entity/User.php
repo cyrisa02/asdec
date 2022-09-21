@@ -86,8 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 190, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\ManyToMany(targetEntity: Sport::class, inversedBy: 'users')]
-    private Collection $sports;
+    
 
     
 
@@ -106,6 +105,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true, unique: true)]
     private ?int $cardnr = null;
 
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: SportUser::class)]
+    private Collection $sportUsers;
+
     
     
     public function __toString()
@@ -122,10 +124,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
  	public function __construct()
     {
         $this->CreatedAt = new \DateTimeImmutable();
-        $this->sports = new ArrayCollection();
+        
         $this->presences = new ArrayCollection();
         $this->presence1s = new ArrayCollection();
-        $this->categories = new ArrayCollection();          
+        $this->categories = new ArrayCollection();
+        $this->sportUsers = new ArrayCollection();          
         
     }
 
@@ -412,30 +415,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sport>
-     */
-    public function getSports(): Collection
-    {
-        return $this->sports;
-    }
-
-    public function addSport(Sport $sport): self
-    {
-        if (!$this->sports->contains($sport)) {
-            $this->sports->add($sport);
-        }
-
-        return $this;
-    }
-
-    public function removeSport(Sport $sport): self
-    {
-        $this->sports->removeElement($sport);
-
-        return $this;
-    }
-
+    
     
 
     public function isIsPresent(): ?bool
@@ -545,6 +525,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCardnr(?int $cardnr): self
     {
         $this->cardnr = $cardnr;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SportUser>
+     */
+    public function getSportUsers(): Collection
+    {
+        return $this->sportUsers;
+    }
+
+    public function addSportUser(SportUser $sportUser): self
+    {
+        if (!$this->sportUsers->contains($sportUser)) {
+            $this->sportUsers->add($sportUser);
+            $sportUser->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSportUser(SportUser $sportUser): self
+    {
+        if ($this->sportUsers->removeElement($sportUser)) {
+            // set the owning side to null (unless already changed)
+            if ($sportUser->getUsers() === $this) {
+                $sportUser->setUsers(null);
+            }
+        }
 
         return $this;
     }

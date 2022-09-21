@@ -29,7 +29,7 @@
 				{# Je déclare active comme variable grâce à TWIG #}
 
 				{# {% for sport in timecard1.sports %} #}
-					{% for user in timecard1.sports.users %}
+					{% for user in users %}
 
 						{% for presence1 in user.presence1s %}
 						{% set active = "" %}
@@ -107,7 +107,7 @@
 			</thead>
 			<tbody>
 				{# {% for sport in sports %} #}
-				{% for user in timecard1.sports.users %}
+				{% for user in users %}
 					<tr>
 						<td>{{ user.id }}</td>
 						<td>{{ user.name }}</td>

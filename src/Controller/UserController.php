@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Service\MailService;
 use App\Form\UserEditSportType;
+use App\Repository\SportRepository;
+use App\Repository\SportUserRepository;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request, SportUserRepository $sportUserRepository): Response
     {
 
         $users = $userRepository->findAll();
@@ -31,6 +33,7 @@ class UserController extends AbstractController
 
         return $this->render('pages/user/index.html.twig', [
             'users' => $users,
+            'sport_users' => $sportUserRepository->findAll(),
         ]);
     }
 

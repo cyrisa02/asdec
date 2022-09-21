@@ -33,14 +33,16 @@ class Sport
     #[ORM\Column(length: 190, nullable: true)]
     private ?string $peopleNbr = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'sports')]
-    private Collection $users;
+    
 
     #[ORM\ManyToMany(targetEntity: Timecard::class, mappedBy: 'sports')]
     private Collection $timecards;
 
     #[ORM\OneToMany(mappedBy: 'sports', targetEntity: Timecard1::class)]
     private Collection $timecard1s;
+
+    #[ORM\OneToMany(mappedBy: 'sports', targetEntity: SportUser::class)]
+    private Collection $sportUsers;
 
     public function __toString()
      {
@@ -50,9 +52,10 @@ class Sport
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        
         $this->timecards = new ArrayCollection();
         $this->timecard1s = new ArrayCollection();
+        $this->sportUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,32 +137,7 @@ class Sport
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addSport($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeSport($this);
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Timecard>
@@ -212,6 +190,36 @@ class Sport
             // set the owning side to null (unless already changed)
             if ($timecard1->getSports() === $this) {
                 $timecard1->setSports(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SportUser>
+     */
+    public function getSportUsers(): Collection
+    {
+        return $this->sportUsers;
+    }
+
+    public function addSportUser(SportUser $sportUser): self
+    {
+        if (!$this->sportUsers->contains($sportUser)) {
+            $this->sportUsers->add($sportUser);
+            $sportUser->setSports($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSportUser(SportUser $sportUser): self
+    {
+        if ($this->sportUsers->removeElement($sportUser)) {
+            // set the owning side to null (unless already changed)
+            if ($sportUser->getSports() === $this) {
+                $sportUser->setSports(null);
             }
         }
 
