@@ -6,13 +6,8 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarColor01">
-			<ul
-				class="navbar-nav me-auto">
-				{# <li class="nav-item">
-																																																																																																																																																																																																																																																																																																																																																																																									<a class="nav-link active" href="#">Home
-																																																																																																																																																																																																																																																																																																																																																																																										<span class="visually-hidden">(current)</span>
-																																																																																																																																																																																																																																																																																																																																																																																									</a>
-																																																																																																																																																																																																																																																																																																																																																																																								</li> #}
+			<ul class="navbar-nav me-auto">
+
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}
 
@@ -66,7 +61,11 @@
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mailing</a>
 							<div class="dropdown-menu">
 
-								<a class="dropdown-item" href="{{ path('app_newsletter_index')}}">Création du mail et liste des mails</a>
+								<a class="dropdown-item" href="{{ path('app_newsletter_new')}}">Création du mail
+								</a>
+
+
+								<a class="dropdown-item" href="{{ path('app_newsletter_index')}}">Envoi du mail et liste des mails</a>
 
 								<a class="dropdown-item" href="{{ path('app_category_index')}} ">Création d'un groupe d'envoi</a>
 

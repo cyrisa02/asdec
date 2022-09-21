@@ -5,21 +5,30 @@ namespace App\Controller;
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
 use App\Repository\NewsletterRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/newsletter')]
 class NewsletterController extends AbstractController
 {
     #[Route('/', name: 'app_newsletter_index', methods: ['GET'])]
-    public function index(NewsletterRepository $newsletterRepository): Response
+    public function index(NewsletterRepository $newsletterRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $newsletter = $newsletterRepository->findAll();
+
+        $newsletter =$paginator->paginate(
+            $newsletter,
+            
+            $request->query->getInt('page', 1),
+           1
+        );
         return $this->render('pages/newsletter/index.html.twig', [
-            'newsletters' => $newsletterRepository->findAll(),
+            'newsletters' => $newsletter,
         ]);
     }
 
@@ -61,6 +70,28 @@ class NewsletterController extends AbstractController
                 $mailer->send($email);
             }
         }
+
+        return $this->render('pages/newsletter/show.html.twig', [
+            'newsletter' => $newsletter,
+        ]);
+    }
+    #[Route('/sendall/{id}', name: 'sendall', methods: ['GET'])]
+    public function sendall(Newsletter $newsletter, MailerInterface $mailer): Response
+    {
+        $users = $newsletter->getCategories()->getUsers();
+        
+
+        foreach ($users as $user){
+            
+                $email = (new TemplatedEmail())
+                ->from('asdecsoissons@gmail.com')
+                ->to ($user->getEmail())                
+                ->subject($newsletter->getName())
+                ->htmlTemplate('emails/newsletter.html.twig')
+                ->context(compact('newsletter','user'));
+                $mailer->send($email);
+            }
+        
 
         return $this->render('pages/newsletter/show.html.twig', [
             'newsletter' => $newsletter,

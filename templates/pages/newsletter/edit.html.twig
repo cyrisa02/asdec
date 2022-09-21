@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Newsletter
+{% block title %}Modification de la  Newsletter
 {% endblock %}
 
 {% block body %}
-	<h1>Edit Newsletter</h1>
+	<div class="mt-4 container">
+		<h1>Modification de la  Newsletter</h1>
 
-	{{ include('pages/newsletter/_form.html.twig', {'button_label': 'Update'}) }}
+		{{ include('pages/newsletter/_form.html.twig', {'button_label': 'Modifier'}) }}
+		<div class="mt-4 container">
+			<a href="{{ path('app_newsletter_index') }}">Retour à la liste</a>
+		</div>
 
-	<a href="{{ path('app_newsletter_index') }}">back to list</a>
 
-	{{ include('pages/newsletter/_delete_form.html.twig') }}
+		{{ include('pages/newsletter/_delete_form.html.twig') }}</div>
+
 {% endblock %}

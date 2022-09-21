@@ -74,6 +74,10 @@ class GoodiesType extends AbstractType
                         'mimeTypesMessage' => 'Télécharger une image au bon format',
                     ])
                 ],
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+     
 
 
             ])

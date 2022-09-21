@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Liste des Newsletters
 	</h1>
-	<h1>Paginator????</h1>
+
 
 	<table class="table">
 		<thead>
@@ -49,6 +49,9 @@
 						</a>
 						{% if newsletter.isSent == false %}
 							<a href="{{ path('send', {id: newsletter.id})}}" class='mt-4 ms-4'>Envoyer</a>
+							<a href="{{ path('sendall', {id: newsletter.id})}}" class='mt-4 ms-4'>Envoyer à tout le monde</a>
+
+
 						{% endif %}
 
 					</td>
@@ -61,5 +64,9 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_newsletter_new') }}">Create new</a>
+	<a href="{{ path('app_newsletter_new') }}">Créer un nouveau mail</a>
+	<div class="navigation d-flex justify-content-center mt-4">
+		{{ knp_pagination_render(newsletters) }}
+	</div>
+
 {% endblock %}
