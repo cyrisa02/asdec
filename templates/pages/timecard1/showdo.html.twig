@@ -4,6 +4,86 @@
 {% endblock %}
 
 {% block body %}
+	<p>Date:
+		{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</p>
+
+	<hr class="my-4">
+
+
+	<h2>Recherche les adhérents présents ou absents</h2>
+
+	{# This section is for the filter isEnable with Partners #}
+	{# cette section permet de créer les boutons filtres #}
+	<section
+		id="filters">
+		{# Je crée des div avec un id pour les appeler plus tard dans le js #}
+		<div id="all" class="btn btn-secondary btn-lg mt-4">Tout</div>
+		<div id="enable" class="btn btn-secondary btn-lg mt-4">Présent(s)</div>
+		<div id="disable" class="btn btn-secondary btn-lg mt-4">Absent(s)</div>
+	</section>
+
+	{# Création de la gallerie de cartes #}
+	<div id="gallery ">
+		<div class="container mt-4 ">
+			<div class="row ">
+				{# Je déclare active comme variable grâce à TWIG #}
+
+				{# {% for sport in timecard1.sports %} #}
+					{% for user in timecard1.sports.users %}
+
+						{% for presence1 in user.presence1s %}
+						{% set active = "" %}
+							{% if presence1.isPresent  %}
+						{% set active = true %}
+						{% endif %}
+						{# Mise en place de la classe active avec le CSS et inactive #}
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-3 {{ active == true ? 'active' : '' }} partner"> <article class="card border-primary mb-3 " style="max-width: 20rem; ">
+								<div class="card-header bg-secondary">
+									<h3>
+										N° de carte:
+										{# {{ user.cardnr}} #}
+									</h3>
+								</div>
+								<div class="card-body bg-light">
+									<h4 class="card-title">{{ user.name}}
+										{{ user.firstname}}
+										{% if user.picture is defined %}
+											<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 3rem; height: auto; border-radius: 50%;">
+										{% else %}
+											<p>Pas de photo</p>
+										{% endif %}
+									</h4>
+									<p class="card-text d-none">
+										{% if presence1.isPresent %}Présent
+										{% else %}
+											Absent
+										{% endif %}
+									</p>
+									<div class="d-flex justify-content-between mt-3">{% set deactiver = 'background-color: #CB3D3F' %}
+										{% set activer = 'background-color: #2F7A4D' %}
+										<a class="btn text-light me-3 ms-3" style="{{ presence1.isIsPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence1.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+											{{ presence1.isIsPresent ? 'Présent' : 'Absent' }}</a>
+										<a href="{{ path('app_user_editsport', {'id': user.id}) }}">
+											<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
+												<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+											</svg>
+										</a>
+									</div>
+								</div>
+							</article>
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{# {% endfor %} #}
+
+
+			</div>
+		</div>
+	</div>
+	{# //  #}
+
+
+	{# end #}
 	<div class="mt-4 container">
 		<h1>Fiche d'appel:
 			{{ timecard1.sports.title }}

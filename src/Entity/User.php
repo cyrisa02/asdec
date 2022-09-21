@@ -102,7 +102,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'users')]
     private Collection $categories;
-
+    
+    public function __toString()
+     {
+       return $this->email;
+     }
+     
    
 
     /**
