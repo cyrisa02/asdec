@@ -5,7 +5,7 @@
 
 {% block body %}
 	<h1>Liste des messages reçus</h1>
-	<h2>Mettre en place un mailer pour prévenir d'un nouveau message</h2>
+
 
 	<table class="table">
 		<thead>
@@ -27,9 +27,9 @@
 					<td>{{ contact.content }}</td>
 					<td>{{ contact.createdAt ? contact.createdAt|date('d-m-Y') : '' }}</td>
 					{# <td>
-											<a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
-											<a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
-										</td> #}
+																<a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
+																<a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
+															</td> #}
 				</tr>
 			{% else %}
 				<tr>
