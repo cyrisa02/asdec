@@ -102,6 +102,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'users')]
     private Collection $categories;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $cardnr = null;
+
+    
     
     public function __toString()
      {
@@ -531,6 +536,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getCardnr(): ?int
+    {
+        return $this->cardnr;
+    }
+
+    public function setCardnr(?int $cardnr): self
+    {
+        $this->cardnr = $cardnr;
+
+        return $this;
+    }
+
+   
 
     
 }
