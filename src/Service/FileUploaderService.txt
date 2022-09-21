@@ -1,3 +1,17 @@
+en revanche pour appeler ta fonction je te laisser essayer ça dans le controller :
+ 
+private FileuploaderService $fileuploaderService;      
+
+public function __construct(FileuploaderService $fileuploaderService) {
+         $this->fileuploaderService = $fileuploaderService;
+}
+
+A partir de la, tu devrais être en mesure d'appeler ta fonction comme ceci : 
+
+$this->fileuploaderService ->taMethode()
+
+
+
 <?php
 
 namespace App\Service;
