@@ -24,8 +24,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for sport in timecard1.sports %}
-					{% for user in sport.users %}
+				{% for sport in sports %}
+					{% for user in timecard1.sports.users %}
 						<tr>
 							<td>{{ user.cardnr}}</td>
 							<td>{{ user.name }}</td>

@@ -103,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'users')]
     private Collection $categories;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, unique: true)]
     private ?int $cardnr = null;
 
     

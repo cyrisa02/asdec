@@ -49,6 +49,9 @@
 						</a>
 						{% if newsletter.isSent == false %}
 							<a href="{{ path('send', {id: newsletter.id})}}" class='mt-4 ms-4'>Envoyer</a>
+							<a href="{{ path('sendall', {id: newsletter.id})}}" class='mt-4 ms-4'>Envoyer à tout le monde</a>
+
+
 						{% endif %}
 
 					</td>

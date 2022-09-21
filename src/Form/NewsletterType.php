@@ -40,9 +40,16 @@ class NewsletterType extends AbstractType
             
            
             ->add('categories', EntityType::class, [
-                'class' => Category::class,
+                'class' => Category::class,                
+                'label' => 'Les activités',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 '
+                ],
                 'choice_label' => 'name',
-                
+                 'expanded' => true,                
+                'attr' => [
+                    'class' => 'd-flex justify-content-around',
+                ],
             ])
         ;
     }

@@ -75,6 +75,28 @@ class NewsletterController extends AbstractController
             'newsletter' => $newsletter,
         ]);
     }
+    #[Route('/sendall/{id}', name: 'sendall', methods: ['GET'])]
+    public function sendall(Newsletter $newsletter, MailerInterface $mailer): Response
+    {
+        $users = $newsletter->getCategories()->getUsers();
+        
+
+        foreach ($users as $user){
+            
+                $email = (new TemplatedEmail())
+                ->from('asdecsoissons@gmail.com')
+                ->to ($user->getEmail())                
+                ->subject($newsletter->getName())
+                ->htmlTemplate('emails/newsletter.html.twig')
+                ->context(compact('newsletter','user'));
+                $mailer->send($email);
+            }
+        
+
+        return $this->render('pages/newsletter/show.html.twig', [
+            'newsletter' => $newsletter,
+        ]);
+    }
 
     #[Route('/{id}', name: 'app_newsletter_show', methods: ['GET'])]
     public function show(Newsletter $newsletter): Response
