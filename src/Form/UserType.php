@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Sport;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,6 +21,18 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('cardnr', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlenght' => '2',
+                    'maxlenght' => '190',
+                ],
+                'label' => 'Numéro de la carte',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+
+            ])
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control'
@@ -220,6 +233,20 @@ class UserType extends AbstractType
                     'class' => 'form-check-label mt-4'
                 ]
             ])
+            ->add('categories', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'Voulez-vous vous inscrire aux informations de vos activités préférées? (recommandé pour recevoir les dernières informations)',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                'attr' => [
+                    'class' => 'd-flex justify-content-around',
+                ],
+            ])
+
         ;
     }
 

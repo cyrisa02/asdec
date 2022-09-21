@@ -9,10 +9,10 @@
 			<ul
 				class="navbar-nav me-auto">
 				{# <li class="nav-item">
-																																																																																																																																																																																																																																																																																																																																																													<a class="nav-link active" href="#">Home
-																																																																																																																																																																																																																																																																																																																																																														<span class="visually-hidden">(current)</span>
-																																																																																																																																																																																																																																																																																																																																																													</a>
-																																																																																																																																																																																																																																																																																																																																																												</li> #}
+																																																																																																																																																																																																																																																																																																																																																																																									<a class="nav-link active" href="#">Home
+																																																																																																																																																																																																																																																																																																																																																																																										<span class="visually-hidden">(current)</span>
+																																																																																																																																																																																																																																																																																																																																																																																									</a>
+																																																																																																																																																																																																																																																																																																																																																																																								</li> #}
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}
 
@@ -62,12 +62,18 @@
 								Fiche de présence</a>
 							<span class="visually-hidden">(current)</span>
 						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mailing</a>
+							<div class="dropdown-menu">
 
-						<li class="nav-item">
-							<a class="nav-link" href="#">
-								Mailing TODO</a>
-							<span class="visually-hidden">(current)</span>
+								<a class="dropdown-item" href="{{ path('app_newsletter_index')}}">Création du mail et liste des mails</a>
+
+								<a class="dropdown-item" href="{{ path('app_category_index')}} ">Création d'un groupe d'envoi</a>
+
+
+							</div>
 						</li>
+
 
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('app_contact_index')}}">
@@ -87,6 +93,20 @@
 				{% endif %}
 				{% if app.user %}
 					{% if is_granted('ROLE_BOARD') %}
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_timecard1_new')}}">
+
+								Créer une feuille de présence</a>
+							<span class="visually-hidden">(current)</span>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_timecard1_index')}}">
+
+								Imprimer une feuille de présence</a>
+							<span class="visually-hidden">(current)</span>
+						</li>
+
 
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Représentant</a>
@@ -153,10 +173,7 @@
 				{% endif %}
 			</ul>
 
-			<form class="d-flex">
-				<input class="form-control me-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
+
 		</div>
 	</div>
 </nav>

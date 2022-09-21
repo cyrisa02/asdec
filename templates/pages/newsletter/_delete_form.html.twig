@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_newsletter_delete', {'id': newsletter.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette newsletter?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ newsletter.id) }}">
+	<button class="btn btn-danger btn-lg mt-4">Supprimer</button>
+
+</form>
