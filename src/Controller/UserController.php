@@ -146,5 +146,40 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/makeItValide1/{page}/{id}', name: 'app_salle_valide1', methods: ['GET', 'POST'])]
+    public function makeItValide($page, int $id, UserRepository $userRepository, Request $request): Response
+    {
+
+
+        $user = $userRepository->find($id);
+        if ($user->isIsValid()) {
+            $user->setIsValid(false);
+        } else {
+            $user->setIsValid(true);
+        }
+
+        $userRepository->add($user, true);
+
+        $this->addFlash(
+            'success',
+            'Le statut de l\'utilisateur vient d\'être modifié'
+        );
+
+
+        //  return $this->redirectToRoute('app_timecard_showdo', [
+        //      'page' => $page,           
+        //   ], Response::HTTP_SEE_OTHER);
+
+
+         // Vu qu'il y a un rechargement de la page j'ai besoin de revenir sur ma page qui
+         //a un id différent, donc pbm Some mandatory parameters are missing ("id") to
+         // generate a URL for route "app_timecard_showdo".         
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);
+
+       // return $this->redirect($request->server['HTTP_REFERER']);
+
+    }
+
     
 }
