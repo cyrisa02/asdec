@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ChildRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ChildRepository::class)]
 class Child
@@ -69,7 +70,7 @@ class Child
     #[ORM\Column(nullable: true)]
     private ?bool $isPresent = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, unique: true)]
     private ?int $cardnr = null;
 
     
