@@ -25,7 +25,7 @@ class ResetPaiementController extends AbstractController
             $users,
             
             $request->query->getInt('page', 1),
-            15
+            7
         );
 
         return $this->render('pages/paiement/index.html.twig', [

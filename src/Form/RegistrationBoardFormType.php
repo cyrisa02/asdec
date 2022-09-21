@@ -166,9 +166,12 @@ class RegistrationBoardFormType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control '
                 ],
-                'label' => 'E-mail'
+                'label' => 'E-mail',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -177,6 +180,12 @@ class RegistrationBoardFormType extends AbstractType
                     new IsTrue([
                         'message' => 'Vous devez être d\'accord avec nos conditions.',
                     ]),
+                ],
+                'attr' => [
+                    'class' => 'd-flex justify-content-around',
+                ],
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -194,6 +203,9 @@ class RegistrationBoardFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                ],
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
                 ],
             ])
         ;
