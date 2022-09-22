@@ -17,18 +17,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(UserRepository $userRepository, PaginatorInterface $paginator,
+     Request $request): Response
     {
-
         $users = $userRepository->findAll();
-
         $users =$paginator->paginate(
-            $users,
-            
+            $users,            
             $request->query->getInt('page', 1),
             3
         );
-
         return $this->render('pages/user/index.html.twig', [
             'users' => $users,
         ]);

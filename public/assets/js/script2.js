@@ -1,5 +1,4 @@
 // Filter disable /Enable Partner
-
 const showEnable = () =>{
     let partners = document.getElementsByClassName("partner");
     
@@ -59,24 +58,15 @@ buttonAll.addEventListener("click", showAll);
 const postCardTemplate = document.querySelector("[data-post-template]")
 const postCardContainer = document.querySelector("[data-post-cards-container]")
 const searchInput = document.querySelector("[data-search]")
-
-
-
 let posts = []
-
-searchInput.addEventListener("input", e => {
-   
+searchInput.addEventListener("input", e => {   
     const value = e.target.value.toLowerCase()
-    posts.forEach(post => {
-         
+    posts.forEach(post => {         
         const isVisible = post.content.toLowerCase().includes(value) || post.author.toLowerCase().includes(value)
         //console.log(post.element.classList)
         post.element.classList.toggle("d-none", !isVisible )
-    })
-    
+    })    
 })
-
-
  fetch('http://127.0.0.1:8000/api/posts?page=1')
 .then(res => res.json())
 .then(data => { return data['hydra:member']})
