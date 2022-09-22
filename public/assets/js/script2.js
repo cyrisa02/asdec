@@ -67,7 +67,7 @@ searchInput.addEventListener("input", e => {
         post.element.classList.toggle("d-none", !isVisible )
     })    
 })
- fetch('http://127.0.0.1:8000/api/posts?page=1')
+ fetch('https://asdecgrh.herokuapp.com/api/posts?page=1')
 .then(res => res.json())
 .then(data => { return data['hydra:member']})
 .then(data1=> {
