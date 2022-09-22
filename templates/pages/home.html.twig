@@ -40,11 +40,13 @@
 				<a href=" {{ path('app_login')}} ">espace.</a>
 
 			</p>
+			{% if app.user %}
 
-			<hr class="my-4">
-			<p>Vous avez déjà un compte et vous souhaitez renouveller votre adhésion.</p>
-			<a class="btn btn-primary btn-lg" href="{{ path('home.index')}}" role="button">Cliquez-ici! TODO Visible que si on est connecté</a>
-
+				<hr class="my-4">
+				<p>Vous avez déjà un compte et vous souhaitez renouveller votre adhésion.</p>
+				<a class="btn btn-primary btn-lg" href="{{ path('home.index')}}" role="button">Cliquez-ici!
+				</a>
+			{% endif %}
 
 		</div>
 		{% if app.user %}
