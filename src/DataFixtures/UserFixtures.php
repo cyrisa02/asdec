@@ -27,8 +27,7 @@ class UserFixtures extends Fixture
         $admin->setAddress('2, allée des Anges');
         $admin->setZipcode('02200');
         $admin->setCity('Soissons');
-       // $admin->setPhone('0606060606');
-
+        // $admin->setPhone('0606060606');
         $admin->setBirthdate(\DateTime::createFromFormat('d-m-Y','05-02-1973')); 
         $admin->setJob('Développeur'); 
         $admin->setIsMedical(true);
