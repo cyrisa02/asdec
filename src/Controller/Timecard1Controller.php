@@ -39,11 +39,14 @@ class Timecard1Controller extends AbstractController
         //Si le formulaire est soumis et valide, je continue
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Je crée l'entité Presence1 avec les champs users, timecards1 et IsPresent
-            $presence1 = new Presence1();
+        $timecard1Repository->add($timecard1, true);
+            
             // J'ai besoin de la liste des users Faut il créer une fonction dans le repository de user findSport? Voir Repository de User
-            $users= [];
+            $users= $userRepository->findBySport($timecard1->getSports());
+            //dd($users);
             foreach ($users as $user) {
+                // Je crée l'entité Presence1 avec les champs users, timecards1 et IsPresent
+            $presence1 = new Presence1();
                 $presence1->setIsPresent(0)
                       ->setUsers($user) //il faudrait boucler sur tous les users
                       ->setTimecards1($timecard1);
@@ -52,8 +55,8 @@ class Timecard1Controller extends AbstractController
             // Je flush quand tous les presence1 ont été persistés
             $entityManager->flush();
 
-            $timecard1Repository->add($timecard1, true);
-                      $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+            
+                      $this->addFlash('success', 'Votre fiche a été créée avec succès');
                     
 
             return $this->redirectToRoute('app_timecard1_index', [], Response::HTTP_SEE_OTHER);

@@ -63,7 +63,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findBySport($sport): array
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.sports = :val')
+            ->join('u.sports', 's')
+            ->where('s = :val')
             ->setParameter('val', $sport)
             ->orderBy('u.id', 'ASC')
             //->setMaxResults(10)
