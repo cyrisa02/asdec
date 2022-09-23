@@ -28,7 +28,7 @@ class ChildType extends AbstractType
                     'minlenght' => '2',
                     'maxlenght' => '190',
                 ],
-                'label' => 'Numéro de la carte',
+                'label' => 'Demander un numéro de carte à votre responsable ASDEC',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],
