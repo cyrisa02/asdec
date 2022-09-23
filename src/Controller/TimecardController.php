@@ -43,7 +43,7 @@ class TimecardController extends AbstractController
             
             $usersofActivite = $sport[0]->getUsers() ;
 
-            dd($usersofActivite[0]);          
+           // dd($usersofActivite[0]);          
            
             
             $timecardRepository->add($timecard, true);
