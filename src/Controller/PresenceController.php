@@ -81,24 +81,24 @@ class PresenceController extends AbstractController
     }
 
 
-    #[Route('/makeItValide/{page}/{id}', name: 'app_salle_valide', methods: ['GET', 'POST'])]
-    public function makeItValide($page, int $id, PresenceRepository $presenceRepository, Request $request): Response
-    {
+    // #[Route('/makeItValide/{page}/{id}', name: 'app_salle_valide', methods: ['GET', 'POST'])]
+    // public function makeItValide($page, int $id, PresenceRepository $presenceRepository, Request $request): Response
+    // {
 
 
-        $presence = $presenceRepository->find($id);
-        if ($presence->isIsPresent()) {
-            $presence->setIsPresent(false);
-        } else {
-            $presence->setIsPresent(true);
-        }
+    //     $presence = $presenceRepository->find($id);
+    //     if ($presence->isIsPresent()) {
+    //         $presence->setIsPresent(false);
+    //     } else {
+    //         $presence->setIsPresent(true);
+    //     }
 
-        $presenceRepository->add($presence, true);
+    //     $presenceRepository->add($presence, true);
 
-        $this->addFlash(
-            'success',
-            'Le statut de l\'utilisateur vient d\'être modifié'
-        );
+    //     $this->addFlash(
+    //         'success',
+    //         'Le statut de l\'utilisateur vient d\'être modifié'
+    //     );
 
 
         //  return $this->redirectToRoute('app_timecard_showdo', [
@@ -110,11 +110,11 @@ class PresenceController extends AbstractController
          //a un id différent, donc pbm Some mandatory parameters are missing ("id") to
          // generate a URL for route "app_timecard_showdo".         
 
-        return $this->redirect($_SERVER['HTTP_REFERER']);
+    //     return $this->redirect($_SERVER['HTTP_REFERER']);
 
-       // return $this->redirect($request->server['HTTP_REFERER']);
+    //    // return $this->redirect($request->server['HTTP_REFERER']);
 
-    }
+    // }
 
 
 }
