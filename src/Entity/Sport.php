@@ -36,8 +36,7 @@ class Sport
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'sports')]
     private Collection $users;
 
-    #[ORM\ManyToMany(targetEntity: Timecard::class, mappedBy: 'sports')]
-    private Collection $timecards;
+    
 
     #[ORM\OneToMany(mappedBy: 'sports', targetEntity: Timecard1::class)]
     private Collection $timecard1s;
@@ -51,7 +50,7 @@ class Sport
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->timecards = new ArrayCollection();
+        
         $this->timecard1s = new ArrayCollection();
     }
 
@@ -161,32 +160,7 @@ class Sport
         return $this;
     }
 
-    /**
-     * @return Collection<int, Timecard>
-     */
-    public function getTimecards(): Collection
-    {
-        return $this->timecards;
-    }
-
-    public function addTimecard(Timecard $timecard): self
-    {
-        if (!$this->timecards->contains($timecard)) {
-            $this->timecards->add($timecard);
-            $timecard->addSport($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTimecard(Timecard $timecard): self
-    {
-        if ($this->timecards->removeElement($timecard)) {
-            $timecard->removeSport($this);
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Timecard1>

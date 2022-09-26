@@ -16,11 +16,9 @@ class Presence
     #[ORM\Column(nullable: true)]
     private ?bool $isPresent = null;
 
-    #[ORM\ManyToOne(inversedBy: 'presences')]
-    private ?User $users = null;
+    
 
-    #[ORM\ManyToOne(inversedBy: 'presences')]
-    private ?Timecard $timecards = null;
+    
 
     public function getId(): ?int
     {
@@ -39,27 +37,7 @@ class Presence
         return $this;
     }
 
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
+    
 
-    public function setUsers(?User $users): self
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    public function getTimecards(): ?Timecard
-    {
-        return $this->timecards;
-    }
-
-    public function setTimecards(?Timecard $timecards): self
-    {
-        $this->timecards = $timecards;
-
-        return $this;
-    }
+    
 }
