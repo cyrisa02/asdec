@@ -41,14 +41,14 @@
 								<div class="card-header bg-secondary">
 									<h3>
 										N° de carte:
-										{{ user.cardnr}}
+										{{ presence1.users.cardnr}}
 									</h3>
 								</div>
 								<div class="card-body bg-light">
-									<h4 class="card-title">{{ user.name}}
-										{{ user.firstname}}
-										{% if user.picture is defined %}
-											<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 3rem; height: auto; border-radius: 50%;">
+									<h4 class="card-title">{{ presence1.users.name}}
+										{{ presence1.users.firstname}}
+										{% if presence1.users.picture is defined %}
+											<img src="{{ asset('uploads/') }}{{ presence1.users.picture }}" alt="{{ presence1.users.name }}" style="max-width: 3rem; height: auto; border-radius: 50%;">
 										{% else %}
 											<p>Pas de photo</p>
 										{% endif %}
@@ -110,7 +110,9 @@
 				{% for user in timecard1.sports.users %}
 					<tr>
 						<td>{{ user.id }}</td>
-						<td>{{ user.name }}</td>
+						<td>{{ user.name }}
+							{# {{ timecard1.presence1s.id }}</td> #}
+						</td>
 						<td>
 							{% for presence1 in user.presence1s %}
 

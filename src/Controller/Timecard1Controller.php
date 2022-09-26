@@ -39,18 +39,21 @@ class Timecard1Controller extends AbstractController
         //Si le formulaire est soumis et valide, je continue
         if ($form->isSubmitted() && $form->isValid()) {
 
+
+        // Je flush-crée l'objet TimeCard1
         $timecard1Repository->add($timecard1, true);
             
-            // J'ai besoin de la liste des users Faut il créer une fonction dans le repository de user findSport? Voir Repository de User
+            // J'ai besoin de la liste des users Faut il créer une fonction dans le repository de user findSport Voir Repository de User
             $users= $userRepository->findBySport($timecard1->getSports());
             //dd($users);
+            // Je parcours un par un mes users dans une boucle
             foreach ($users as $user) {
                 // Je crée l'entité Presence1 avec les champs users, timecards1 et IsPresent
             $presence1 = new Presence1();
                 $presence1->setIsPresent(0)
                       ->setUsers($user) //il faudrait boucler sur tous les users
                       ->setTimecards1($timecard1);
-                      $entityManager->persist($presence1);
+                      $entityManager->persist($presence1);// Je prépare pour la BD
             }
             // Je flush quand tous les presence1 ont été persistés
             $entityManager->flush();
