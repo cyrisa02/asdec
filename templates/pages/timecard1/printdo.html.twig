@@ -4,11 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
+	<div
+		class="mt-4 container">
+		{# Essai #}
 		<h1>Fiche d'appel:
-			{% for sport in timecard1.sports %}
-				{{ sport.title}}
-			{% endfor %}
+			{{ timecard1.sports.title }}
+			{{ timecard1.sports.id }}
 			-
 			{{ timecard1.responsable }}
 		</h1>
@@ -20,31 +21,39 @@
 					<th>N°</th>
 					<th>Nom</th>
 					<th>Présent</th>
-					<th>Ticket</th>
+					<th>Photo</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for sport in timecard1.sports %}
-					{% for user in sport.users %}
-						<tr>
-							<td>{{ user.cardnr}}</td>
-							<td>{{ user.name }}</td>
-							<td></td>
-							<td></td>
-						</tr>
-					{% endfor %}
+				{% for user in timecard1.sports.users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.name }}
+						</td>
+						<td></td>
+						<td>
+							{% if user.picture is defined %}
+								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 5rem; height: auto; border-radius: 50%;">
+							{% else %}
+								<p>Pas de photo</p>
+							{% endif %}
+						</td>
+					</tr>
 				{% else %}
 					<tr>
 						<td colspan="15">Pas d'utilistateur</td>
 					</tr>
 				{% endfor %}
 			</tbody>
+			{# Fin essai #}
 		</table>
-		<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
+		<div class="mt-4">
+			<form>
+				<input id="impression" name="impression" type="button" onclick="imprimer_page()" value="Imprimer cette page"/>
+			</form>
+		</div>
 	</div>
-	<form>
-		<input id="impression" name="impression" type="button" onclick="imprimer_page()" value="Imprimer cette page"/>
-	</form>
+
 	{% block javascripts %}
 		<script type="text/javascript">
 			function imprimer_page() {
@@ -52,6 +61,4 @@ window.print();
 }
 		</script>
 	{% endblock %}
-
-
 {% endblock %}
