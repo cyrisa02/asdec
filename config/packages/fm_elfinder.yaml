@@ -1,0 +1,14 @@
+fm_elfinder: assets_path: /assets 
+  instances: 
+    default: 
+      locale: fr 
+       editor: ckeditor 
+       fullscreen: true 
+       theme: smoothness 
+       include_assets: true 
+       connector: debug: false 
+         roots:
+          uploads: show_hidden: false
+           driver: LocalFileSystem 
+           path: uploads/files
+           upload_max_size: 2M # Taille maximum 

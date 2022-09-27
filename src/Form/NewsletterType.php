@@ -4,12 +4,13 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Newsletter;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 class NewsletterType extends AbstractType
 {
@@ -27,7 +28,7 @@ class NewsletterType extends AbstractType
                     'class' => 'form-label  mt-4'
                 ]
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     
