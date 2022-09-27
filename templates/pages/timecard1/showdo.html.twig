@@ -111,18 +111,22 @@
 					<tr>
 						<td>{{ user.id }}</td>
 						<td>{{ user.name }}
-							{# {{ timecard1.presence1s.id }}</td> #}
+
 						</td>
 						<td>
-							{% for presence1 in user.presence1s %}
+							{% for presence1 in timecard1.presence1s %}
 
-								{# {{ presence.IsPresent ? 'Présent' : 'Absent' }} #}
-								{% set deactiver = 'background-color: #CB3D3F' %}
-								{% set activer = 'background-color: #2F7A4D' %}
-								<a class="btn text-light me-3 ms-3" style="{{ presence1.isisPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence1.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+								{% if presence1.users.id == user.id %}
 
-									{{ presence1.isisPresent ? 'Présent' : 'Absent' }}</a>
+									{{ presence1.isisPresent ? 'Présent' : 'Absent' }}
 
+									{% set deactiver = 'background-color: #CB3D3F' %}
+									{% set activer = 'background-color: #2F7A4D' %}
+									<a class="btn text-light me-3 ms-3" style="{{ presence1.isisPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence1.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+
+										{{ presence1.isisPresent ? 'Présent' : 'Absent' }}</a>
+
+								{% endif %}
 							{% endfor %}
 						</td>
 						<td>
