@@ -131,7 +131,7 @@ class ChildType extends AbstractType
                     'minlenght' => '2',
                     'maxlenght' => '190',
                 ],
-                'label' => 'Numéro de téléphone',
+                'label' => 'Numéro de téléphone du réprésentant légal de l\'enfant',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],

@@ -25,7 +25,7 @@ class ChildController extends AbstractController
             $childs,
             
             $request->query->getInt('page', 1),
-            3
+           15
         );
         return $this->render('pages/child/index.html.twig', [
             'children' => $childs,

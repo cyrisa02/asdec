@@ -92,22 +92,23 @@
 
 	{# end #}
 	<div class="mt-4 container">
-		<h1>Fiche d'appel:
+		<h3>Fiche d'appel:
 			{{ timecard1.sports.title }}
-			{{ timecard1.sports.id }}
-
 			-
 			{{ timecard1.responsable }}
+			Date:
+			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}
 
-		</h1>
-		<p>Date:
-			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</p>
+
+		</h3>
+
 
 		<table class="table">
 			<thead>
 				<tr>
 					<th>N°</th>
 					<th>Nom</th>
+					<th>Prénom</th>
 					<th>Présent</th>
 					<th>Photo</th>
 				</tr>
@@ -116,16 +117,20 @@
 				{# {% for sport in sports %} #}
 				{% for user in timecard1.sports.users %}
 					<tr>
-						<td>{{ user.id }}</td>
+						<td>{{ user.cardnr }}</td>
 						<td>{{ user.name }}
 
 						</td>
+						<td>{{ user.firstname }}
+
+						</td>
+
 						<td>
 							{% for presence1 in timecard1.presence1s %}
 
 								{% if presence1.users.id == user.id %}
 
-									{{ presence1.isisPresent ? 'Présent' : 'Absent' }}
+									{# {{ presence1.isisPresent ? 'Présent' : 'Absent' }} #}
 
 									{% set deactiver = 'background-color: #CB3D3F' %}
 									{% set activer = 'background-color: #2F7A4D' %}
@@ -138,7 +143,7 @@
 						</td>
 						<td>
 							{% if user.picture is defined %}
-								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 5rem; height: auto; border-radius: 50%;">
+								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 2rem; height: auto; border-radius: 50%;">
 							{% else %}
 								<p>Pas de photo</p>
 							{% endif %}

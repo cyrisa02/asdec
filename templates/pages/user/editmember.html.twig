@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création de commande
+{% block title %}Modification d'un utilisateur
 {% endblock %}
 
 {% block body %}
 	<div class="mt-4 container">
-		<h1>Création de commande</h1>
-		<h2>Sous réserve de stock</h2>
-
-		{{ include('pages/order/_form.html.twig') }}
+		<h1>Modifier son compte</h1>
 
 
+		{{ include('pages/user/_form.html.twig', {'button_label': 'Modifier'}) }}
 		<div class="mt-4">
 			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+
 		</div>
 
 	</div>

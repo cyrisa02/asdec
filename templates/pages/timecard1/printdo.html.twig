@@ -7,14 +7,16 @@
 	<div
 		class="mt-4 container">
 		{# Essai #}
-		<h1>Fiche d'appel:
+		<h2>Fiche d'appel:
 			{{ timecard1.sports.title }}
-			{{ timecard1.sports.id }}
+
 			-
 			{{ timecard1.responsable }}
-		</h1>
-		<p>Date:
-			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</p>
+			Date:
+			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}
+
+		</h2>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -33,7 +35,7 @@
 						<td></td>
 						<td>
 							{% if user.picture is defined %}
-								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 5rem; height: auto; border-radius: 50%;">
+								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 2rem; height: auto; border-radius: 50%;">
 							{% else %}
 								<p>Pas de photo</p>
 							{% endif %}

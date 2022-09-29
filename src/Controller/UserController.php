@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserMemberType;
 use App\Service\MailService;
 use App\Form\UserEditSportType;
 use App\Repository\UserRepository;
@@ -24,7 +25,7 @@ class UserController extends AbstractController
         $users =$paginator->paginate(
             $users,            
             $request->query->getInt('page', 1),
-            3
+            15
         );
         return $this->render('pages/user/index.html.twig', [
             'users' => $users,
@@ -96,7 +97,34 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+/**
+ * This method dysplays the features only for the member
+ */
+     #[Route('/{id}/edition_membre', name: 'app_usermember_edit', methods: ['GET', 'POST'])]
+    public function editmember(Request $request, User $user, UserRepository $userRepository, MailService $mailService): Response
+    {
+        $form = $this->createForm(UserMemberType::class, $user);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->add($user, true);
+            $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+
+            // Email J'ai injecté le MailService $mailService
+            //$mailService->sendEmail(
+            //    $user->getEmail(),                
+            //    'emails/userafterpayment.html.twig',
+            //    ['user'=>$user]
+            //);
+
+            return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('pages/user/editmember.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
 
 
     #[Route('/{id}/edition_sport', name: 'app_user_editsport', methods: ['GET', 'POST'])]

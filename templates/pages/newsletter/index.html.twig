@@ -21,7 +21,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for newsletter in newsletters %}
+			{% for newsletter in newsletters|reverse %}
 				<tr>
 					<td>{{ newsletter.id }}</td>
 					<td>{{ newsletter.name }}</td>

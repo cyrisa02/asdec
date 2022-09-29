@@ -25,7 +25,7 @@ class NewsletterController extends AbstractController
             $newsletter,
             
             $request->query->getInt('page', 1),
-           1
+           4
         );
         return $this->render('pages/newsletter/index.html.twig', [
             'newsletters' => $newsletter,
@@ -53,50 +53,7 @@ class NewsletterController extends AbstractController
         ]);
     }
 
-     #[Route('/send/{id}', name: 'send', methods: ['GET'])]
-    public function send(Newsletter $newsletter, MailerInterface $mailer): Response
-    {
-        $users = $newsletter->getCategories()->getUsers();
-        
-
-        foreach ($users as $user){
-            if($user->isIsValid()){
-                $email = (new TemplatedEmail())
-                ->from('asdecsoissons@gmail.com')
-                ->to ($user->getEmail())                
-                ->subject($newsletter->getName())
-                ->htmlTemplate('emails/newsletter.html.twig')
-                ->context(compact('newsletter','user'));
-                $mailer->send($email);
-            }
-        }
-
-        return $this->render('pages/newsletter/show.html.twig', [
-            'newsletter' => $newsletter,
-        ]);
-    }
-    #[Route('/sendall/{id}', name: 'sendall', methods: ['GET'])]
-    public function sendall(Newsletter $newsletter, MailerInterface $mailer): Response
-    {
-        $users = $newsletter->getCategories()->getUsers();
-        
-
-        foreach ($users as $user){
-            
-                $email = (new TemplatedEmail())
-                ->from('asdecsoissons@gmail.com')
-                ->to ($user->getEmail())                
-                ->subject($newsletter->getName())
-                ->htmlTemplate('emails/newsletter.html.twig')
-                ->context(compact('newsletter','user'));
-                $mailer->send($email);
-            }
-        
-
-        return $this->render('pages/newsletter/show.html.twig', [
-            'newsletter' => $newsletter,
-        ]);
-    }
+     
 
     #[Route('/{id}', name: 'app_newsletter_show', methods: ['GET'])]
     public function show(Newsletter $newsletter): Response
@@ -132,5 +89,49 @@ class NewsletterController extends AbstractController
         }
 
         return $this->redirectToRoute('app_newsletter_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/send/{id}', name: 'send', methods: ['GET'])]
+    public function send(Newsletter $newsletter, MailerInterface $mailer): Response
+    {
+        $users = $newsletter->getCategories()->getUsers();
+        foreach ($users as $user){
+            if($user->isIsValid()){
+                $email = (new TemplatedEmail())
+                ->from('asdecsoissons@gmail.com')
+                //->to ($user->getEmail())   
+                ->to('cyril.gourdon.02@gmail.com')  // fonctionne           
+                ->subject($newsletter->getName())
+                ->htmlTemplate('emails/newsletter.html.twig')
+                ->context(compact('newsletter','user'));
+                $mailer->send($email);
+            }
+        }
+
+        // 
+        return $this->redirectToRoute('app_newsletter_index');
+        
+    }
+    #[Route('/sendall/{id}', name: 'sendall', methods: ['GET'])]
+    public function sendall(Newsletter $newsletter, MailerInterface $mailer): Response
+    {
+        $users = $newsletter->getCategories()->getUsers();
+        
+
+        foreach ($users as $user){
+            
+                $email = (new TemplatedEmail())
+                ->from('asdecsoissons@gmail.com')
+                ->to ($user->getEmail())                
+                ->subject($newsletter->getName())
+                ->htmlTemplate('emails/newsletter.html.twig')
+                ->context(compact('newsletter','user'));
+                $mailer->send($email);
+            }
+        
+
+        return $this->render('pages/newsletter/show.html.twig', [
+            'newsletter' => $newsletter,
+        ]);
     }
 }
