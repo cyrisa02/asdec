@@ -25,7 +25,7 @@ class NewsletterController extends AbstractController
             $newsletter,
             
             $request->query->getInt('page', 1),
-           4
+           50
         );
         return $this->render('pages/newsletter/index.html.twig', [
             'newsletters' => $newsletter,

@@ -105,6 +105,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true, unique: true)]
     private ?int $cardnr = null;
 
+    #[ORM\Column(length: 190, nullable: true)]
+    private ?string $responsablity = null;
+
     
     
     public function __toString()
@@ -514,6 +517,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCardnr(?int $cardnr): self
     {
         $this->cardnr = $cardnr;
+
+        return $this;
+    }
+
+    public function getResponsablity(): ?string
+    {
+        return $this->responsablity;
+    }
+
+    public function setResponsablity(?string $responsablity): self
+    {
+        $this->responsablity = $responsablity;
 
         return $this;
     }

@@ -40,12 +40,17 @@ class NewsletterType extends AbstractType
             
            
             ->add('categories', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
+                'class' => Category::class,                
+                'label' => 'Merci de sélectionner un groupe d\'envoi',
                 'label_attr' => [
-                    'class' => 'form-label  mt-4'
+                    'class' => 'form-label mt-4 '
                 ],
-                
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => true,
+                'attr' => [
+                    'class' => 'd-flex justify-content-between',
+                ],
             ])
         ;
     }

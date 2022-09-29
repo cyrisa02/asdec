@@ -5,7 +5,10 @@
 
 {% block body %}
 	<div class="mt-4 container">
-		<h1>Mon Compte</h1>
+		<h1>Mon Compte
+			{{ user.responsablity}}
+
+		</h1>
 		<div class="container">
 
 			<a href="{{ path('app_usermember_edit', {'id': user.id}) }}" class="btn btn-secondary btn-lg mt-4 ms-4">Modifier vos données ou ajouter votre photo</a>

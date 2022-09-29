@@ -46,6 +46,18 @@ class RegistrationBoardFormType extends AbstractType
                 ],
                 
             ])
+            ->add('responsablity', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlenght' => '2',
+                    'maxlenght' => '190',
+                ],
+                'label' => 'Fonction  dans le Conseil d\'Administration',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                
+            ])
             ->add('address', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',

@@ -33,11 +33,17 @@
 								<p>Votre carte n'est pas valide!</p>
 							{% endif %}
 							<img src="{{ asset('assets/images/logo.ico')}}" alt="logo asdec" style="max-width: 3rem;" class="ms-5">
+
+
 						</div>
 					</div>
 					<div class="card-body bg-light">
 						<h3 class="card-title">{{ user.name}}
 							{{ user.firstname }}
+							-
+							{{ user.responsablity}}
+
+
 						</h3>
 
 						<p class="card-text">
