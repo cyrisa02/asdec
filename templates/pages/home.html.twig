@@ -4,6 +4,18 @@
 {% endblock %}
 
 {% block body %}
+	{% if app.user %}
+		{% if is_granted('ROLE_MEMBER') %}
+			{% if  app.user.picture == false %}
+
+				<div class="container mt-4">
+					<h1>Vous n'avez pas télécharger votre photo d'adhérent. Nous vous rappelons que la photo est obligatoire. Merci de vous rendre sur ce lien
+						<a class="btn btn-danger btn-lg" href="{{ path('app_usermember_edit',{'id':app.user.id})}}" role="button">Cliquez-ici!</a>.</h1>
+					<h2>Merci.</h2>
+				</div>
+			{% endif %}
+		{% endif %}
+	{% endif %}
 
 
 	<div class="container">
