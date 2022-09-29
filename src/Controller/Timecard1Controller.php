@@ -70,7 +70,9 @@ class Timecard1Controller extends AbstractController
             'form' => $form,
         ]);
     }
-
+    /**
+    * This method displays the user with the index 
+    */
     #[Route('/{id}', name: 'app_timecard_showdo', methods: ['GET'])]
     public function showdo(Timecard1 $timecard1, SportRepository $sportRepository, UserRepository $userRepository, Presence1Repository $presence1Repository, Presence1 $presence1): Response
     {
@@ -82,6 +84,7 @@ class Timecard1Controller extends AbstractController
             
         ]);
     }
+     
 
     #[Route('/voir/{id}', name: 'app_timecard1_show', methods: ['GET'])]
     public function show(Timecard1 $timecard1): Response
@@ -90,7 +93,20 @@ class Timecard1Controller extends AbstractController
             'timecard1' => $timecard1,
         ]);
     }
-
+    /**
+     * This method displays the timecard with the cards and filters
+     */
+    #[Route('/carte/{id}', name: 'app_timecard_showdo_card', methods: ['GET'])]
+    public function showdocard(Timecard1 $timecard1, SportRepository $sportRepository, UserRepository $userRepository, Presence1Repository $presence1Repository, Presence1 $presence1): Response
+    {
+        return $this->render('pages/timecard1/showdocard.html.twig', [
+            'timecard1' => $timecard1,
+            'sports' => $sportRepository->findAll(),
+            'users' => $userRepository->findAll(),
+            'presence1s' => $presence1Repository->findAll(),
+            
+        ]);
+    }
     #[Route('/{id}/edition', name: 'app_timecard1_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Timecard1 $timecard1, Timecard1Repository $timecard1Repository): Response
     {

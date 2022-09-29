@@ -9,39 +9,35 @@
 		<a href=" {{ path('app_login')}} ">espace.</a>
 	</p>
 
-</p>
+	<h2>Pour réaliser votre inscription, merci de vous munir de votre certificat médical de moins de trois ans et d'une photo en format jpg, png.</h2>
 
-{{ form_start(registrationForm) }}
-{{ form_row(registrationForm.name) }}
-{{ form_row(registrationForm.firstname) }}
-{{ form_row(registrationForm.sports) }}
+	{{ form_start(registrationForm) }}
+	{{ form_row(registrationForm.name) }}
+	{{ form_row(registrationForm.firstname) }}
+	{{ form_row(registrationForm.sports) }}
 
-{{ form_row(registrationForm.address) }}
-{{ form_row(registrationForm.zipcode) }}
-{{ form_row(registrationForm.city) }}
-{{ form_row(registrationForm.phone) }}
-{{ form_row(registrationForm.job) }}
-{{ form_row(registrationForm.birthdate) }}
-{{ form_row(registrationForm.categories) }}
+	{{ form_row(registrationForm.address) }}
+	{{ form_row(registrationForm.zipcode) }}
+	{{ form_row(registrationForm.city) }}
+	{{ form_row(registrationForm.phone) }}
+	{{ form_row(registrationForm.job) }}
+	{{ form_row(registrationForm.birthdate) }}
+	{{ form_row(registrationForm.categories) }}
 
-{{ form_row(registrationForm.isMedical) }}
+	{{ form_row(registrationForm.isMedical) }}
 
 
-{{ form_row(registrationForm.certificatyear) }}
-{{ form_row(registrationForm.email) }}
-{{ form_row(registrationForm.plainPassword, {
+	{{ form_row(registrationForm.certificatyear) }}
+	{{ form_row(registrationForm.email) }}
+	{{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-{{ form_row(registrationForm.agreeTerms) }}
-{{ form_row(registrationForm.isChild) }}
+	{{ form_row(registrationForm.agreeTerms) }}
+	{{ form_row(registrationForm.isChild) }}
 
 
-<button type="submit" class="btn btn-primary btn-lg mt-4">Enregistrer</button>
-
-<div class="">
-
-	<h1>Doit encore choisir des activités sportives!</h1>
-</div>
+	<button type="submit" class="btn btn-primary btn-lg mt-4">Enregistrer</button>
 
 
-{{ form_end(registrationForm) }}{% endblock %}
+	{{ form_end(registrationForm) }}
+{% endblock %}

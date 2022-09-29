@@ -8,24 +8,21 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class RegistrationMemberFormType extends AbstractType
+class UserMemberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('name', TextType::class, [
+        
+            ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlenght' => '2',
@@ -97,6 +94,7 @@ class RegistrationMemberFormType extends AbstractType
                 ],
                 
             ])
+            
             ->add('job', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -109,28 +107,19 @@ class RegistrationMemberFormType extends AbstractType
                 ],
                 
             ])
-            ->add('birthdate', BirthdayType::class, [
-                'placeholder' => [
-        'year' => 'Année',  'day' => 'Jour','month' => 'Mois'
-    ],
-                
-                'label' => 'Date de naissance',
-                'label_attr' => [
-                    'class' => 'form-label  mt-4'
-                ],
-                'format' => 'dd-MM-yyyy',
-                
-            ])
-            ->add('isValid', CheckboxType::class, [
+            
+
+            ->add('isMedical', CheckboxType::class, [
                 'attr' => [
-                    'class' => 'd-none',
+                    'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
-                'label' => '',
+                'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical récent.',
                 'label_attr' => [
-                    'class' => 'form-check-label'
+                    'class' => 'form-check-label mt-4'
                 ]
             ])
+
             ->add('certificatyear', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -143,64 +132,25 @@ class RegistrationMemberFormType extends AbstractType
                 ],
                 
             ])
-
-            ->add('isMedical', CheckboxType::class, [
-                'attr' => [
-                    'class' => 'form-check-input mt-4 ms-4',
-                ],
-                'required' => false,
-                'label' => 'Je certifie sur l\'honneur avoir en ma possession un certificat médical de non-contre-indication de l\'activité ou des activités de moins de 3 ans lors de l\'inscription.',
-                'label_attr' => [
-                    'class' => 'form-check-label mt-4'
-                ]
-            ])
-            ->add('email', EmailType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'label' => 'E-mail',
-                'label_attr' => [
-                    'class' => 'form-label  mt-4'
-                ],
-            ])
             
-            ->add('agreeTerms', CheckboxType::class, [
-                'attr' => [
-                    'class' => 'form-check-input mt-4 ms-4',
-                ],
+            
+            ->add('my_file', FileType::class, [
                 'mapped' => false,
-                'label' => 'Etes-vous d\'accord avec notre RGPD ?',
+                'required' => false,
+                'label' => 'Télécharger votre photo.',
                 'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez être d\'accord avec nos conditions.',
-                    ]),
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/*',
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Télécharger une image au bon format',
+                    ])
                 ],
-                'label_attr' => [
-                    'class' => 'form-label  mt-4'
-                ],
-            ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password',
-                'class' => 'form-control'                
-            ],
-             'label' => 'Mot de passe',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrez un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Votre mot de passe doit contenir {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-                'label_attr' => [
-                    'class' => 'form-label  mt-4'
-                ],
+
+
             ])
             ->add('sports', EntityType::class, [
                 'class' => Sport::class,                
@@ -215,12 +165,23 @@ class RegistrationMemberFormType extends AbstractType
                     'class' => 'd-flex justify-content-between',
                 ],
             ])
-            ->add('isChild', CheckboxType::class, [
+            
+            ->add('isYoga', CheckboxType::class, [
                 'attr' => [
                     'class' => 'form-check-input mt-4 ms-4',
                 ],
                 'required' => false,
-                'label' => 'Voulez-vous inscrire un ou des enfants à nos activités?',
+                'label' => 'L\'adhérent(e) pratique le Yoga?',
+                'label_attr' => [
+                    'class' => 'form-check-label mt-4'
+                ]
+            ])
+            ->add('isPilate', CheckboxType::class, [
+                'attr' => [
+                    'class' => 'form-check-input mt-4 ms-4',
+                ],
+                'required' => false,
+                'label' => 'L\'adhérent(e) pratique le Pilates?',
                 'label_attr' => [
                     'class' => 'form-check-label mt-4'
                 ]
@@ -230,7 +191,7 @@ class RegistrationMemberFormType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
-                'label' => 'Cocher les cases ci-dessous pour recevoir les informations de l\'asdec et des activités que vous pratiquez (pas de cours, matériel particulier...)',
+                'label' => 'Voulez-vous vous inscrire aux informations de vos activités préférées? (recommandé pour recevoir les dernières informations)',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],

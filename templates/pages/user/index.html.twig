@@ -17,8 +17,8 @@
 					{# <th>Email</th> #}
 					{# <th>Roles</th> #}
 					{# <th>Adresse</th>
-																																																		<th>Code</th>
-																																																		<th>Ville</th> #}
+																																																																											<th>Code</th>
+																																																																											<th>Ville</th> #}
 						<th>
 					Activité(s)
 					</th>
@@ -26,15 +26,15 @@
 						<th>
 					Téléphone
 						{# </th><th>Date de naissance
-																																																					</th> #}
+																																																																																			</th> #}
 					</th>
 					<th>Statut
 					</th>
 					{# <th>Date d'entrée
-																																													</th><th>Profession
-																																													</th><th>Certificat Médical
-																																													</th><th>Date
-																																													</th> #}
+																																																																						</th><th>Profession
+																																																																						</th><th>Certificat Médical
+																																																																						</th><th>Date
+																																																																						</th> #}
 					<th>Déjà ré-inscrit
 					</th>
 					<th>Actions
@@ -43,6 +43,8 @@
 			</thead>
 			<tbody>
 				{% for user in users|reverse %}
+					{# {% for user in users| sortByField('cardnr') %} #}
+
 					<tr>
 						<td>{{ user.cardnr }}
 						</td>
@@ -56,8 +58,8 @@
 
 
 						{# <td>{{ user.address }}</td>
-																																																												<td>{{ user.zipcode }}</td>
-																																																												<td>{{ user.city }}</td> #}
+																																																																																										<td>{{ user.zipcode }}</td>
+																																																																																										<td>{{ user.city }}</td> #}
 							<td>
 								{% for sport in user.sports %}
 								{{ sport.title }}
@@ -70,23 +72,23 @@
 						{{ user.phone }}
 						</td>
 						{# <td>
-																																																{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
-																																																</td> #}
+																																																																														{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
+																																																																														</td> #}
 							<td>
 						{{ user.IsValid ? 'a réglé' : 'Pas encore payé' }}
 						</td>
 						{# <td>
-																																										{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
-																																										</td>
-																																											<td>
-																																										{{ user.job }}
-																																										</td>
-																																											<td>
-																																										{{ user.isMedical ? 'Oui' : 'Non' }}
-																																										</td>
-																																											<td>
-																																										{{ user.certificatyear }}
-																																										</td> #}
+																																																																								{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
+																																																																								</td>
+																																																																									<td>
+																																																																								{{ user.job }}
+																																																																								</td>
+																																																																									<td>
+																																																																								{{ user.isMedical ? 'Oui' : 'Non' }}
+																																																																								</td>
+																																																																									<td>
+																																																																								{{ user.certificatyear }}
+																																																																								</td> #}
 							<td>
 						{{ user.IsRegistered ? 'Oui' : 'Non' }}
 						</td>

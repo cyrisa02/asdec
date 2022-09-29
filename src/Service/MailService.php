@@ -22,9 +22,9 @@ class MailService
         string $htmlTemplate,
         array $context,
         //string $to = 'ivha@cegetel.net',
-        string $to = 'atelier.cabriolet@gmail.com',
-        string $cc = 'cyrisa02.test@gmail.com',
-        string $subject = 'Votre adhésion à l\'ASDEC //  Test Cyril',
+        string $to = 'asdecsoissons@gmail.com',
+        string $cc = 'ivha@cegetel.net',
+        string $subject = 'Votre adhésion à l\'ASDEC - TEST Cyril',
 
     ): void {
         $email = (new TemplatedEmail())

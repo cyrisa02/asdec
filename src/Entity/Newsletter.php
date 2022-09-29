@@ -30,6 +30,12 @@ class Newsletter
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categories = null;
 
+    public function __toString()
+     {
+       return $this->name;
+     }
+     
+
     public function __construct()
     {
         $this->created_at =  new \DateTimeImmutable();

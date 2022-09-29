@@ -13,7 +13,7 @@
 			<tr>
 				<th>N°</th>
 				<th>Titre</th>
-				<th>Message</th>
+				{# <th>Message</th> #}
 				<th>Date</th>
 				<th>Catégorie</th>
 				<th>Nbre inscrits</th>
@@ -21,11 +21,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for newsletter in newsletters %}
+			{% for newsletter in newsletters|reverse %}
 				<tr>
 					<td>{{ newsletter.id }}</td>
 					<td>{{ newsletter.name }}</td>
-					<td>{{ newsletter.content }}</td>
+					{# <td>{{ newsletter.content }}</td> #}
 					<td>{{ newsletter.createdAt ? newsletter.createdAt|date('d-m-Y') : '' }}</td>
 					{# <td>{{ newsletter.isSent ? 'Yes' : 'No' }}</td> #}
 					<td>{{ newsletter.categories.name }}</td>
@@ -48,8 +48,14 @@
 							</svg>
 						</a>
 						{% if newsletter.isSent == false %}
-							<a href="{{ path('send', {id: newsletter.id})}}" class='mt-4 ms-4'>Envoyer</a>
-							<a href="{{ path('sendall', {id: newsletter.id})}}" class='mt-4 ms-4'>Envoyer à tout le monde</a>
+							<a href="{{ path('send', {id: newsletter.id})}}" class='mt-4 ms-4'>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewbox="0 0 16 16">
+									<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+								</svg>
+							</a>
+
+							<a href="{{ path('sendall', {id: newsletter.id})}}" class='mt-4 ms-4'>
+								envoyer à tout le monde</a>
 
 
 						{% endif %}
@@ -58,15 +64,17 @@
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="6">no records found</td>
+					<td colspan="6">Message envoyé</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
 	<a href="{{ path('app_newsletter_new') }}">Créer un nouveau mail</a>
-	<div class="navigation d-flex justify-content-center mt-4">
-		{{ knp_pagination_render(newsletters) }}
-	</div>
+	<a class="ms-4" href="{{ path('home.index') }}">Accueil</a>
+
+	{# <div class="navigation d-flex justify-content-center mt-4">
+					{{ knp_pagination_render(newsletters) }}
+				</div> #}
 
 {% endblock %}
