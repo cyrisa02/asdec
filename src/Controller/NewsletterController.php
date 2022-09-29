@@ -99,17 +99,20 @@ class NewsletterController extends AbstractController
             if($user->isIsValid()){
                 $email = (new TemplatedEmail())
                 ->from('asdecsoissons@gmail.com')
-                //->to ($user->getEmail())   
-                ->to('cyril.gourdon.02@gmail.com')  // fonctionne           
+                ->to ($user->getEmail())   
+                //->to('cyril.gourdon.02@gmail.com')  // fonctionne  attention au isIsValid         
                 ->subject($newsletter->getName())
                 ->htmlTemplate('emails/newsletter.html.twig')
                 ->context(compact('newsletter','user'));
                 $mailer->send($email);
             }
-        }
-
+        
+        $this->addFlash('success', 'Votre message a été envoyé');
         // 
-        return $this->redirectToRoute('app_newsletter_index');
+        return $this->render('pages/newsletter/index.html.twig', [
+            'newsletters' => $newsletter,
+        ]);
+    }
         
     }
     #[Route('/sendall/{id}', name: 'sendall', methods: ['GET'])]
@@ -122,16 +125,17 @@ class NewsletterController extends AbstractController
             
                 $email = (new TemplatedEmail())
                 ->from('asdecsoissons@gmail.com')
-                ->to ($user->getEmail())                
+                ->to ($user->getEmail()) 
+                // ->to('cyril.gourdon.02@gmail.com')               
                 ->subject($newsletter->getName())
                 ->htmlTemplate('emails/newsletter.html.twig')
                 ->context(compact('newsletter','user'));
                 $mailer->send($email);
             }
-        
+        $this->addFlash('success', 'Votre message a été envoyé');
 
-        return $this->render('pages/newsletter/show.html.twig', [
-            'newsletter' => $newsletter,
+        return $this->render('pages/newsletter/index.html.twig', [
+            'newsletters' => $newsletter,
         ]);
     }
 }
