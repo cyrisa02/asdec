@@ -43,7 +43,9 @@
 								</svg>
 							</a>
 
-							<a href="{{ path('app_timecard_showdo', {'id': timecard1.id}) }}" class='mt-4 ms-4'>Faire l'appel</a>
+							<a href="{{ path('app_timecard_showdo', {'id': timecard1.id}) }}" class='mt-4 ms-4'>Faire l'appel en liste</a>
+							<a href="{{ path('app_timecard_showdo_card', {'id': timecard1.id}) }}" class='mt-4 ms-4'>Faire l'appel en carte</a>
+
 
 							<a href="{{ path('app_timecard_printdo', {'id': timecard1.id}) }}" class='mt-4 ms-4'>Imprimer</a>
 
