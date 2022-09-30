@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presence1 index
+{% endblock %}
+
+{% block body %}
+	<h1>Presence1 index</h1>
+
+	<h1>Liste des utilisateurs adultes à réinscrire</h1>
+	<h1>Remise à zéro - ATTENTION ACTION IRREVERSIBLE</h1>
+	{% for presence1 in presence1s %}
+		{# {% if presence1.id == app.user.id %} #}
+
+
+		<form method="post" action="{{ path('app_presence_delete', {'id': presence1.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir mettre la base de donnée à zéro?');">
+
+			<button class="btn btn-danger btn-lg mt-4">Remise à zero de l'ensemble</button>
+		</form>
+
+		{# <a href="{{ path('app_user_delete',{'id':user.id})}}" class="btn btn-danger btn-lg mt-4"></a> #}
+		{# {% endif %} #}
+	{% endfor %}
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>IsPresent</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for presence1 in presence1s %}
+				<tr>
+					<td>{{ presence1.id }}</td>
+					<td>{{ presence1.isPresent ? 'Yes' : 'No' }}</td>
+					<td>
+						<a href="{{ path('app_presence1_show', {'id': presence1.id}) }}">show</a>
+						<a href="{{ path('app_presence1_edit', {'id': presence1.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_presence1_new') }}">Create new</a>
+{% endblock %}

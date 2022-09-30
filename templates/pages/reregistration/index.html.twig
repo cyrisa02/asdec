@@ -6,6 +6,19 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Liste des utilisateurs adultes à réinscrire</h1>
+		<h1>Remise à zéro - ATTENTION ACTION IRREVERSIBLE</h1>
+		{% for user in users %}
+			{% if user.id == app.user.id %}
+
+
+				<form method="post" action="{{ path('app_registration_delete', {'id': user.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir mettre la base de donnée à zéro?');">
+					<button class="btn btn-danger btn-lg mt-4">Remise à zero de l'ensemble</button>
+				</form>
+
+				{# <a href="{{ path('app_user_delete',{'id':user.id})}}" class="btn btn-danger btn-lg mt-4"></a> #}
+			{% endif %}
+
+		{% endfor %}
 
 
 		<table class="table">
@@ -17,8 +30,8 @@
 					{# <th>Email</th> #}
 					{# <th>Roles</th> #}
 					{# <th>Adresse</th>
-																																																							<th>Code</th>
-																																																							<th>Ville</th> #}
+																																																																						<th>Code</th>
+																																																																						<th>Ville</th> #}
 						<th>
 					Activité(s) précédente(s)
 					</th>
@@ -26,15 +39,15 @@
 						<th>
 					Téléphone
 						{# </th><th>Date de naissance
-																																																											</th> #}
+																																																																													</th> #}
 					</th>
 					<th>Statut
 					</th>
 					{# <th>Date d'entrée
-																																																		</th><th>Profession
-																																																		</th><th>Certificat Médical
-																																																		</th><th>Date
-																																																		</th> #}
+																																																																	</th><th>Profession
+																																																																	</th><th>Certificat Médical
+																																																																	</th><th>Date
+																																																																	</th> #}
 					<th>Déjà ré-inscrit
 					</th>
 					<th>Actions
@@ -56,8 +69,8 @@
 
 
 						{# <td>{{ user.address }}</td>
-																																																																		<td>{{ user.zipcode }}</td>
-																																																																		<td>{{ user.city }}</td> #}
+																																																																																				<td>{{ user.zipcode }}</td>
+																																																																																				<td>{{ user.city }}</td> #}
 							<td>
 								{% for sport in user.sports %}
 								{{ sport.title }}
@@ -70,23 +83,23 @@
 						{{ user.phone }}
 						</td>
 						{# <td>
-																																																						{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
-																																																						</td> #}
+																																																																								{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
+																																																																								</td> #}
 							<td>
 						{{ user.IsValid ? 'a réglé' : 'Pas encore payé' }}
 						</td>
 						{# <td>
-																																																{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
-																																																</td>
-																																																	<td>
-																																																{{ user.job }}
-																																																</td>
-																																																	<td>
-																																																{{ user.isMedical ? 'Oui' : 'Non' }}
-																																																</td>
-																																																	<td>
-																																																{{ user.certificatyear }}
-																																																</td> #}
+																																																																		{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
+																																																																		</td>
+																																																																			<td>
+																																																																		{{ user.job }}
+																																																																		</td>
+																																																																			<td>
+																																																																		{{ user.isMedical ? 'Oui' : 'Non' }}
+																																																																		</td>
+																																																																			<td>
+																																																																		{{ user.certificatyear }}
+																																																																		</td> #}
 							<td>
 						{{ user.IsRegistered ? 'Oui' : 'Non' }}
 						</td>

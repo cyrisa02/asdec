@@ -5,19 +5,27 @@
 
 {% block body %}
 	<div class="mt-4 container">
-		<h1>Remise à zéro</h1>
+		<h1>Remise à zéro - ATTENTION ACTION IRREVERSIBLE</h1>
 		{% for user in users %}
-			<a href="{{ path('app_user_delete',{'id':user.id})}}" class="btn btn-secondary btn-lg mt-4">Remise à zero de l'ensemble</a>
+			{% if user.id == app.user.id %}
+
+
+				<form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir mettre la base de donnée à zéro?');">
+					<button class="btn btn-danger btn-lg mt-4">Remise à zero de l'ensemble</button>
+				</form>
+
+				{# <a href="{{ path('app_user_delete',{'id':user.id})}}" class="btn btn-danger btn-lg mt-4"></a> #}
+			{% endif %}
+
 		{% endfor %}
 
 
-		<h2>Recherche les adhérents présents ou absents</h2>
+		<hr>
 
 		{# This section is for the filter isEnable with Partners #}
 		{# cette section permet de créer les boutons filtres #}
-		<section
-			id="filters">
-			{# Je crée des div avec un id pour les appeler plus tard dans le js #}
+			<section
+			id="filters"> {# Je crée des div avec un id pour les appeler plus tard dans le js #}
 			<div id="all" class="btn btn-secondary btn-lg mt-4">Tout</div>
 			<div id="enable" class="btn btn-secondary btn-lg mt-4">Mettre à 0</div>
 			<div id="disable" class="btn btn-secondary btn-lg mt-4">OK</div>
@@ -26,19 +34,18 @@
 		{# Création de la gallerie de cartes #}
 		<div id="gallery ">
 			<div class="container mt-4 ">
-				<div class="row ">
+				<div
+					class="row ">
 					{# Je déclare active comme variable grâce à TWIG #}
 
-					{# {% for sport in timecard1.sports %} #}
-						{% for user in users %}
-
-
+					{% for user in users %}
 						{% set active = "" %}
-							{% if user.isValid  %}
-						{% set active = true %}
+						{% if user.isValid  %}
+							{% set active = true %}
 						{% endif %}
 						{# Mise en place de la classe active avec le CSS et inactive #}
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-3 {{ active == true ? 'active' : '' }} partner"> <article class="card border-primary mb-3 " style="max-width: 20rem; ">
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-3 {{ active == true ? 'active' : '' }} partner">
+							<article class="card border-primary mb-3 " style="max-width: 20rem; ">
 								<div class="card-header bg-secondary">
 									<h3>
 										N° de carte:
@@ -89,89 +96,39 @@
 					<th>N° de carte</th>
 					<th>Prénom</th>
 					<th>Nom</th>
-					{# <th>Email</th> #}
-					{# <th>Roles</th> #}
-					{# <th>Adresse</th>
-																																																																																																																																																																																								<th>Code</th>
-																																																																																																																																																																																								<th>Ville</th> #}
-						<th>
-					Activité(s)
-					</th>
-
-						<th>
-					Téléphone
-						{# </th><th>Date de naissance
-																																																																																																																																																																																																																						</th> #}
-					</th>
-					<th>Statut
-					</th>
-					{# <th>Date d'entrée
-																																																																																																																																																																																			</th><th>Profession
-																																																																																																																																																																																			</th><th>Certificat Médical
-																																																																																																																																																																																			</th><th>Date
-																																																																																																																																																																																			</th> #}
-					<th>Déjà ré-inscrit
-					</th>
-					<th>Actions
-					</th>
+					<th>Activité(s)</th>
+					<th>Téléphone</th>
+					<th>Statut</th>
+					<th>Déjà ré-inscrit</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for user in users|reverse %}
 					<tr>
-						<td>{{ user.id }}
+						<td>{{ user.cardnr }}
 						</td>
 						<td>{{ user.firstname }}
 						</td>
 						<td>{{ user.name }}
 						</td>
-
-						{# <td>{{ user.email }}</td> #}
-						{# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
-
-
-						{# <td>{{ user.address }}</td>
-																																																																																																																																																																																																																													<td>{{ user.zipcode }}</td>
-																																																																																																																																																																																																																													<td>{{ user.city }}</td> #}
-							<td>
-								{% for sport in user.sports %}
+						<td>
+							{% for sport in user.sports %}
 								{{ sport.title }}
-							/
-						{% endfor %}
-
+								/
+							{% endfor %}
 						</td>
-
-							<td>
-						{{ user.phone }}
+						<td>
+							{{ user.phone }}
 						</td>
-						{# <td>
-																																																																																																																																																																																																																	{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
-																																																																																																																																																																																																																	</td> #}
-							<td>
-
-							{% set activer = 'background-color: #CB3D3F' %}
+						<td>{% set activer = 'background-color: #CB3D3F' %}
 							{% set deactiver = 'background-color: #2F7A4D' %}
-
-								<a class="btn text-light me-3 ms-3" style="{{ user.isIsValid ? activer : deactiver }}" href="{{ path('app_paiement_valide', {'id': user.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}"> {{ user.isIsValid ? 'Mettre à 0' : 'OK' }}</a>
-
-
+							<a class="btn text-light me-3 ms-3" style="{{ user.isIsValid ? activer : deactiver }}" href="{{ path('app_paiement_valide', {'id': user.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+								{{ user.isIsValid ? 'Mettre à 0' : 'OK' }}</a>
 						</td>
-						{# <td>
-																																																																																																																																																																																																											{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
-																																																																																																																																																																																																											</td>
-																																																																																																																																																																																																												<td>
-																																																																																																																																																																																																											{{ user.job }}
-																																																																																																																																																																																																											</td>
-																																																																																																																																																																																																												<td>
-																																																																																																																																																																																																											{{ user.isMedical ? 'Oui' : 'Non' }}
-																																																																																																																																																																																																											</td>
-																																																																																																																																																																																																												<td>
-																																																																																																																																																																																																											{{ user.certificatyear }}
-																																																																																																																																																																																																											</td> #}
 						<td>
 							{{ user.IsRegistered ? 'Oui' : 'Non' }}
 						</td>
-
 						<td>
 							<a href="{{ path('app_user_show', {'id': user.id}) }}">
 								Voir</a>
@@ -186,4 +143,4 @@
 			<td colspan="15">Pas d'utilistateur</td>
 		</tr>
 	{% endfor %}
-</tbody></table>{# <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a> #}<div class="navigation d-flex justify-content-center mt-4">{{ knp_pagination_render(users) }}</div></div>{% endblock %}
+</tbody></table>{# <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a> #}</div>{% endblock %}

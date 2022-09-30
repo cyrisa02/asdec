@@ -23,6 +23,35 @@ class Presence1Controller extends AbstractController
         ]);
     }
 
+    #[Route('/mise_a_zero', name: 'app_presence1delete_index', methods: ['GET'])]
+    public function deleteindex(Presence1Repository $presence1Repository): Response
+    {
+        return $this->render('pages/presence1/indexdelete.html.twig', [
+            'presence1s' => $presence1Repository->findAll(),
+        ]);
+    }
+
+    #[Route('/makeItDelete4/{id}', name: 'app_presence_delete', methods: ['GET', 'POST'])]
+    public function makeItDelete( Presence1 $presence1, Presence1Repository $presence1Repository, Request $request): Response
+    {
+
+        $presence1s= $presence1Repository->findAll();
+        
+        foreach ($presence1s as $presence1) {
+       
+        if ($presence1->isIsPresent()) {
+            $presence1->setIsPresent(false);
+        }      
+    }
+    $presence1Repository->add($presence1, true);
+        $this->addFlash(
+            'success',
+            'La Base de Données a été mise à jour avec succès'
+        );             
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);       
+
+    }
     #[Route('/stat', name: 'app_presence1stat_index', methods: ['GET'])]
     public function indexusertimecard(Presence1Repository $presence1Repository, UserRepository $userRepository, Timecard1Repository $timecard1Repository): Response
     {

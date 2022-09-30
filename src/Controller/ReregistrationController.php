@@ -29,11 +29,34 @@ class ReregistrationController extends AbstractController
             $users,
             
             $request->query->getInt('page', 1),
-            3
+            1005
+            
         );
         return $this->render('pages/reregistration/index.html.twig', [
             'users' => $users,
         ]);
+    }
+
+     #[Route('/makeItDelete2/{id}', name: 'app_registration_delete', methods: ['GET', 'POST'])]
+    public function makeItDelete( User $user, UserRepository $userRepository, Request $request): Response
+    {
+
+        $users= $userRepository->findAll();
+        
+        foreach ($users as $user) {
+       
+        if ($user->isIsRegistered()) {
+            $user->setIsRegistered(false);
+        }      
+    }
+    $userRepository->add($user, true);
+        $this->addFlash(
+            'success',
+            'La Base de Données a été mise à jour avec succès'
+        );             
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);       
+
     }
 
     #[Route('/creation', name: 'app_reregistration_new', methods: ['GET', 'POST'])]
