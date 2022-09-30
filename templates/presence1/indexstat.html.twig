@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presence1 index
+{% endblock %}
+
+{% block body %}
+	<h1>Presence1 index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>IsPresent</th>
+				<th>User</th>
+				<th>Timecard</th>
+				<th>Date</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for presence1 in presence1s %}
+				{% if presence1.isPresent == true %}
+					<tr>
+						<td>{{ presence1.id }}</td>
+						<td>{{ presence1.isPresent ? 'Yes' : 'No' }}</td>
+						{% for user in users %}
+							{% if presence1.users.id == user.id  %}
+								<td>{{ user.name }}</td>
+							{% endif %}
+						{% endfor %}
+						{% for timecard1 in timecard1s %}
+							{% if presence1.timecards1.id == timecard1.id %}
+								<td>{{ timecard1.sports.title }}</td>
+							{% endif %}
+						{% endfor %}
+						<td>{{ presence1.createdAt ? presence1.createdAt|date('d-m-Y') : '' }}</td>
+
+						<td>
+							<a href="{{ path('app_presence1_show', {'id': presence1.id}) }}">show</a>
+							<a href="{{ path('app_presence1_edit', {'id': presence1.id}) }}">edit</a>
+						</td>
+
+					</tr>
+				{% endif %}
+
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+
+
+			{% endfor %}
+
+
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_presence1_new') }}">Create new</a>
+{% endblock %}

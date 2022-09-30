@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Presence1;
 use App\Form\Presence1Type;
 use App\Repository\Presence1Repository;
+use App\Repository\Timecard1Repository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +23,15 @@ class Presence1Controller extends AbstractController
         ]);
     }
 
+    #[Route('/stat', name: 'app_presence1stat_index', methods: ['GET'])]
+    public function indexusertimecard(Presence1Repository $presence1Repository, UserRepository $userRepository, Timecard1Repository $timecard1Repository): Response
+    {
+        return $this->render('presence1/indexstat.html.twig', [
+            'presence1s' => $presence1Repository->findAll(),
+            'users' => $userRepository->findAll(),
+            'timecard1s' => $timecard1Repository->findAll(),
+        ]);
+    }
     #[Route('/new', name: 'app_presence1_new', methods: ['GET', 'POST'])]
     public function new(Request $request, Presence1Repository $presence1Repository): Response
     {
