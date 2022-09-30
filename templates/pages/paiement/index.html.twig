@@ -6,6 +6,10 @@
 {% block body %}
 	<div class="mt-4 container">
 		<h1>Remise à zéro</h1>
+		{% for user in users %}
+			<a href="{{ path('app_user_delete',{'id':user.id})}}" class="btn btn-secondary btn-lg mt-4">Remise à zero de l'ensemble</a>
+		{% endfor %}
+
 
 		<h2>Recherche les adhérents présents ou absents</h2>
 
@@ -88,8 +92,8 @@
 					{# <th>Email</th> #}
 					{# <th>Roles</th> #}
 					{# <th>Adresse</th>
-																																																																																																																																																					<th>Code</th>
-																																																																																																																																																					<th>Ville</th> #}
+																																																																																																																																																																																								<th>Code</th>
+																																																																																																																																																																																								<th>Ville</th> #}
 						<th>
 					Activité(s)
 					</th>
@@ -97,15 +101,15 @@
 						<th>
 					Téléphone
 						{# </th><th>Date de naissance
-																																																																																																																																																																												</th> #}
+																																																																																																																																																																																																																						</th> #}
 					</th>
 					<th>Statut
 					</th>
 					{# <th>Date d'entrée
-																																																																																																																																																</th><th>Profession
-																																																																																																																																																</th><th>Certificat Médical
-																																																																																																																																																</th><th>Date
-																																																																																																																																																</th> #}
+																																																																																																																																																																																			</th><th>Profession
+																																																																																																																																																																																			</th><th>Certificat Médical
+																																																																																																																																																																																			</th><th>Date
+																																																																																																																																																																																			</th> #}
 					<th>Déjà ré-inscrit
 					</th>
 					<th>Actions
@@ -127,8 +131,8 @@
 
 
 						{# <td>{{ user.address }}</td>
-																																																																																																																																																																																			<td>{{ user.zipcode }}</td>
-																																																																																																																																																																																			<td>{{ user.city }}</td> #}
+																																																																																																																																																																																																																													<td>{{ user.zipcode }}</td>
+																																																																																																																																																																																																																													<td>{{ user.city }}</td> #}
 							<td>
 								{% for sport in user.sports %}
 								{{ sport.title }}
@@ -141,8 +145,8 @@
 						{{ user.phone }}
 						</td>
 						{# <td>
-																																																																																																																																																																							{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
-																																																																																																																																																																							</td> #}
+																																																																																																																																																																																																																	{{ user.Birthdate ? user.Birthdate|date('d-m-Y') : '' }}
+																																																																																																																																																																																																																	</td> #}
 							<td>
 
 							{% set activer = 'background-color: #CB3D3F' %}
@@ -153,17 +157,17 @@
 
 						</td>
 						{# <td>
-																																																																																																																																																																	{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
-																																																																																																																																																																	</td>
-																																																																																																																																																																		<td>
-																																																																																																																																																																	{{ user.job }}
-																																																																																																																																																																	</td>
-																																																																																																																																																																		<td>
-																																																																																																																																																																	{{ user.isMedical ? 'Oui' : 'Non' }}
-																																																																																																																																																																	</td>
-																																																																																																																																																																		<td>
-																																																																																																																																																																	{{ user.certificatyear }}
-																																																																																																																																																																	</td> #}
+																																																																																																																																																																																																											{{ user.CreatedAt ? user.CreatedAt|date('d-m-Y') : '' }}
+																																																																																																																																																																																																											</td>
+																																																																																																																																																																																																												<td>
+																																																																																																																																																																																																											{{ user.job }}
+																																																																																																																																																																																																											</td>
+																																																																																																																																																																																																												<td>
+																																																																																																																																																																																																											{{ user.isMedical ? 'Oui' : 'Non' }}
+																																																																																																																																																																																																											</td>
+																																																																																																																																																																																																												<td>
+																																																																																																																																																																																																											{{ user.certificatyear }}
+																																																																																																																																																																																																											</td> #}
 						<td>
 							{{ user.IsRegistered ? 'Oui' : 'Non' }}
 						</td>

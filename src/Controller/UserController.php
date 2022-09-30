@@ -171,5 +171,26 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/makeItDelete/{id}', name: 'app_user_delete', methods: ['GET', 'POST'])]
+    public function makeItDelete( int $id, UserRepository $userRepository, Request $request): Response
+    {
+
+        $users= $userRepository->findAll();
+        
+        foreach ($users as $user) {
+        $user = $userRepository->find($id);
+        if ($user->isIsValid()) {
+            $user->setIsValid(false);
+        }      
+    }
+    $userRepository->add($user, true);
+        $this->addFlash(
+            'success',
+            'La Base de Données a été mise à jour avec succès'
+        );             
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);       
+
+    }
     
 }
