@@ -16,6 +16,9 @@ class Presence
     #[ORM\Column(nullable: true)]
     private ?bool $isPresent = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     
 
     
@@ -33,6 +36,18 @@ class Presence
     public function setIsPresent(?bool $isPresent): self
     {
         $this->isPresent = $isPresent;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

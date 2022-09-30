@@ -30,8 +30,6 @@
 					{# <td>{{ newsletter.isSent ? 'Yes' : 'No' }}</td> #}
 					<td>{{ newsletter.categories.name }}</td>
 					<td>{{ newsletter.categories.users|length }}</td>
-
-
 					<td>
 						<a href="{{ path('app_newsletter_show', {'id': newsletter.id}) }}" class=' mt-4'>
 
@@ -74,7 +72,7 @@
 	<a class="ms-4" href="{{ path('home.index') }}">Accueil</a>
 
 	{# <div class="navigation d-flex justify-content-center mt-4">
-					{{ knp_pagination_render(newsletters) }}
-				</div> #}
+						{{ knp_pagination_render(newsletters) }}
+					</div> #}
 
 {% endblock %}
