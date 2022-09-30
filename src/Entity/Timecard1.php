@@ -39,7 +39,11 @@ class Timecard1
         $this->presence1s = new ArrayCollection();          
         
     }
-
+public function __toString()
+     {
+       return $this->responsable;
+     }
+     
 
     public function getId(): ?int
     {

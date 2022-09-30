@@ -31,7 +31,46 @@ class UserController extends AbstractController
             'users' => $users,
         ]);
     }
+    #[Route('/paiement', name: 'app_userpaiement', methods: ['GET'])]
+    public function paiement(UserRepository $userRepository): Response
+    {
+            return $this->render('pages/paiement/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
 
+    #[Route('/makeItValide2/{page}/{id}', name: 'app_paiement_valide', methods: ['GET', 'POST'])]
+    public function makeItValide($page, int $id, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+        if ($user->isIsValid()) {
+            $user->setIsValid(false);
+        } else {
+            $user->setIsValid(true);
+        }
+
+        $userRepository->add($user, true);
+
+        $this->addFlash(
+            'success',
+            'Le statut de l\'utilisateur vient d\'être modifié'
+        );
+
+
+        //  return $this->redirectToRoute('app_timecard_showdo', [
+        //      'page' => $page,           
+        //   ], Response::HTTP_SEE_OTHER);
+
+
+         // Vu qu'il y a un rechargement de la page j'ai besoin de revenir sur ma page qui
+         //a un id différent, donc pbm Some mandatory parameters are missing ("id") to
+         // generate a URL for route "app_timecard_showdo".         
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);
+
+       // return $this->redirect($request->server['HTTP_REFERER']);
+
+    }
     #[Route('/creation', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
@@ -170,6 +209,30 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    #[Route('/makeItDelete/{id}', name: 'app_user_delete', methods: ['GET', 'POST'])]
+    public function makeItDelete( User $user, UserRepository $userRepository, Request $request): Response
+    {
+
+        $users= $userRepository->findAll();
+        
+        foreach ($users as $user) {
+       
+        if ($user->isIsValid()) {
+            $user->setIsValid(false);
+        }      
+    }
+    $userRepository->add($user, true);
+        $this->addFlash(
+            'success',
+            'La Base de Données a été mise à jour avec succès'
+        );             
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);       
+
+    }
+
+    
 
     
 }

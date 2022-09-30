@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/paiement')]
 class ResetPaiementController extends AbstractController
 {
-    #[Route('/', name: 'app_userpaiement_index', methods: ['GET'])]
+    #[Route('/paiement', name: 'app_userpaiement_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
     {
 

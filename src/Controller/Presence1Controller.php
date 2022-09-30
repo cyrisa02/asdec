@@ -18,15 +18,44 @@ class Presence1Controller extends AbstractController
     #[Route('/', name: 'app_presence1_index', methods: ['GET'])]
     public function index(Presence1Repository $presence1Repository): Response
     {
-        return $this->render('presence1/index.html.twig', [
+        return $this->render('pages/presence1/index.html.twig', [
             'presence1s' => $presence1Repository->findAll(),
         ]);
     }
 
+    #[Route('/mise_a_zero', name: 'app_presence1delete_index', methods: ['GET'])]
+    public function deleteindex(Presence1Repository $presence1Repository): Response
+    {
+        return $this->render('pages/presence1/indexdelete.html.twig', [
+            'presence1s' => $presence1Repository->findAll(),
+        ]);
+    }
+
+    #[Route('/makeItDelete4/{id}', name: 'app_presence_delete', methods: ['GET', 'POST'])]
+    public function makeItDelete( Presence1 $presence1, Presence1Repository $presence1Repository, Request $request): Response
+    {
+
+        $presence1s= $presence1Repository->findAll();
+        
+        foreach ($presence1s as $presence1) {
+       
+        if ($presence1->isIsPresent()) {
+            $presence1->setIsPresent(false);
+        }      
+    }
+    $presence1Repository->add($presence1, true);
+        $this->addFlash(
+            'success',
+            'La Base de Données a été mise à jour avec succès'
+        );             
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);       
+
+    }
     #[Route('/stat', name: 'app_presence1stat_index', methods: ['GET'])]
     public function indexusertimecard(Presence1Repository $presence1Repository, UserRepository $userRepository, Timecard1Repository $timecard1Repository): Response
     {
-        return $this->render('presence1/indexstat.html.twig', [
+        return $this->render('pages/presence1/indexstat.html.twig', [
             'presence1s' => $presence1Repository->findAll(),
             'users' => $userRepository->findAll(),
             'timecard1s' => $timecard1Repository->findAll(),
@@ -45,7 +74,7 @@ class Presence1Controller extends AbstractController
             return $this->redirectToRoute('app_presence1_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('presence1/new.html.twig', [
+        return $this->renderForm('pages/presence1/new.html.twig', [
             'presence1' => $presence1,
             'form' => $form,
         ]);
@@ -54,7 +83,7 @@ class Presence1Controller extends AbstractController
     #[Route('/{id}', name: 'app_presence1_show', methods: ['GET'])]
     public function show(Presence1 $presence1): Response
     {
-        return $this->render('presence1/show.html.twig', [
+        return $this->render('pages/presence1/show.html.twig', [
             'presence1' => $presence1,
         ]);
     }
@@ -71,7 +100,7 @@ class Presence1Controller extends AbstractController
             return $this->redirectToRoute('app_presence1_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('presence1/edit.html.twig', [
+        return $this->renderForm('pages/presence1/edit.html.twig', [
             'presence1' => $presence1,
             'form' => $form,
         ]);
