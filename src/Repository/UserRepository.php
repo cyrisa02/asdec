@@ -90,13 +90,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      *This function doesn't work
      */
- public function getOrderCard()
-{
-   return $query = $this->createQueryBuilder('u');  
-    $query->where("SELECT u FROM user u "
-            . "ORDER BY u.cardnr ASC");           
-    
-}
+    public function getOrderCard()
+    {
+    return $query = $this->createQueryBuilder('u')  
+            ->where("SELECT user FROM user u "
+            . "ORDER BY u.cardnr ASC")        
+            ->getQuery()
+         ->getResult()
+        ;
+    }
 
 
 

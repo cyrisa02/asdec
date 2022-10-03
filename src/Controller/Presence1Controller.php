@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Presence1;
+
 use App\Form\Presence1Type;
 use App\Repository\Presence1Repository;
+use App\Repository\SportRepository;
 use App\Repository\Timecard1Repository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,12 +58,13 @@ class Presence1Controller extends AbstractController
      * This function displays the graph for the statistic
      */
     #[Route('/stat', name: 'app_presence1stat_index', methods: ['GET'])]
-    public function indexusertimecard(Presence1Repository $presence1Repository, UserRepository $userRepository, Timecard1Repository $timecard1Repository): Response
+    public function indexusertimecard(Presence1Repository $presence1Repository, UserRepository $userRepository, Timecard1Repository $timecard1Repository, SportRepository $sportRepository): Response
     {
         return $this->render('pages/presence1/indexstat.html.twig', [
             'presence1s' => $presence1Repository->findAll(),
             'users' => $userRepository->findAll(),
             'timecard1s' => $timecard1Repository->findAll(),
+            'sports'=>$sportRepository->findAll(),
         ]);
     }
 
@@ -72,9 +75,9 @@ class Presence1Controller extends AbstractController
     public function indexusertimecard2(Presence1Repository $presence1Repository, UserRepository $userRepository, Timecard1Repository $timecard1Repository): Response
     {
         return $this->render('pages/stat/stat.html.twig', [
-            'presence1s' => $presence1Repository->findAll(),
-            'users' => $userRepository->findAll(),
-            'timecard1s' => $timecard1Repository->findAll(),
+            // 'presence1s' => $presence1Repository->findAll(),
+            // 'users' => $userRepository->findAll(),
+            // 'timecard1s' => $timecard1Repository->findAll(),
         ]);
     }
 
