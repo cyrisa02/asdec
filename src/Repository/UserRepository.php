@@ -73,6 +73,35 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
 
+    /**
+    * @return User[] Returns an index  of User objects sorted by CardNr
+    */
+    public function sortByCard()
+    {
+       return $qb = $this->createQueryBuilder('u')  
+        ->select('u') 
+        ->orderBy('u.cardnr', 'DESC')
+         ->getQuery()
+         ->getResult()
+        ;
+    }
+
+
+    /**
+     *This function doesn't work
+     */
+    public function getOrderCard()
+    {
+    return $query = $this->createQueryBuilder('u')  
+            ->where("SELECT user FROM user u "
+            . "ORDER BY u.cardnr ASC")        
+            ->getQuery()
+         ->getResult()
+        ;
+    }
+
+
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

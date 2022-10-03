@@ -4,7 +4,69 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Presence1 index</h1>
+	<h1>Statistiques</h1>
+	{% set dateinput =  date('2023-06-30') %}
+
+	<h2>Période du: 01/09/{{ "now" | date ('Y') }}
+		au
+		{{ dateinput | date ('d-m-Y') }}
+	</h2>
+
+
+	{# Badminton  lundi #}
+	{% set count = 0 %}
+	{% for presence1 in presence1s %}
+		{% for timecard1 in timecard1s %}
+			{% if presence1.isPresent == true %}
+				{% if presence1.timecards1.id == timecard1.id %}
+					{% if timecard1.sports.title == 'Badminton - Lundi' %}
+						{% if "now" | date('Y-m-d') < dateinput | date('Y-m-d') %}
+							{% set count = count +1 %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+	<p>Il y a
+		{{ count }}
+		présents dans le cours du badminton du lundi. Nombre d'inscrits de la saison:
+		{% for sport in sports %}
+			{% if sport.title == 'Badminton - Lundi' %}
+				{{ sport.users | length }}
+			{% endif %}
+
+
+		{% endfor %}
+	</p>
+
+
+	{# Gymnastique du lundi #}
+	{% set count = 0 %}
+	{% for presence1 in presence1s %}
+		{% for timecard1 in timecard1s %}
+			{% if presence1.isPresent == true %}
+				{% if presence1.timecards1.id == timecard1.id %}
+					{% if timecard1.sports.title == 'Gymnastique - Lundi' %}
+
+						{% if "now" | date('Y-m-d') < dateinput | date('Y-m-d') %}
+							{% set count = count +1 %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+	<p>Il y a
+		{{ count }}
+		présents dans le cours de gymnastique du lundi. Nombre d'inscrits de la saison:
+		{% for sport in sports %}
+			{% if sport.title == 'Gymnastique - Lundi' %}
+				{{ sport.users | length }}
+			{% endif %}
+		{% endfor %}
+	</p>
+
 
 	<table class="table">
 		<thead>
@@ -54,6 +116,5 @@
 
 		</tbody>
 	</table>
-
 	<a href="{{ path('app_presence1_new') }}">Create new</a>
 {% endblock %}
