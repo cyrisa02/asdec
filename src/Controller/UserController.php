@@ -21,6 +21,8 @@ class UserController extends AbstractController
     public function index(UserRepository $userRepository, PaginatorInterface $paginator,
      Request $request): Response
     {
+
+        //$users = $userRepository->sortByCard();
         $users = $userRepository->findAll();
         $users =$paginator->paginate(
             $users,            
@@ -31,6 +33,22 @@ class UserController extends AbstractController
             'users' => $users,
         ]);
     }
+
+
+    /**
+     * This function displays the index of users ordered by CardNr
+     * 
+     */
+    #[Route('/carte', name: 'app_usercard_index', methods: ['GET'])]
+    public function indexsortedbyCardNr(UserRepository $userRepository): Response
+    {       
+        
+        return $this->render('pages/user/indexcard.html.twig', [
+            'users' => $userRepository->sortByCard(),
+        ]);
+    }
+   
+
     #[Route('/paiement', name: 'app_userpaiement', methods: ['GET'])]
     public function paiement(UserRepository $userRepository): Response
     {
