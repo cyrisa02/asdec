@@ -42,8 +42,7 @@ class GoodiesController extends AbstractController
                 $filename);
                 // Comment sauveagrder en BD, champ picture
             $goody->setPicture($filename);
-            //$goodiesRepository->add($goody, true);
-
+            
             $goodiesRepository->add($goody, true);
             $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
 
