@@ -13,10 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/utilisateur')]
 class UserController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, PaginatorInterface $paginator,
      Request $request): Response
@@ -39,6 +41,7 @@ class UserController extends AbstractController
      * This function displays the index of users ordered by CardNr
      * 
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/carte', name: 'app_usercard_index', methods: ['GET'])]
     public function indexsortedbyCardNr(UserRepository $userRepository): Response
     {       
@@ -49,6 +52,7 @@ class UserController extends AbstractController
     }
    
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/paiement', name: 'app_userpaiement', methods: ['GET'])]
     public function paiement(UserRepository $userRepository): Response
     {
@@ -89,6 +93,7 @@ class UserController extends AbstractController
        // return $this->redirect($request->server['HTTP_REFERER']);
 
     }
+
     #[Route('/creation', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
@@ -121,6 +126,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {

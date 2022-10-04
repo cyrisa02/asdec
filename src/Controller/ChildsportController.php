@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/activites_enfant')]
 class ChildsportController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_childsport_index', methods: ['GET'])]
     public function index(ChildsportRepository $childsportRepository): Response
     {
@@ -21,6 +23,7 @@ class ChildsportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/creation', name: 'app_childsport_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ChildsportRepository $childsportRepository): Response
     {
@@ -41,6 +44,7 @@ class ChildsportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_childsport_show', methods: ['GET'])]
     public function show(Childsport $childsport): Response
     {
@@ -49,6 +53,7 @@ class ChildsportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edition', name: 'app_childsport_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Childsport $childsport, ChildsportRepository $childsportRepository): Response
     {
@@ -68,6 +73,7 @@ class ChildsportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_childsport_delete', methods: ['POST'])]
     public function delete(Request $request, Childsport $childsport, ChildsportRepository $childsportRepository): Response
     {

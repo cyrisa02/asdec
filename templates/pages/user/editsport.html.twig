@@ -4,17 +4,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
-		<h1>Modifier son compte</h1>
-		<h1>Manque les activités validées</h1>
+	{% if app.user %}
+		<div class="mt-4 container">
+			<h1>Modifier son compte</h1>
+			<h1>Manque les activités validées</h1>
 
 
-		{{ include('pages/user/_form.html.twig', {'button_label': 'Modifier'}) }}
-		<div class="mt-4">
-			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+			{{ include('pages/user/_form.html.twig', {'button_label': 'Modifier'}) }}
+			<div class="mt-4">
+				<a href="{{ path('home.index') }}">Retour à l'accueil</a>
 
-		</div>
+			</div>
 
-		{{ include('pages/user/_delete_form.html.twig') }}</div>
+			{{ include('pages/user/_delete_form.html.twig') }}</div>
+	{% endif %}
 
 {% endblock %}

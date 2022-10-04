@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/objet_publicitaire')]
 class GoodiesController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_goodies_index', methods: ['GET'])]
     public function index(GoodiesRepository $goodiesRepository): Response
     {
@@ -21,6 +23,7 @@ class GoodiesController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/création', name: 'app_goodies_new', methods: ['GET', 'POST'])]
     public function new(Request $request, GoodiesRepository $goodiesRepository): Response
     {
@@ -53,6 +56,7 @@ class GoodiesController extends AbstractController
         ]);
     }
 
+    
     #[Route('/{id}', name: 'app_goodies_show', methods: ['GET'])]
     public function show(Goodies $goody): Response
     {
@@ -61,6 +65,7 @@ class GoodiesController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edition', name: 'app_goodies_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Goodies $goody, GoodiesRepository $goodiesRepository): Response
     {
@@ -80,6 +85,7 @@ class GoodiesController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_goodies_delete', methods: ['POST'])]
     public function delete(Request $request, Goodies $goody, GoodiesRepository $goodiesRepository): Response
     {

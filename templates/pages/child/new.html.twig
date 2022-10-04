@@ -4,16 +4,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
-		<h1>Création d'un profil enfant</h1>
+	{% if app.user %}
+		<div class="mt-4 container">
+			<h1>Création d'un profil enfant</h1>
 
 
-		{{ include('pages/child/_form.html.twig') }}
-		<div class="mt-4">
-			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+			{{ include('pages/child/_form.html.twig') }}
+			<div class="mt-4">
+				<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+			</div>
+
+
 		</div>
+	{% endif %}
 
-
-	</div>
 
 {% endblock %}

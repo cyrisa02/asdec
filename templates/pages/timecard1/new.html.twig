@@ -4,16 +4,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
-		<h1>Création d'une fiche d'appel</h1>
+	{% if app.user %}
+
+		<div class="mt-4 container">
+			<h1>Création d'une fiche d'appel</h1>
 
 
-		{{ include('pages/timecard1/_form.html.twig') }}
-		<div class="mt-4">
-			<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+			{{ include('pages/timecard1/_form.html.twig') }}
+			<div class="mt-4">
+				<a href="{{ path('home.index') }}">Retour à l'accueil</a>
+			</div>
+
+
 		</div>
-
-
-	</div>
+	{% endif %}
 
 {% endblock %}

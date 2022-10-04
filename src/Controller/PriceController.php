@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/tarif')]
 class PriceController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_price_index', methods: ['GET'])]
     public function index(PriceRepository $priceRepository): Response
     {
@@ -21,6 +23,7 @@ class PriceController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/creation', name: 'app_price_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PriceRepository $priceRepository): Response
     {
@@ -41,6 +44,7 @@ class PriceController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_price_show', methods: ['GET'])]
     public function show(Price $price): Response
     {
@@ -49,6 +53,7 @@ class PriceController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edition', name: 'app_price_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Price $price, PriceRepository $priceRepository): Response
     {
@@ -68,6 +73,7 @@ class PriceController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_price_delete', methods: ['POST'])]
     public function delete(Request $request, Price $price, PriceRepository $priceRepository): Response
     {

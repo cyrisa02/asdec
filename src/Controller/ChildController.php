@@ -12,10 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/enfant')]
 class ChildController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_child_index', methods: ['GET'])]
     public function index(ChildRepository $childRepository, PaginatorInterface $paginator, Request $request, ChildsportRepository $childsportRepository): Response
     {
@@ -99,6 +101,7 @@ class ChildController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_child_delete', methods: ['POST'])]
     public function delete(Request $request, Child $child, ChildRepository $childRepository): Response
     {

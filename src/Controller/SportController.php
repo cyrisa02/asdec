@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/sport')]
 class SportController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/', name: 'app_sport_index', methods: ['GET'])]
     public function index(SportRepository $sportRepository): Response
     {
@@ -21,6 +23,7 @@ class SportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/creation', name: 'app_sport_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SportRepository $sportRepository): Response
     {
@@ -42,6 +45,7 @@ class SportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_sport_show', methods: ['GET'])]
     public function show(Sport $sport): Response
     {
@@ -50,6 +54,7 @@ class SportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_sport_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sport $sport, SportRepository $sportRepository): Response
     {
@@ -70,6 +75,7 @@ class SportController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_sport_delete', methods: ['POST'])]
     public function delete(Request $request, Sport $sport, SportRepository $sportRepository): Response
     {

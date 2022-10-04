@@ -4,75 +4,78 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des Newsletters
-	</h1>
+	{% if app.user %}
+
+		<h1>Liste des Newsletters
+		</h1>
 
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>N°</th>
-				<th>Titre</th>
-				{# <th>Message</th> #}
-				<th>Date</th>
-				<th>Catégorie</th>
-				<th>Nbre inscrits</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for newsletter in newsletters|reverse %}
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ newsletter.id }}</td>
-					<td>{{ newsletter.name }}</td>
-					{# <td>{{ newsletter.content }}</td> #}
-					<td>{{ newsletter.createdAt ? newsletter.createdAt|date('d-m-Y') : '' }}</td>
-					{# <td>{{ newsletter.isSent ? 'Yes' : 'No' }}</td> #}
-					<td>{{ newsletter.categories.name }}</td>
-					<td>{{ newsletter.categories.users|length }}</td>
-					<td>
-						<a href="{{ path('app_newsletter_show', {'id': newsletter.id}) }}" class=' mt-4'>
+					<th>N°</th>
+					<th>Titre</th>
+					{# <th>Message</th> #}
+					<th>Date</th>
+					<th>Catégorie</th>
+					<th>Nbre inscrits</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for newsletter in newsletters|reverse %}
+					<tr>
+						<td>{{ newsletter.id }}</td>
+						<td>{{ newsletter.name }}</td>
+						{# <td>{{ newsletter.content }}</td> #}
+						<td>{{ newsletter.createdAt ? newsletter.createdAt|date('d-m-Y') : '' }}</td>
+						{# <td>{{ newsletter.isSent ? 'Yes' : 'No' }}</td> #}
+						<td>{{ newsletter.categories.name }}</td>
+						<td>{{ newsletter.categories.users|length }}</td>
+						<td>
+							<a href="{{ path('app_newsletter_show', {'id': newsletter.id}) }}" class=' mt-4'>
 
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewbox="0 0 16 16">
-								<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-								<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-							</svg>
-						</a>
-
-						<a href="{{ path('app_newsletter_edit', {'id': newsletter.id}) }}" class='mt-4 ms-4'>
-
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewbox="0 0 16 16">
-								<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-							</svg>
-						</a>
-						{% if newsletter.isSent == false %}
-							<a href="{{ path('send', {id: newsletter.id})}}" class='mt-4 ms-4'>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewbox="0 0 16 16">
-									<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewbox="0 0 16 16">
+									<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+									<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
 								</svg>
 							</a>
 
-							<a href="{{ path('sendall', {id: newsletter.id})}}" class='mt-4 ms-4'>
-								envoyer à tout le monde</a>
+							<a href="{{ path('app_newsletter_edit', {'id': newsletter.id}) }}" class='mt-4 ms-4'>
+
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewbox="0 0 16 16">
+									<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+								</svg>
+							</a>
+							{% if newsletter.isSent == false %}
+								<a href="{{ path('send', {id: newsletter.id})}}" class='mt-4 ms-4'>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewbox="0 0 16 16">
+										<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+									</svg>
+								</a>
+
+								<a href="{{ path('sendall', {id: newsletter.id})}}" class='mt-4 ms-4'>
+									envoyer à tout le monde</a>
 
 
-						{% endif %}
+							{% endif %}
 
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="6">Message envoyé</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">Message envoyé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-	<a href="{{ path('app_newsletter_new') }}">Créer un nouveau mail</a>
-	<a class="ms-4" href="{{ path('home.index') }}">Accueil</a>
+		<a href="{{ path('app_newsletter_new') }}">Créer un nouveau mail</a>
+		<a class="ms-4" href="{{ path('home.index') }}">Accueil</a>
 
-	{# <div class="navigation d-flex justify-content-center mt-4">
-						{{ knp_pagination_render(newsletters) }}
-					</div> #}
+		{# <div class="navigation d-flex justify-content-center mt-4">
+								{{ knp_pagination_render(newsletters) }}
+							</div> #}
+	{% endif %}
 
 {% endblock %}
