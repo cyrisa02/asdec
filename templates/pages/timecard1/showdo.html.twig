@@ -4,87 +4,90 @@
 {% endblock %}
 
 {% block body %}
-	<p>Date:
-		{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}
-		-
-		{{ timecard1.sports.title }}
-		-
-		{{ timecard1.responsable }}</p>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>N°</th>
-				<th>Nom</th>
-				<th>Prénom</th>
-				<th>Présent</th>
-				<th>Photo</th>
-				<th>Modifier</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			{# {% for sport in sports %} #}
-			{% for user in timecard1.sports.users %}
+	{% if app.user %}
+		<p>Date:
+			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}
+			-
+			{{ timecard1.sports.title }}
+			-
+			{{ timecard1.responsable }}</p>
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ user.cardnr }}</td>
-					<td>{{ user.name }}
+					<th>N°</th>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Présent</th>
+					<th>Photo</th>
+					<th>Modifier</th>
 
-					</td>
-					<td>{{ user.firstname }}
+				</tr>
+			</thead>
+			<tbody>
+				{# {% for sport in sports %} #}
+				{% for user in timecard1.sports.users %}
+					<tr>
+						<td>{{ user.cardnr }}</td>
+						<td>{{ user.name }}
 
-					</td>
+						</td>
+						<td>{{ user.firstname }}
 
-					<td>
-						{% for presence1 in timecard1.presence1s %}
+						</td>
 
-							{% if presence1.users.id == user.id %}
+						<td>
+							{% for presence1 in timecard1.presence1s %}
 
-								{# {{ presence1.isisPresent ? 'Présent' : 'Absent' }} #}
+								{% if presence1.users.id == user.id %}
 
-								{% set deactiver = 'background-color: #CB3D3F' %}
-								{% set activer = 'background-color: #2F7A4D' %}
-								<a class="btn text-light me-3 ms-3" style="{{ presence1.isisPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence1.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
+									{# {{ presence1.isisPresent ? 'Présent' : 'Absent' }} #}
 
-									{{ presence1.isisPresent ? 'Présent' : 'Absent' }}</a>
+									{% set deactiver = 'background-color: #CB3D3F' %}
+									{% set activer = 'background-color: #2F7A4D' %}
+									<a class="btn text-light me-3 ms-3" style="{{ presence1.isisPresent ? activer : deactiver }}" href="{{ path('app_salle_valide', {'id': presence1.id, 'page': app.request.get('page') ? app.request.get('page') : 1}) }}">
 
+										{{ presence1.isisPresent ? 'Présent' : 'Absent' }}</a>
+
+								{% endif %}
+							{% endfor %}
+						</td>
+
+
+						<td>
+							{% if user.picture is defined %}
+								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 2rem; height: auto; border-radius: 50%;">
+							{% else %}
+								<p>Pas de photo</p>
 							{% endif %}
-						{% endfor %}
-					</td>
+						</td>
+						<td>
+							<a href="{{ path('app_user_editsport', {'id': user.id}) }}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
+									<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+								</svg>
+							</a>
+						</td>
 
+					</tr>
+					{# {% endfor %} #}
+				{% else %}
+					<tr>
+						<td colspan="15">Pas d'utilistateur</td>
+					</tr>
 
-					<td>
-						{% if user.picture is defined %}
-							<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 2rem; height: auto; border-radius: 50%;">
-						{% else %}
-							<p>Pas de photo</p>
-						{% endif %}
-					</td>
-					<td>
-						<a href="{{ path('app_user_editsport', {'id': user.id}) }}">
-							<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
-								<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-							</svg>
-						</a>
-					</td>
+				{% endfor %}
 
-				</tr>
-				{# {% endfor %} #}
-			{% else %}
-				<tr>
-					<td colspan="15">Pas d'utilistateur</td>
-				</tr>
+			</tbody>
 
-			{% endfor %}
+		</table>
+		<div class="container mt-4">
+			<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
 
-		</tbody>
+			<a class="ms-4" href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">Modifier</a>
 
-	</table>
-	<div class="container mt-4">
-		<a href="{{ path('app_timecard1_index') }}">Retour à la liste</a>
+		</div>
+		{# {{ include('pages/timecard1/_delete_form.html.twig') }} #}
+	{% endif %}
 
-		<a class="ms-4" href="{{ path('app_timecard1_edit', {'id': timecard1.id}) }}">Modifier</a>
-
-	</div>
-	{# {{ include('pages/timecard1/_delete_form.html.twig') }} #}
 
 {% endblock %}

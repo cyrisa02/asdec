@@ -5,7 +5,9 @@
 
 {% block body %}
 	<h1>Statistiques</h1>
-	{% set dateinput =  date('2023-06-30') %}
+
+
+	{% set dateinput =  date('2023-08-30') %}
 
 	<h2>Période du: 01/09/{{ "now" | date ('Y') }}
 		au
@@ -35,9 +37,25 @@
 			{% if sport.title == 'Badminton - Lundi' %}
 				{{ sport.users | length }}
 			{% endif %}
-
-
 		{% endfor %}
+		{#Nombre de séances:
+				
+									{% set count2 = 0 %}
+							
+									{% for presence1 in presence1s %}
+										{% for timecard1 in timecard1s %}
+											{% if presence1.timecards1.id == timecard1.id %}
+												{% if timecard1.sports.title == 'Badminton - Lundi' %}
+													{% if "now" | date('Y-m-d') < dateinput | date('Y-m-d') %}
+														{% set count2 = count2 +1 %}
+														{{ presence1.timecards1.id| length }}
+													{% endif %}
+												{% endif %}
+											{% endif %}
+										{% endfor %}
+									{% endfor %}
+									{{ count2 }} #}
+
 	</p>
 
 
@@ -57,64 +75,64 @@
 			{% endif %}
 		{% endfor %}
 	{% endfor %}
-	<p>Il y a
-		{{ count }}
-		présents dans le cours de gymnastique du lundi. Nombre d'inscrits de la saison:
-		{% for sport in sports %}
-			{% if sport.title == 'Gymnastique - Lundi' %}
-				{{ sport.users | length }}
-			{% endif %}
-		{% endfor %}
-	</p>
+</p>
+<p>Il y a
+	{{ count }}
+	présents dans le cours de gymnastique du lundi. Nombre d'inscrits de la saison:
+	{% for sport in sports %}
+		{% if sport.title == 'Gymnastique - Lundi' %}
+			{{ sport.users | length }}
+		{% endif %}
+	{% endfor %}
+</p>
 
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>IsPresent</th>
-				<th>User</th>
-				<th>Timecard</th>
-				<th>Date</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for presence1 in presence1s %}
-				{% if presence1.isPresent == true %}
-					<tr>
-						<td>{{ presence1.id }}</td>
-						<td>{{ presence1.isPresent ? 'Yes' : 'No' }}</td>
-						{% for user in users %}
-							{% if presence1.users.id == user.id  %}
-								<td>{{ user.name }}</td>
-							{% endif %}
-						{% endfor %}
-						{% for timecard1 in timecard1s %}
-							{% if presence1.timecards1.id == timecard1.id %}
-								<td>{{ timecard1.sports.title }}</td>
-							{% endif %}
-						{% endfor %}
-						<td>{{ presence1.createdAt ? presence1.createdAt|date('d-m-Y') : '' }}</td>
-
-						<td>
-							<a href="{{ path('app_presence1_show', {'id': presence1.id}) }}">show</a>
-							<a href="{{ path('app_presence1_edit', {'id': presence1.id}) }}">edit</a>
-						</td>
-
-					</tr>
-				{% endif %}
-
-			{% else %}
+<table class="table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>IsPresent</th>
+			<th>User</th>
+			<th>Timecard</th>
+			<th>Date</th>
+			<th>actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for presence1 in presence1s %}
+			{% if presence1.isPresent == true %}
 				<tr>
-					<td colspan="3">no records found</td>
+					<td>{{ presence1.id }}</td>
+					<td>{{ presence1.isPresent ? 'Yes' : 'No' }}</td>
+					{% for user in users %}
+						{% if presence1.users.id == user.id  %}
+							<td>{{ user.name }}</td>
+						{% endif %}
+					{% endfor %}
+					{% for timecard1 in timecard1s %}
+						{% if presence1.timecards1.id == timecard1.id %}
+							<td>{{ timecard1.sports.title }}</td>
+						{% endif %}
+					{% endfor %}
+					<td>{{ presence1.createdAt ? presence1.createdAt|date('d-m-Y') : '' }}</td>
+
+					<td>
+						<a href="{{ path('app_presence1_show', {'id': presence1.id}) }}">show</a>
+						<a href="{{ path('app_presence1_edit', {'id': presence1.id}) }}">edit</a>
+					</td>
+
 				</tr>
+			{% endif %}
+
+		{% else %}
+			<tr>
+				<td colspan="3">no records found</td>
+			</tr>
 
 
-			{% endfor %}
+		{% endfor %}
 
 
-		</tbody>
-	</table>
-	<a href="{{ path('app_presence1_new') }}">Create new</a>
-{% endblock %}
+	</tbody>
+</table>
+<a href="{{ path('app_presence1_new') }}">Create new</a>{% endblock %}

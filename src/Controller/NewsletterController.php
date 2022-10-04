@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 #[Route('/newsletter')]
 class NewsletterController extends AbstractController
 {
+    
     #[Route('/', name: 'app_newsletter_index', methods: ['GET'])]
     public function index(NewsletterRepository $newsletterRepository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -32,6 +34,7 @@ class NewsletterController extends AbstractController
         ]);
     }
 
+   
     #[Route('/creation', name: 'app_newsletter_new', methods: ['GET', 'POST'])]
     public function new(Request $request, NewsletterRepository $newsletterRepository): Response
     {
@@ -55,6 +58,7 @@ class NewsletterController extends AbstractController
 
      
 
+   
     #[Route('/{id}', name: 'app_newsletter_show', methods: ['GET'])]
     public function show(Newsletter $newsletter): Response
     {
@@ -63,6 +67,7 @@ class NewsletterController extends AbstractController
         ]);
     }
 
+   
     #[Route('/{id}/edition', name: 'app_newsletter_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Newsletter $newsletter, NewsletterRepository $newsletterRepository): Response
     {
@@ -81,6 +86,7 @@ class NewsletterController extends AbstractController
         ]);
     }
 
+  
     #[Route('/{id}', name: 'app_newsletter_delete', methods: ['POST'])]
     public function delete(Request $request, Newsletter $newsletter, NewsletterRepository $newsletterRepository): Response
     {
@@ -90,6 +96,7 @@ class NewsletterController extends AbstractController
 
         return $this->redirectToRoute('app_newsletter_index', [], Response::HTTP_SEE_OTHER);
     }
+
 
     #[Route('/send/{id}', name: 'send', methods: ['GET'])]
     public function send(Newsletter $newsletter, MailerInterface $mailer): Response

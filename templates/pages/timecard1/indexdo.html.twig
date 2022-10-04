@@ -4,51 +4,53 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
-		<h1>Liste des fiches d'appel</h1>
-		<h2>TODO relier les activités et les adhérents</h2>
+	{% if app.user %}
+		<div class="mt-4 container">
+			<h1>Liste des fiches d'appel</h1>
+			<h2>TODO relier les activités et les adhérents</h2>
 
-		{# <td>{{ timecard.responsable.sport }}</td> #}
+			{# <td>{{ timecard.responsable.sport }}</td> #}
 
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>N°</th>
-					<th>Responsable</th>
-					<th>Activité</th>
-					<th>Date</th>
-					<th>actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for timecard1 in timecard1s|reverse %}
+			<table class="table">
+				<thead>
 					<tr>
-						<td>{{ timecard1.id }}</td>
-						<td>{{ timecard1.responsable }}</td>
-						<td>
-							{% for sport in timecard1.sports %}
-								{{ sport.title }}
-							{% endfor %}
-						</td>
-
-
-						<td>{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</td>
-						<td>
-							<a href="{{ path('app_timecard1_show', {'id': timecard.id}) }}">Voir</a>
-							<a href="{{ path('app_timecard1_edit', {'id': timecard.id}) }}">Modifier</a>
-							<a href="{{ path('app_timecarddo_index', {'id': timecard.id}) }}">Faire l'appel</a>
-						</td>
+						<th>N°</th>
+						<th>Responsable</th>
+						<th>Activité</th>
+						<th>Date</th>
+						<th>actions</th>
 					</tr>
-				{% else %}
-					<tr>
-						<td colspan="4">Pas de fiche</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for timecard1 in timecard1s|reverse %}
+						<tr>
+							<td>{{ timecard1.id }}</td>
+							<td>{{ timecard1.responsable }}</td>
+							<td>
+								{% for sport in timecard1.sports %}
+									{{ sport.title }}
+								{% endfor %}
+							</td>
 
-		<a href="{{ path('app_timecard1_new') }}">Créer une nouvelle fiche</a>
-	</div>
+
+							<td>{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}</td>
+							<td>
+								<a href="{{ path('app_timecard1_show', {'id': timecard.id}) }}">Voir</a>
+								<a href="{{ path('app_timecard1_edit', {'id': timecard.id}) }}">Modifier</a>
+								<a href="{{ path('app_timecarddo_index', {'id': timecard.id}) }}">Faire l'appel</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">Pas de fiche</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('app_timecard1_new') }}">Créer une nouvelle fiche</a>
+		</div>
+	{% endif %}
 
 {% endblock %}

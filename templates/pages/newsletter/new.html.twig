@@ -4,16 +4,19 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mt-4 container">
-		<h1>Création de la Newsletter</h1>
-		<h2>Ecrivez votre newsletter</h2>
-
-		{{ include('pages/newsletter/_form.html.twig') }}
+	{% if app.user %}
 		<div class="mt-4 container">
-			<a href="{{ path('app_newsletter_index') }}">Retour à la liste</a>
+			<h1>Création de la Newsletter</h1>
+			<h2>Ecrivez votre newsletter</h2>
+
+			{{ include('pages/newsletter/_form.html.twig') }}
+			<div class="mt-4 container">
+				<a href="{{ path('app_newsletter_index') }}">Retour à la liste</a>
+			</div>
+
+
 		</div>
+	{% endif %}
 
-
-	</div>
 
 {% endblock %}

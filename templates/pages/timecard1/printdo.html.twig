@@ -4,57 +4,59 @@
 {% endblock %}
 
 {% block body %}
-	<div
-		class="mt-4 container">
-		{# Essai #}
-		<p>Fiche d'appel:
-			{{ timecard1.sports.title }}
+	{% if app.user %}
+		<div
+			class="mt-4 container">
+			{# Essai #}
+			<p>Fiche d'appel:
+				{{ timecard1.sports.title }}
 
-			-
-			{{ timecard1.responsable }}
-			Date:
-			{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}
+				-
+				{{ timecard1.responsable }}
+				Date:
+				{{ timecard1.CreatedAt ? timecard1.CreatedAt|date('d-m-Y') : '' }}
 
-		</p>
+			</p>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>N°</th>
-					<th>Nom</th>
-					<th>Présent</th>
-					<th>Photo</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for user in timecard1.sports.users %}
+			<table class="table">
+				<thead>
 					<tr>
-						<td>{{ user.id }}</td>
-						<td>{{ user.name }}
-						</td>
-						<td></td>
-						<td>
-							{% if user.picture is defined %}
-								<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 2rem; height: auto; border-radius: 50%;">
-							{% else %}
-								<p>Pas de photo</p>
-							{% endif %}
-						</td>
+						<th>N°</th>
+						<th>Nom</th>
+						<th>Présent</th>
+						<th>Photo</th>
 					</tr>
-				{% else %}
-					<tr>
-						<td colspan="15">Pas d'utilistateur</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-			{# Fin essai #}
-		</table>
-		<div class="mt-4">
-			<form>
-				<input id="impression" name="impression" type="button" onclick="imprimer_page()" value="Imprimer cette page"/>
-			</form>
+				</thead>
+				<tbody>
+					{% for user in timecard1.sports.users %}
+						<tr>
+							<td>{{ user.id }}</td>
+							<td>{{ user.name }}
+							</td>
+							<td></td>
+							<td>
+								{% if user.picture is defined %}
+									<img src="{{ asset('uploads/') }}{{ user.picture }}" alt="{{ user.name }}" style="max-width: 2rem; height: auto; border-radius: 50%;">
+								{% else %}
+									<p>Pas de photo</p>
+								{% endif %}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="15">Pas d'utilistateur</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+				{# Fin essai #}
+			</table>
+			<div class="mt-4">
+				<form>
+					<input id="impression" name="impression" type="button" onclick="imprimer_page()" value="Imprimer cette page"/>
+				</form>
+			</div>
 		</div>
-	</div>
+	{% endif %}
 
 	{% block javascripts %}
 		<script type="text/javascript">
