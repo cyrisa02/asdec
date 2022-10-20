@@ -181,8 +181,9 @@ class UserType extends AbstractType
                     'class' => 'form-check-label mt-4'
                 ]
             ])
-            ->add('image', FileType::class, [
+            ->add('picture', FileType::class, [
                 'mapped' => false,
+                'label' => 'Merci de mettre une photo',
                 
             ])
             ->add('sports', EntityType::class, [

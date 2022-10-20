@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -89,6 +90,14 @@ class RegistrationBoardFormType extends AbstractType
                     'maxlenght' => '190',
                 ],
                 'label' => 'Ville',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                
+            ])
+             ->add('picture', FileType::class, [
+                'mapped' => false,
+                'label' => 'Merci de mettre une photo',
                 'label_attr' => [
                     'class' => 'form-label  mt-4'
                 ],

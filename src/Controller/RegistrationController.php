@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\MailService;
+use App\Service\FileUploader;
+use App\Repository\UserRepository;
 use App\Security\UserAuthenticator;
 use App\Form\RegistrationBoardFormType;
 use App\Form\RegistrationMemberFormType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +26,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription_adherent', name: 'app_register_member')]
-    public function registermember(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager,MailService $mailService): Response
+    public function registermember(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager,MailService $mailService, FileUploader $fileUploader): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationMemberFormType::class, $user);
@@ -43,7 +44,11 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $imageFile = $form->get('picture')->getData();
+            if ($imageFile) {
+            $imageFileName = $fileUploader->upload($imageFile);
+            $user->setPicture($imageFileName);
+        }
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -69,7 +74,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/inscription_representant', name: 'app_register_board')]
-    public function registerboard(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function registerboard(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationBoardFormType::class, $user);
@@ -84,6 +89,12 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            $imageFile = $form->get('picture')->getData();
+            if ($imageFile) {
+            $imageFileName = $fileUploader->upload($imageFile);
+            $user->setPicture($imageFileName);
+        }
 
             $entityManager->persist($user);
             $entityManager->flush();

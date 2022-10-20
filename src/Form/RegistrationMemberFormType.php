@@ -154,6 +154,14 @@ class RegistrationMemberFormType extends AbstractType
                     'class' => 'form-check-label mt-4'
                 ]
             ])
+            ->add('picture', FileType::class, [
+                'mapped' => false,
+                'label' => 'Merci de mettre une photo',
+                'label_attr' => [
+                    'class' => 'form-label  mt-4'
+                ],
+                
+            ])
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control'
