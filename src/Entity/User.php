@@ -83,8 +83,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isChild = null;
 
-    #[ORM\Column(length: 190, nullable: true)]
-    private ?string $picture = null;
+    #[ORM\Column(type: 'string')]
+    private  $picture;
 
     #[ORM\ManyToMany(targetEntity: Sport::class, inversedBy: 'users')]
     private Collection $sports;
@@ -401,12 +401,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPicture()
     {
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPicture($picture)
     {
         $this->picture = $picture;
 

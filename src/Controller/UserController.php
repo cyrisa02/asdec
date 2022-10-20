@@ -8,6 +8,7 @@ use App\Form\UserMemberType;
 use App\Service\MailService;
 use App\Form\UserEditSportType;
 use App\Repository\UserRepository;
+use App\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -164,7 +165,7 @@ class UserController extends AbstractController
  * This method dysplays the features only for the member
  */
      #[Route('/{id}/edition_membre', name: 'app_usermember_edit', methods: ['GET', 'POST'])]
-    public function editmember(Request $request, User $user, UserRepository $userRepository, MailService $mailService): Response
+    public function editmember(Request $request, User $user, UserRepository $userRepository, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(UserMemberType::class, $user);
         $form->handleRequest($request);
@@ -172,15 +173,11 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
 
-            // Ajout de la photo
-            $file = $request->files->get('user')['my_file'];
-            $uploads_directory = $this->getParameter('uploads_directory');
-            $filename = md5(uniqid()) . '.' . $file->guessExtension();  
-            $file->move(
-                $uploads_directory,
-                $filename);
-                // Comment sauveagrder en BD, champ picture
-            $user->setPicture($filename);
+            $imageFile = $form->get('picture')->getData();
+        if ($imageFile) {
+            $imageFileName = $fileUploader->upload($imageFile);
+            $user->setPicture($imageFileName);
+        }
             $userRepository->add($user, true);
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
