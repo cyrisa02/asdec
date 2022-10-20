@@ -134,10 +134,11 @@ class UserMemberType extends AbstractType
             ])
             
             
-            ->add('image', FileType::class, [
+            ->add('picture', FileType::class, [
                 'mapped' => false,
                 
             ])
+
             ->add('sports', EntityType::class, [
                 'class' => Sport::class,                
                 'label' => 'Merci de sélectionner vos activités',
