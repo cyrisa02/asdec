@@ -24,7 +24,7 @@ class OrderController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+   
     #[Route('/creation', name: 'app_order_new', methods: ['GET', 'POST'])]
     public function new(Request $request, OrderRepository $orderRepository): Response
     {

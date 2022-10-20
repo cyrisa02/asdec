@@ -43,7 +43,7 @@ class Timecard1Controller extends AbstractController
         // Je flush-crée l'objet TimeCard1
         $timecard1Repository->add($timecard1, true);
             
-            // J'ai besoin de la liste des users Faut il créer une fonction dans le repository de user findSport Voir Repository de User
+            // J'ai besoin de la liste des users il faut créer une fonction dans le repository de user findBySport Voir Repository de User
             $users= $userRepository->findBySport($timecard1->getSports());
             //dd($users);
             // Je parcours un par un mes users dans une boucle

@@ -35,7 +35,7 @@ security:
     # - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/groupe, roles: ROLE_ADMIN }
     #- { path: ^/newsletter, roles: ROLE_ADMIN }
-    - { path: ^/presence1, roles: ROLE_ADMIN }
+    # - { path: ^/presence1, roles: ROLE_ADMIN }
     - { path: ^/tarif, roles: ROLE_ADMIN }
     - { path: ^/sport, roles: ROLE_ADMIN }
 

@@ -168,17 +168,20 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserMemberType::class, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->add($user, true);
-            $this->addFlash('success', 'Votre demande a été enregistrée avec succès');
+            
 
-            // Email J'ai injecté le MailService $mailService
-            //$mailService->sendEmail(
-            //    $user->getEmail(),                
-            //    'emails/userafterpayment.html.twig',
-            //    ['user'=>$user]
-            //);
+            // Ajout de la photo
+            $file = $request->files->get('user')['my_file'];
+            $uploads_directory = $this->getParameter('uploads_directory');
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();  
+            $file->move(
+                $uploads_directory,
+                $filename);
+                // Comment sauveagrder en BD, champ picture
+            $user->setPicture($filename);
+            $userRepository->add($user, true);
 
             return $this->redirectToRoute('home.index', [], Response::HTTP_SEE_OTHER);
         }
@@ -186,6 +189,7 @@ class UserController extends AbstractController
         return $this->renderForm('pages/user/editmember.html.twig', [
             'user' => $user,
             'form' => $form,
+            
         ]);
     }
 
