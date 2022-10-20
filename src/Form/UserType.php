@@ -181,23 +181,9 @@ class UserType extends AbstractType
                     'class' => 'form-check-label mt-4'
                 ]
             ])
-            ->add('my_file', FileType::class, [
+            ->add('image', FileType::class, [
                 'mapped' => false,
-                'required' => false,
-                'label' => 'Télécharger votre photo.',
-                'constraints' => [
-                    new File([
-                        'maxSize' => '5M',
-                        'mimeTypes' => [
-                            'image/*',
-                            'application/pdf',
-                            'application/x-pdf',
-                        ],
-                        'mimeTypesMessage' => 'Télécharger une image au bon format',
-                    ])
-                ],
-
-
+                
             ])
             ->add('sports', EntityType::class, [
                 'class' => Sport::class,                
