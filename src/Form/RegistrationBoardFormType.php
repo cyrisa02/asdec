@@ -7,6 +7,7 @@ use App\Entity\Sport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -97,9 +98,16 @@ class RegistrationBoardFormType extends AbstractType
             ])
              ->add('picture', FileType::class, [
                 'mapped' => false,
-                'label' => 'Merci de mettre une photo',
-                'label_attr' => [
-                    'class' => 'form-label  mt-4'
+                'label' => 'Merci de mettre une photo en jpeg ou png',
+                     'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Merci de télécharger une image en jpeg ou png.',
+                    ])
                 ],
                 
             ])

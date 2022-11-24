@@ -183,7 +183,17 @@ class UserType extends AbstractType
             ])
             ->add('picture', FileType::class, [
                 'mapped' => false,
-                'label' => 'Merci de mettre une photo',
+                'label' => 'Merci de mettre une photo en jpeg ou png',
+                     'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Merci de télécharger une image en jpeg ou png.',
+                    ])
+                ],
                 
             ])
             ->add('sports', EntityType::class, [
